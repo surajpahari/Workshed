@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\ClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,10 @@ Route::get('/', function () {
 Route::get('/login',function(){
     return Inertia::render('Login');
 });
+Route::post('/signup', [ClientController::class,'create']);
+
+Route::get('/god',function(){
+    return Inertia::render('Maker');
+});
+Route::get('/show',[ClientController::class,'show']);
+Route::post('/request',[ClientController::class,'accept']);
