@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('company_name');
             $table->string('company_address');
             $table->string('company_field');
-            $table->foreign('client_id')->references('id')->on('clients');
+            $table->foreignId('client_id')->constrained('clients')->onDelete('cascade');
             $table->timestamps();
         });
     }
