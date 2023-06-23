@@ -13,10 +13,14 @@ return new class extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->string('company_name');
-            $table->string('company_address');
-            $table->string('company_field');
-            $table->foreignId('client_id')->constrained('clients')->onDelete('cascade');
+            $table->string('companyName');
+            $table->string('short_name')->nullable();
+            $table->string('tagline')->nullable();
+            $table->string('address');
+            $table->string('primary_contact')->nullable();
+            $table->string('primary_email')->nullable();
+            $table->string('wesbsite')->nullable();
+            $table->string('logo')->default('logo.png');
             $table->timestamps();
         });
     }

@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Company extends Model
 {
-    public function client(){
-        return $this->belongsTo(Company::class);
+    public function user(){
+        return $this->hasMany(User::class);
     }
+
     use HasFactory;
 }

@@ -24,7 +24,7 @@ const Login = () => {
         <>
             <form onSubmit={handleSubmit}>
                 <div>
-                    CompnayName
+                    CompanyName
                 </div>
                 <div>
                     <input type="text" value={data.companyName} name="companyName" placeholder="companyName" onChange={
@@ -32,7 +32,7 @@ const Login = () => {
                     } />
                 </div>
                 <div>
-                    CompnayAddress
+                    CompanyAddress
                 </div>
                 <div>
                     <input type="text" name="companyAddress" placeholder="companyName" onChange={(e) => {

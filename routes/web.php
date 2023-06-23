@@ -1,9 +1,8 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Controllers\ClientController;
-use App\Http\Controllers\EmployeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,18 +15,36 @@ use App\Http\Controllers\EmployeeController;
 |
 */
 
+//Welcome Page
 Route::get('/', function () {
-    return Inertia::render('Test');
+    return Inertia::render('Welcome');
 });
-Route::get('/login',function(){
-    return Inertia::render('Login');
+
+
+//User Singnup and creation
+Route::get('/signup', function () {
+    return Inertia::render('User/SignUp');
 });
-Route::post('/signup', [ClientController::class,'create']);
-Route::post('/createEmployee',[EmployeeController::class,'test']);
-//routes for test
-Route::get('/god',function(){
-    return Inertia::render('Maker');
+Route::get('/signin', function () {
+    return Inertia::render('User/SignIn');
 });
-Route::get('/show',[ClientController::class,'show']);
-Route::post('/request',[ClientController::class,'accept']);
-Route::post('/showEmployeeList',[EmployeeController::class,'showList']);
+Route::post('/signup',[UserController::class,'createUser']);
+
+
+//For built in login functioanliy
+Auth::routes();
+
+//UserDashbord
+/* Route::group(['middleware'=>['auth']],function(){ */
+/*     Route::get('/home',[UserController::class,"test"]); */
+/* } */
+/* ); */
+
+Route::get('/dashboard',function(){
+    return Inertia::render("Dashboard");
+})->middleware('auth');
+
+
+
+
+
