@@ -3,6 +3,7 @@
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use function PHPUnit\Framework\returnSelf;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,34 +16,35 @@ use Inertia\Inertia;
 |
 */
 
-//Welcome Page
-Route::get('/', function () {
-    return Inertia::render('Welcome');
-});
 
+Route::middleware(['guest'])->group(function(){
 
-//User Singnup and creation
-Route::get('/signup', function () {
-    return Inertia::render('User/SignUp');
+    //Welcome Page
+    Route::get('/', function () {
+        return Inertia::render('Welcome');
+    });
+    //Singup Page
+    Route::get('/signup',function(){
+        return Inertia::render('User/SingUp');
+    })->name('signin');
+    //Singin Page
+    Route::get('signin',function(){
+        return Inertia::render("User/SignIn");
+    })->name('signin');
+    //SignUP Request
+    Route::post('signup',[UserController::class,'createUser']);
 });
-Route::get('/signin', function () {
-    return Inertia::render('User/SignIn');
-})->name('signin');
-Route::post('/signup',[UserController::class,'createUser']);
 
 
 //For built in login functioanliy
 Auth::routes();
 
-//UserDashbord
-/* Route::group(['middleware'=>['auth']],function(){ */
-/*     Route::get('/home',[UserController::class,"test"]); */
-/* } */
-/* ); */
-
-Route::get('/dashboard',function(){
-    return Inertia::render("Dashboard");
-})->middleware('auth');
+Route::middleware(['auth'])->group(function(){
+    //Dashboard home
+    Route::get('/dashboard',function(){
+        return Inertia::render("Dashboard");
+    });
+});
 
 
 
