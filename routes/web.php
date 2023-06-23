@@ -27,7 +27,7 @@ Route::get('/signup', function () {
 });
 Route::get('/signin', function () {
     return Inertia::render('User/SignIn');
-});
+})->name('signin');
 Route::post('/signup',[UserController::class,'createUser']);
 
 
