@@ -44,14 +44,15 @@ Route::middleware(['auth'])->group(function(){
     //Dashboard home
     Route::get('/dashboard',function(){
         return Inertia::render("Dashboard");
-    });
+    })->name('dashboard');
 });
 
-Route::controller(EmployeeController::class)->middleware(['auth'])->group(function(){
+Route::controller(EmployeeController::class)->middleware(['auth','admin'])->group(function(){
     //EmplyeeController
     Route::get('/employee','index');
     Route::post('/employee','create');
 });
+
 
 
 
