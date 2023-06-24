@@ -50,6 +50,7 @@ Route::middleware(['auth'])->group(function(){
 Route::controller(EmployeeController::class)->middleware(['auth'])->group(function(){
     //EmplyeeController
     Route::get('/employee','index');
+    Route::post('/employee','create');
 });
 
 
