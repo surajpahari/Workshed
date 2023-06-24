@@ -10,9 +10,17 @@ use Illuminate\Validation\Rule;
 
 class EmployeeController extends Controller
 {
+    //Index page for the employee
     public function index(){
-        return Inertia::render("Employee");
+        return Inertia::render("Employee/Employee");
     }
+
+    //Page to show the create Employee form
+    public function showForm(){
+         return Inertia::render("Employee/AddEmployee");
+    }
+
+    //Handle the request to create new employee
     public function create(Request $request){
         $this->validate($request,[
             'username' => ['required','string','max:20'],
@@ -38,5 +46,19 @@ class EmployeeController extends Controller
         $company->user()->save($employee);
         return $employee;
     }
+
+    //to response the request for employee-list
+
+    public function showList(){
+        $company = Auth::user()->company;
+        $users = $company->user;
+
+        /* $company = findOrFail(); */
+        return Inertia::render("Employee/ListEmployee",[
+            'users'=>$users,
+        ]);
+    }
+
+    //to redirect to emdd
     //
 }

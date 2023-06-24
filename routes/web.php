@@ -51,6 +51,8 @@ Route::controller(EmployeeController::class)->middleware(['auth','admin'])->grou
     //EmplyeeController
     Route::get('/employee','index');
     Route::post('/employee','create');
+    Route::get('/employee-add','showform');
+    Route::get('/employee-list','showlist');
 });
 
 
