@@ -1,12 +1,14 @@
 import { Link } from "@inertiajs/inertia-react"
+import SideBar from "./Layout/SideBar"
+import Top from "./Layout/Top"
 
 const Dashboard = () => {
     return (
         <div>
-            <h1>Welcome to dashboard!!</h1>
-            <Link href="/logout" method="post">
-                logout
-            </Link>
+            <Top>
+                <SideBar>
+                </SideBar>
+            </Top>
         </div>
     )
 }

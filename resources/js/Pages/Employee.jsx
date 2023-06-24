@@ -1,8 +1,15 @@
+import SideBar from "./Layout/SideBar"
+import Top from "./Layout/Top"
 const Employee = () => {
+
     return (
-        <div>
-            Employee view
-        </div>
+        <Top>
+            <SideBar>
+                <div>
+                    Employee view
+                </div>
+            </SideBar>
+        </Top>
     )
 }
 
