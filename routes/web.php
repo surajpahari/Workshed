@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -44,6 +45,11 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/dashboard',function(){
         return Inertia::render("Dashboard");
     });
+});
+
+Route::controller(EmployeeController::class)->middleware(['auth'])->group(function(){
+    //EmplyeeController
+    Route::get('/employee','index');
 });
 
 
