@@ -6,7 +6,16 @@ export default {
         "./resources/**/*.jsx",
     ],
     theme: {
-        extend: {},
+        extend: {
+            width: {
+                '288': '72rem',
+                '224': '56rem',
+            },
+            colors: {
+                purple: '#1e266d',
+            }
+
+        },
     },
     plugins: [],
 }

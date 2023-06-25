@@ -1,6 +1,14 @@
 import { Link } from "@inertiajs/inertia-react";
+import Navbar from "../../UI/Navbar/Navbar";
 
 const Header = () => {
+    return (
+        <>
+            <Navbar />
+        </>
+    )
+}
+const Header2 = () => {
     return (
         <>
             <div className="bg-red-300">
