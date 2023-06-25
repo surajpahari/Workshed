@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from "@inertiajs/inertia-react";
 import { RxHamburgerMenu } from 'react-icons/rx';
 
 const Navbar = () => {
@@ -24,9 +25,13 @@ const Navbar = () => {
                             <div className="m-2 text-purple cursor-pointer font-semibold text-sm">
                                 Features
                             </div>
-                            <button className="cursor-pointer rounded border-solid border-purple bg-transparent p-2 m-2">
-                                Login
-                            </button>
+                            <Link href="/signin"
+                                method="get"
+                                as="button"
+                                className="cursor-pointer rounded border-solid border-purple bg-transparent p-2 m-2"
+                            >
+                                SignIn
+                            </Link>
                         </div>
                         <div className="md:hidden flex items-center flex-grow">
                             <div className="flex  flex-grow justify-end items-center">
