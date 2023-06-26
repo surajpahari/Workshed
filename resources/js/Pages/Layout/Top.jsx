@@ -4,6 +4,7 @@ const Top = ({ children }) => {
     return (
         <>
             <Authbar />
+            {children}
         </>
     )
 }

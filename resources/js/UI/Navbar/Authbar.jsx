@@ -1,8 +1,10 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { useState } from "react";
 import { Link } from "@inertiajs/inertia-react";
 import { FiPower } from "react-icons/fi";
 
-const Authbar = () => {
+const Authbar = ({ tooglerFunction = () => { } }) => {
     const [showLogout, setShowLogout] = useState(false);
     const handleShowLogout = () => {
         setShowLogout(!showLogout);
@@ -13,6 +15,15 @@ const Authbar = () => {
                 <div className="flex justify-end p-2">
                     <div className="cursor-pointer" onClick={handleShowLogout}>
                         you are user
+                    </div>
+                </div>
+                <div className="absolute left-0 top-0 h-full">
+                    <div className="h-full  ">
+                        <div className="flex justify-center items-center h-full">
+                            <div className="cursor-pointer w-8 h-6">
+                                <FontAwesomeIcon icon={faBars} className='w-full h-full' />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

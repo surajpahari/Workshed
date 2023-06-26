@@ -4,3 +4,49 @@ body{
 }
 @tailwind components;
 @tailwind utilities;
+
+@keyframes expand{
+  from {width:0rem;}
+  to {width:16rem;}
+}
+@@keyframes contract{
+    from{width:16rem;}
+    to{width:32rem;}
+
+}
+/* The element to apply the animation to */
+
+@keyframes expand {
+  from {
+    width: 0rem;
+  }
+  to {
+    width: 16rem;
+  }
+}
+
+@keyframes contract {
+  from {
+    width: 16rem;
+  }
+  to {
+    width: 0rem;
+  }
+}
+
+.animate-width {
+  animation-duration: 0.5s;
+  overflow: hidden;
+}
+
+.animate-expand {
+  animation-name: expand;
+  width: 16rem;
+}
+
+.animate-contract {
+  animation-name: contract;
+  width: 0rem;
+}
+
+

@@ -13,6 +13,7 @@ export default {
             },
             colors: {
                 purple: '#1e266d',
+                icons: '#343a40'
             }
 
         },

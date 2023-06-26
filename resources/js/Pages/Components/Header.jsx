@@ -1,7 +1,8 @@
 import { Link } from "@inertiajs/inertia-react";
 import Navbar from "../../UI/Navbar/Navbar";
+import DashboardLayout from "../Layout/DashboardLayout";
 
-const Header = () => {
+const Header3 = () => {
     return (
         <>
             <Navbar />
@@ -30,6 +31,11 @@ const Header2 = () => {
             </Link>
 
         </>
+    )
+}
+const Header = () => {
+    return (
+        <DashboardLayout />
     )
 }
 export default Header;
