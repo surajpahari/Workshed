@@ -34,29 +34,47 @@ const DashboardLayout = () => {
     return (
         <>
             <div className="">
-                <div className="flex h-[72rem]" >
+                <div className="flex" >
                     {/*ADMIN DASHBOARD*/}
 
                     <div className={`${showMenuTitle ? 'animate-contract' : 'animate-expand'} animate-width bg-red-500`}>
-                        {/*Title and Logo*/}
 
+                        {/*Title and Logo*/}
                         <div className="flex bg-green-500 justfiy-center items-center h-16 cursor-pointer">
                             <div className="  flex justify-center items-center icon bg-sky-500 w-12 h-full flex-shrink-0">
                                 <span>
-                                    <FontAwesomeIcon icon={faHome} />
+                                    <FontAwesomeIcon icon={faMars} />
                                 </span>
                             </div>
                             <div className=" flex items-center text bg-orange-500 flex-grow flex-shrink-0 h-full">
                                 <span className="p-1">
-                                    Dashboard
+                                    Workshed
                                 </span>
                             </div>
                         </div>
                         {/*End of Title and Logo*/}
+                        {content.map((item, index) => (
+                            <div className="flex bg-green-500 justfiy-center items-center h-16 cursor-pointer">
+                                <div className="  flex justify-center items-center icon bg-sky-500 w-12 h-full flex-shrink-0">
+                                    <span>
+                                        <FontAwesomeIcon icon={item.icon} />
+                                    </span>
+                                </div>
+                                <div className=" flex items-center text bg-orange-500 flex-grow flex-shrink-0 h-full">
+                                    <span className="p-1">
+                                        {item.name}
+                                    </span>
+                                </div>
+                            </div>
 
+
+                        ))}
+
+                        {/*End of Icon and Menu*/}
                     </div>
-
                     {/*END ADMIN DASHBOARD*/}
+
+                    {/*Header and Bar*/}
                     <div className="bg-green-500 flex-grow   relative ">
                         <div className="relative  bg-green-50 h-16">
                             <div className="flex justify-end p-2">
@@ -84,11 +102,14 @@ const DashboardLayout = () => {
                                 Log Out
                             </Link>
                         </div>
+                        {/*End of Header and Bar*/}
 
                         {/*Main content*/}
                         <div className="w-full h-64">
+                            <div className="flex justify-center items-center">
+                                <h1>Your Content Goes Here</h1>
 
-
+                            </div>
                         </div>
                     </div>
                 </div>
