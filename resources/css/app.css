@@ -10,30 +10,29 @@ body{
   to {width:16rem;}
 }
 @@keyframes contract{
-    from{width:16rem;}
-    to{width:32rem;}
+    from{width:16rem; overflow:hidden}
+    to{width:32rem; overflow:none}
 
 }
 /* The element to apply the animation to */
 
 @keyframes expand {
   from {
-    width: 0rem;
+    width: 3rem;
   }
   to {
-    width: 16rem;
+    width: 24rem;
   }
 }
 
 @keyframes contract {
   from {
-    width: 16rem;
+    width: 24rem;
   }
   to {
-    width: 0rem;
+    width:3rem;
   }
 }
-
 .animate-width {
   animation-duration: 0.5s;
   overflow: hidden;
@@ -41,12 +40,19 @@ body{
 
 .animate-expand {
   animation-name: expand;
-  width: 16rem;
+  overflow:none;
+  width: 24rem;
 }
 
 .animate-contract {
   animation-name: contract;
-  width: 0rem;
+  overflow:hidden;
+  width: 3rem;
+}
+
+#test:hover + #fire{
+    color:red
+
 }
 
 

@@ -1,4 +1,3 @@
-
 import Authbar from "../../UI/Navbar/Authbar"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faMars } from '@fortawesome/free-solid-svg-icons';
@@ -36,27 +35,60 @@ const DashboardLayout = () => {
             <div className="">
                 <div className="flex h-[72rem]" >
                     {/*ADMIN DASHBOARD*/}
+                    <div className={`bg-blue-500`}>
+                        <div className="bg-green-50">
+                            <div className="flex h-16 items-center">
+                                <span className="m-1">
+                                    <FontAwesomeIcon icon={faMars} className="h-6 w-6 text-icons" />
+                                </span>
 
-                    <div className={`${showMenuTitle ? 'animate-contract' : 'animate-expand'} animate-width bg-red-500`}>
-                        {/*Title and Logo*/}
-
-                        <div className="flex bg-green-500 justfiy-center items-center h-16 cursor-pointer">
-                            <div className="  flex justify-center items-center icon bg-sky-500 w-12 h-full flex-shrink-0">
-                                <span>
-                                    <FontAwesomeIcon icon={faHome} />
+                                <span className={`m-1  ease-out duration-300 text-lg bold text-purple ${showMenuTitle ? 'block' : 'hidden'}`}>
+                                    Workshed
                                 </span>
                             </div>
-                            <div className=" flex items-center text bg-orange-500 flex-grow flex-shrink-0 h-full">
-                                <span className="p-1">
-                                    Dashboard
-                                </span>
+                            <div className="p-2">
+
+                                <div className="flex">
+                                    {/* menu with icons only*/}
+                                    <div className="bg-green-50 mr-1">
+                                        {/*icons*/}
+                                        {content.map((item, index) => (
+                                            <div key={index} className={` cursor-pointer flex items-center py-2  my-1 hover:bg-blue-500 hover:rounded-l-lg`}>
+                                                <span className="m-1 h-6 w-6 hover-trigger" data-trigger={index + 1}>
+                                                    <FontAwesomeIcon icon={item.icon} className="h-full w-full text-icons" />
+                                                </span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    {/*menu with text only*/}
+                                    <div>
+                                        <div className={`h-full animate-width ${showMenuTitle ? 'animate-expand' : 'animate-contract'}`}>
+                                            {/*menu title*/}
+                                            {content.map((item, index) => (
+                                                <div className="relative">
+                                                    <div key={index} className={` test cursor-pointer flex items-center py-2  my-1 test hover:bg-blue-500 hover:rounded-r-lg`}>
+                                                        <span className={`m-1 h-6  change-color-element hover:bg-red-500 hover:rounded-r-lg`} data-element={index + 1}>
+                                                            <span >{item.name}</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                                {/*
+                                {content.map((item, index) => (
+                                    <div key={index} className="flex items-center py-2">
+                                        <span className="m-1 h-6 w-6">
+                                            <FontAwesomeIcon icon={item.icon} className="h-full w-full text-icons" />
+                                        </span>
+                                        <span className={`m-1 bg-yellow-500 ease-out duration-300 ${showMenuTitle ? 'block' : 'hidden'}`}>{item.name}</span>
+                                    </div>
+                                ))}*/}
                             </div>
                         </div>
-                        {/*End of Title and Logo*/}
-
                     </div>
 
-                    {/*END ADMIN DASHBOARD*/}
                     <div className="bg-green-500 flex-grow   relative ">
                         <div className="relative  bg-green-50 h-16">
                             <div className="flex justify-end p-2">
