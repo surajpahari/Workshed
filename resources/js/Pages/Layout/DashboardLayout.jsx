@@ -48,14 +48,14 @@ const DashboardLayout = ({ children }) => {
 
 
                         {/*Title and Logo*/}
-                        <div className="flex  justfiy-center items-center h-16 cursor-pointer px-1 m-1 rounded-lg hover:bg-red-500">
-                            <div className="  flex justify-center items-center icon w-12 h-full flex-shrink-0">
-                                <div className="rounded-full bg-yellow-900 w-10 h-10 flex justify-center items-center">
-                                    <FontAwesomeIcon icon={faMars} />
+                        <div className="flex  justfiy-center items-center h-16 cursor-pointer  rounded-lg hover:bg-red-500">
+                            <div className="  flex justify-center items-center icon w-12 h-full flex-shrink-0 m-1">
+                                <div className="rounded-full  bg-red-50 hw-33 flex justify-center items-center ">
+                                    <FontAwesomeIcon icon={faMars} className="h-full w-full " />
                                 </div>
                             </div>
-                            <div className=" flex  items-center m-1 text flex-grow flex-shrink-0 h-full">
-                                <span className="p-1 font-medium text-2xl ">
+                            <div className=" flex  items-center text flex-grow flex-shrink-0 h-full">
+                                <span className="font-medium text-2xl ">
                                     Workshed
                                 </span>
                             </div>
@@ -67,19 +67,17 @@ const DashboardLayout = ({ children }) => {
                             <Link
                                 href={item.link}
                                 as="div"
-                                className={`${url === item.link ? 'bg-red-500 rounded-lg' : ''}`}
+                                className={`${url === item.link ? 'bg-red-500 rounded-lg' : ''} flex  justfiy-center items-center h-16 cursor-pointer hover:bg-red-500 rounded-lg m-1`}
                             >
-                                <div className="flex  justfiy-center items-center h-16 cursor-pointer hover:bg-red-500 px-1 m-1 rounded-lg" key={index}>
-                                    <div className="  flex justify-center items-center icon  w-12 h-full flex-shrink-0">
-                                        <span>
-                                            <FontAwesomeIcon icon={item.icon} />
-                                        </span>
-                                    </div>
-                                    <div className=" flex items-center text  flex-grow flex-shrink-0 h-full">
+                                <div className="  flex justify-center items-center icon m-1 w-12 h-full flex-shrink-0">
+                                    <span>
+                                        <FontAwesomeIcon icon={item.icon} />
+                                    </span>
+                                </div>
+                                <div className=" flex items-center text  flex-grow flex-shrink-0 h-full">
+                                    <span className="p-1">
                                         {item.name}
-                                        <span className="p-1">
-                                        </span>
-                                    </div>
+                                    </span>
                                 </div>
                             </Link>
                         ))}

@@ -8,7 +8,7 @@ body{
 
 @keyframes expand {
   from {
-    width: 3.75rem;
+    width: 60px;
   }
   to {
     width: 12rem;
@@ -20,7 +20,7 @@ body{
     width: 12rem;
   }
   to {
-    width:3.75rem;
+    width:60px;
   }
 }
 .animate-width {
@@ -37,7 +37,7 @@ body{
 .animate-contract {
   animation-name: contract;
   overflow:hidden;
-  width: 3.75rem;
+  width: 60px;
 }
 
 #test:hover + #fire{
@@ -46,15 +46,14 @@ body{
 }
 
 
-/* for Link button*/
-.linkButton{
-    background: none;
-    border:none;
-    padding:0rem;
-}
+
 
 /* for the active menu*/
 .activeNav{
     background:blue;
     text:white;
+}
+.hw-33{
+    height:33px;
+    width:33px;
 }
