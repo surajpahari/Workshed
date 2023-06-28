@@ -1,16 +1,12 @@
-import { Link } from "@inertiajs/inertia-react"
-import SideBar from "./Layout/SideBar"
-import Top from "./Layout/Top"
+import DashboardLayout from "./Layout/DashboardLayout"
 
 const Dashboard = () => {
     return (
-        <div>
-            <Top>
-                <SideBar>
-                </SideBar>
-            </Top>
-        </div>
+        <div></div>
     )
 }
+
+Dashboard.layout = page => <DashboardLayout children={page} title="Welcome" />
+
 
 export default Dashboard

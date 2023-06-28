@@ -1,36 +1,26 @@
 body{
     margin:0px;
-    font: 400 1rem/1.625rem "Open Sans", sans-serif;
+    font: 3.7500 1rem/1.625rem "Open Sans", sans-serif;
 }
 @tailwind components;
 @tailwind utilities;
-
-@keyframes expand{
-  from {width:0rem;}
-  to {width:16rem;}
-}
-@@keyframes contract{
-    from{width:16rem; overflow:hidden}
-    to{width:32rem; overflow:none}
-
-}
 /* The element to apply the animation to */
 
 @keyframes expand {
   from {
-    width: 3rem;
+    width: 3.75rem;
   }
   to {
-    width: 24rem;
+    width: 12rem;
   }
 }
 
 @keyframes contract {
   from {
-    width: 24rem;
+    width: 12rem;
   }
   to {
-    width:3rem;
+    width:3.75rem;
   }
 }
 .animate-width {
@@ -41,13 +31,13 @@ body{
 .animate-expand {
   animation-name: expand;
   overflow:none;
-  width: 24rem;
+  width: 12rem;
 }
 
 .animate-contract {
   animation-name: contract;
   overflow:hidden;
-  width: 3rem;
+  width: 3.75rem;
 }
 
 #test:hover + #fire{
@@ -56,3 +46,15 @@ body{
 }
 
 
+/* for Link button*/
+.linkButton{
+    background: none;
+    border:none;
+    padding:0rem;
+}
+
+/* for the active menu*/
+.activeNav{
+    background:blue;
+    text:white;
+}

@@ -1,8 +1,8 @@
-import Header from "../Components/Header";
+import Navbar from "../../UI/Navbar/Navbar";
 const Front = ({ children }) => {
     return (
         <>
-            <Header />
+            <Navbar />
             <div>
                 {children}
             </div>

@@ -26,7 +26,7 @@ Route::middleware(['guest'])->group(function(){
     });
     //Singup Page
     Route::get('/signup',function(){
-        return Inertia::render('User/SingUp');
+        return Inertia::render('User/SignUp');
     })->name('signin');
     //Singin Page
     Route::get('signin',function(){

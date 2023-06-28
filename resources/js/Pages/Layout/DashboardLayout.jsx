@@ -8,12 +8,17 @@ import { faCheckCircle, faBriefcase, faMapMarkerAlt, faUsers, faReceipt, faUser 
 import { FiPower } from "react-icons/fi";
 import { Link } from "@inertiajs/inertia-react";
 import { useState } from "react";
-const DashboardLayout = () => {
+import { usePage } from "@inertiajs/inertia-react";
+import { useRemember } from '@inertiajs/react'
+
+
+const DashboardLayout = ({ children }) => {
+    const { url, component } = usePage()
     const [showLogout, setShowLogout] = useState(false);
     const handleShowLogout = () => {
         setShowLogout(!showLogout);
     }
-    const [showSideBar, setShowSideBar] = useState(false);
+    const [showSideBar, setShowSideBar] = useRemember(false);
     const handleShowSideBar = () => {
         setShowSideBar(!showSideBar)
     }
@@ -21,15 +26,16 @@ const DashboardLayout = () => {
     const handleShowMenuTitle = () => {
         setShowMenuTitle(!showMenuTitle)
     }
+    const MenuTitle = showMenuTitle ? "animate-contract" : "animate-expand";
     const content = [
-        { icon: faHome, name: "Dashboard", link: "" },
-        { icon: faClock, name: "Roster", link: "" },
-        { icon: faCheckCircle, name: "TaskCompleted", link: "" },
-        { icon: faBriefcase, name: "Jobs", link: "" },
-        { icon: faMapMarkerAlt, name: "Location", link: "" },
-        { icon: faUsers, name: "Employee", link: "" },
-        { icon: faReceipt, name: "PlaySlip", link: "" },
-        { icon: faUser, name: "Profile", link: "" },
+        { icon: faHome, name: "Dashboard", link: "/dashboard" },
+        { icon: faClock, name: "Roster", link: "/" },
+        { icon: faCheckCircle, name: "Task Completed", link: "/" },
+        { icon: faBriefcase, name: "Jobs", link: "/" },
+        { icon: faMapMarkerAlt, name: "Location", link: "/" },
+        { icon: faUsers, name: "Employee", link: "/employee" },
+        { icon: faReceipt, name: "PlaySlip", link: "/" },
+        { icon: faUser, name: "Profile", link: "/" },
     ]
     return (
         <>
@@ -37,45 +43,53 @@ const DashboardLayout = () => {
                 <div className="flex" >
                     {/*ADMIN DASHBOARD*/}
 
-                    <div className={`${showMenuTitle ? 'animate-contract' : 'animate-expand'} animate-width bg-red-500`}>
+
+                    <div className={`${showMenuTitle ? 'animate-contract' : 'animate-expand'} divide-y  animate-width  bg-green-100  flex-shrink-0`}>
+
 
                         {/*Title and Logo*/}
-                        <div className="flex bg-green-500 justfiy-center items-center h-16 cursor-pointer">
-                            <div className="  flex justify-center items-center icon bg-sky-500 w-12 h-full flex-shrink-0">
-                                <span>
+                        <div className="flex  justfiy-center items-center h-16 cursor-pointer px-1 m-1 rounded-lg hover:bg-red-500">
+                            <div className="  flex justify-center items-center icon w-12 h-full flex-shrink-0">
+                                <div className="rounded-full bg-yellow-900 w-10 h-10 flex justify-center items-center">
                                     <FontAwesomeIcon icon={faMars} />
-                                </span>
+                                </div>
                             </div>
-                            <div className=" flex items-center text bg-orange-500 flex-grow flex-shrink-0 h-full">
-                                <span className="p-1">
+                            <div className=" flex  items-center m-1 text flex-grow flex-shrink-0 h-full">
+                                <span className="p-1 font-medium text-2xl ">
                                     Workshed
                                 </span>
                             </div>
                         </div>
                         {/*End of Title and Logo*/}
+
+                        {/*Icon and Menu*/}
                         {content.map((item, index) => (
-                            <div className="flex bg-green-500 justfiy-center items-center h-16 cursor-pointer">
-                                <div className="  flex justify-center items-center icon bg-sky-500 w-12 h-full flex-shrink-0">
-                                    <span>
-                                        <FontAwesomeIcon icon={item.icon} />
-                                    </span>
-                                </div>
-                                <div className=" flex items-center text bg-orange-500 flex-grow flex-shrink-0 h-full">
-                                    <span className="p-1">
+                            <Link
+                                href={item.link}
+                                as="div"
+                                className={`${url === item.link ? 'bg-red-500 rounded-lg' : ''}`}
+                            >
+                                <div className="flex  justfiy-center items-center h-16 cursor-pointer hover:bg-red-500 px-1 m-1 rounded-lg" key={index}>
+                                    <div className="  flex justify-center items-center icon  w-12 h-full flex-shrink-0">
+                                        <span>
+                                            <FontAwesomeIcon icon={item.icon} />
+                                        </span>
+                                    </div>
+                                    <div className=" flex items-center text  flex-grow flex-shrink-0 h-full">
                                         {item.name}
-                                    </span>
+                                        <span className="p-1">
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-
-
+                            </Link>
                         ))}
-
                         {/*End of Icon and Menu*/}
+
                     </div>
                     {/*END ADMIN DASHBOARD*/}
 
                     {/*Header and Bar*/}
-                    <div className="bg-green-500 flex-grow   relative ">
+                    <div className="flex-grow   relative ">
                         <div className="relative  bg-green-50 h-16">
                             <div className="flex justify-end p-2">
                                 <div className="cursor-pointer" onClick={handleShowLogout}>
@@ -96,7 +110,8 @@ const DashboardLayout = () => {
                             <Link href="/logout"
                                 method="post"
                                 as="button"
-                                className="cursor-pointer rounded border-purple bg-red-400 p-2 border-double w-full"
+                                className={`${(url === '/employee') ? 'activeNav' : 'a'} cursor-pointer rounded border-purple bg-red-400 p-2 border-double w-full
+`}
                             >
                                 <FiPower className="mx-2" />
                                 Log Out
@@ -104,19 +119,19 @@ const DashboardLayout = () => {
                         </div>
                         {/*End of Header and Bar*/}
 
+
                         {/*Main content*/}
                         <div className="w-full h-64">
                             <div className="flex justify-center items-center">
-                                <h1>Your Content Goes Here</h1>
-
+                                {children}
                             </div>
                         </div>
+                        {/*End of main content*/}
                     </div>
                 </div>
 
 
-
-            </div >
+            </div>
         </>
     )
 }
