@@ -21,14 +21,27 @@
 
 
 
+import CreateEmployee from "../Forms/CreateEmployee";
 import DashboardLayout from "../Layout/DashboardLayout";
 import { Inertia } from "@inertiajs/inertia";
+import ListEmployee from "./ListEmployee";
 
 const Employee = () => {
     return (
         <>
-            <h1>Details About Employee</h1>
+
+            <div>
+                <div>
+                    <h1>ADD Employee</h1>
+                    <CreateEmployee />
+                </div>
+                <div>
+                    <h1>List</h1>
+                    <ListEmployee />
+                </div>
+            </div>
         </>
+
     );
 };
 

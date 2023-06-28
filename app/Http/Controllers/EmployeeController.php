@@ -47,8 +47,12 @@ class EmployeeController extends Controller
         return $employee;
     }
 
-    //to response the request for employee-list
+    public function getList(){
+        $user = User::query()->orderBy('id')->paginate(5);
+        return response($user,'200');
 
+    }
+    //to response the request for employee-list
     public function showList(){
         $company = Auth::user()->company;
         $users = $company->user;
