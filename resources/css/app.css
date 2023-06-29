@@ -44,6 +44,18 @@ body{
     color:red
 
 }
+/*Css for pagination*/
+
+.activePage{
+    background:red;
+}
+
+
+.paginate-container li{
+    list-style-type:none;
+}
+
+
 
 
 
