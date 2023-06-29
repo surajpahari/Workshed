@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -54,7 +55,9 @@ Route::controller(EmployeeController::class)->middleware(['auth','admin'])->grou
     Route::get('/employee-add','showform');
     Route::get('/employee-list','showlist');
 });
-
+Route::controller(LocationController::class)->middleware(['auth','admin'])->group(function(){
+    Route::get('/location','index');
+});
 
 
 

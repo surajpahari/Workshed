@@ -32,7 +32,7 @@ const DashboardLayout = ({ children }) => {
         { icon: faClock, name: "Roster", link: "/" },
         { icon: faCheckCircle, name: "Task Completed", link: "/" },
         { icon: faBriefcase, name: "Jobs", link: "/" },
-        { icon: faMapMarkerAlt, name: "Location", link: "/" },
+        { icon: faMapMarkerAlt, name: "Location", link: "/location" },
         { icon: faUsers, name: "Employee", link: "/employee" },
         { icon: faReceipt, name: "PlaySlip", link: "/" },
         { icon: faUser, name: "Profile", link: "/" },
