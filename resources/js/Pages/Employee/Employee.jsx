@@ -25,6 +25,7 @@ import CreateEmployee from "../Forms/CreateEmployee";
 import DashboardLayout from "../Layout/DashboardLayout";
 import { Inertia } from "@inertiajs/inertia";
 import ListEmployee from "./ListEmployee";
+import SearchEmployee from "./SearchEmployee";
 
 const Employee = () => {
     return (
@@ -34,6 +35,11 @@ const Employee = () => {
                 <div>
                     <h1>ADD Employee</h1>
                     <CreateEmployee />
+                </div>
+                <div>
+                    <h1>Search</h1>
+                    <SearchEmployee />
+
                 </div>
                 <div>
                     <h1>List</h1>

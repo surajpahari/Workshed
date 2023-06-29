@@ -62,7 +62,9 @@ class EmployeeController extends Controller
             'users'=>$users,
         ]);
     }
+    //for search
+    public function search($key){
+        return User::where('name','like',"$key%")->get();
+    }
 
-    //to redirect to emdd
-    //
 }
