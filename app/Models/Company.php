@@ -13,6 +13,9 @@ class Company extends Model
     public function location(){
         return $this->hasMany(Location::class);
     }
+    public function type(){
+        return $this->hasMany(Type::class);
+    }
 
     use HasFactory;
 }

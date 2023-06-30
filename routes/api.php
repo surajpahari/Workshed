@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\TypeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,3 +26,7 @@ Route::get('/employeeSearch/{key}',[EmployeeController::class,'search']);
 
 Route::get('/locationList',[LocationController::class,'getList']);
 Route::get('/searchLocation/{key}',[LocationController::class,'search']);
+
+
+Route::get('/typeList',[TypeController::class,'getList']);
+Route::get('/searchType/{key}',[TypeController::class,'search']);

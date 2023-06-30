@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const SearchEmployee = () => {
+const SearchType = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [response, setResponse] = useState("");
 
     async function search() {
         console.log(searchQuery);
-        const url = `http://localhost:8000/api/employeeSearch/${searchQuery}`;
+        const url = `http://localhost:8000/api/searchType/${searchQuery}`;
         const responseData = await axios.get(url);
         setResponse(responseData.data);
     }
@@ -41,7 +41,7 @@ const SearchEmployee = () => {
             <div>
                 {response ?
                     response.map((user) => (
-                        <p>{user.name}</p>
+                        <p>{user.type}</p>
                     )) : ''}
             </div>
             <div>{/* Display search results here */}</div>
@@ -49,5 +49,5 @@ const SearchEmployee = () => {
     );
 };
 
-export default SearchEmployee;
+export default SearchType;
 

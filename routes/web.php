@@ -3,6 +3,7 @@
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TypeController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use function PHPUnit\Framework\returnSelf;
@@ -59,7 +60,10 @@ Route::controller(LocationController::class)->middleware(['auth','admin'])->grou
     Route::get('/location','index');
     Route::post ('/location','store');
 });
-
+Route::controller(TypeController::class)->middleware(['auth','admin'])->group(function(){
+    Route::get('/job-type','index');
+    Route::post ('/job-type','store');
+});
 
 
 
