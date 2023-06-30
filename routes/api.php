@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\LocationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::get('/employeeList' ,[EmployeeController::class,'getList']);
 Route::get('/employeeSearch/{key}',[EmployeeController::class,'search']);
+
+
+Route::get('/locationList',[LocationController::class,'getList']);
+Route::get('/searchLocation/{key}',[LocationController::class,'search']);

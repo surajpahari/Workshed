@@ -68,13 +68,11 @@ class UserController extends Controller
                 //insert subscriptions
 
 
-                Session::flash('success', $request->productName .' Package Purchased Successfully!');
                 return $this->signIn();
                 //send email
 
         }catch(Exception $e){
                 // Catch any error from Stripe API request and show
-                Session::flash('error', $e->getMessage().' Try again or contact our administrator.');
                 return redirect()->back()->withInput();
         }
     }

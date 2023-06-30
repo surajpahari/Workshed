@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Auth;
 use App\Models\Location;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -30,7 +30,22 @@ class LocationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $company=Auth::user()->company;
+        $location = new Location;
+         $location ->name = $request->input('name');
+         $location ->address = $request->input('address');
+         $location->lat = $request->input('lat');
+         $location ->long = $request->input('lng');
+         $location ->contact = $request->input('contact');
+         $location ->person = $request->input('person');
+         $location ->status = 1;
+         $company->location()->save($location);
+
+         return $this->index();
+
+
+
+
     }
 
     /**
@@ -64,4 +79,14 @@ class LocationController extends Controller
     {
         //
     }
+    public function getList(){
+        $location = Location::query()->orderBy('id')->paginate(5);
+        return response($location,'200');
+    }
+    public function search($key){
+        return Location::where('name','like',"$key%")->get();
+    }
+
+
+
 }

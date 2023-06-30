@@ -57,6 +57,7 @@ Route::controller(EmployeeController::class)->middleware(['auth','admin'])->grou
 });
 Route::controller(LocationController::class)->middleware(['auth','admin'])->group(function(){
     Route::get('/location','index');
+    Route::post ('/location','store');
 });
 
 
