@@ -1,5 +1,3 @@
-
-import Authbar from "../../UI/Navbar/Authbar"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faMars } from '@fortawesome/free-solid-svg-icons';
 import { faClock } from '@fortawesome/free-solid-svg-icons';

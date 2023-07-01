@@ -54,6 +54,11 @@ body{
 .paginate-container li{
     list-style-type:none;
 }
+td{
+}
+th{
+    text-align:left;
+}
 
 
 
