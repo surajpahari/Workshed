@@ -51,10 +51,12 @@ Route::middleware(['auth'])->group(function(){
 
 Route::controller(EmployeeController::class)->middleware(['auth','admin'])->group(function(){
     //EmplyeeController
-    Route::get('/employee','index');
+    Route::get('/employee','index')->name('employee.index');
     Route::post('/employee','create');
     Route::get('/employee-add','showform');
     Route::get('/employee-list','showlist');
+    Route::delete('/employee/destroy/{id}', 'destroy')->name('employee.delete');
+
 });
 Route::controller(LocationController::class)->middleware(['auth','admin'])->group(function(){
     Route::get('/location','index');

@@ -8,7 +8,7 @@ const Employee = () => {
                     <b>Employee</b>
                 </div>
                 <div>
-                    Home /Employee
+                    <span>Home&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;Employee</span>
                 </div>
             </div>
             {/*Heading*/}

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Auth;
+use Illuminate\Http\Response;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -65,6 +66,19 @@ class EmployeeController extends Controller
     //for search
     public function search($key){
         return User::where('name','like',"$key%")->get();
+    }
+    public function destroy($key){
+        $company = Auth::user()->company;
+        $user= User::findOrFail($key);
+        if(Auth::user()->company_id == $user->company_id){
+            $user->delete();
+        return response()->json(['message' => 'Authorized'], Response::HTTP_OK);
+        }
+        else{
+        return response()->json(['message' => 'Unauthorized'], Response::HTTP_FAILED);
+        }
+    /* return redirect()->route('employee.index')->with(['notification' => 'Success']); */
+
     }
 
 }

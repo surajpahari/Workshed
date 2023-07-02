@@ -74,3 +74,6 @@ th{
     height:33px;
     width:33px;
 }
+input{
+    outline:none;
+}

@@ -1,32 +1,13 @@
-
-// import SideBar from "../Layout/SideBar"
-// import CreateEmployee from "../Forms/CreateEmployee"
-// import EmployeeLayout from "../Layout/Employee/EmployeeLayout"
-// import Top from "../Layout/Top"
-// import DashboardLayout from "../Layout/DashboardLayout"
-// const Employee = () => {
-//
-//     return (
-//         <>
-//             <h1>"hola"</h1>
-//         </>
-//     )
-//
-// }
-// Employee.layout = page => <DashboardLayout children={page} title="Welcome" />
-//
-//
-//
-// export default Employee
-
-
 import ReactModal from "react-modal";
 import CreateEmployee from "../Forms/CreateEmployee";
 import DashboardLayout from "../Layout/DashboardLayout";
 import { Inertia } from "@inertiajs/inertia";
 import ListEmployee from "./ListEmployee";
+import { Toaster, toast } from "react-hot-toast";
 import SearchEmployee from "./SearchEmployee";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { usePage } from '@inertiajs/inertia-react'
+import { Toast } from "bootstrap";
 
 const Employee = () => {
     const [openModal, setOpenModal] = useState(false);
@@ -36,36 +17,46 @@ const Employee = () => {
     }
     return (
         <>
-
-            <div className="flex-grow  bg-red-500">
+            <Toaster />
+            <div className="flex-grow">
                 {/*Heading*/}
-                <div className="bg-green-500 flex">
+                <div className=" flex mx-2 my-5  border-b-4 border-b-green-100">
                     <div className="m-0 flex-grow">
-                        <b>Employee</b>
+                        <h1 className="m-0 font-light">Employee</h1>
                     </div>
                     <div>
-                        Home /Employee
+
+                        Home&nbsp; / &nbsp;Employee
                     </div>
                 </div>
                 {/*Heading*/}
 
-                {/*list and add bar*/}
-                <div className="flex justify-center items-center">
-                    <div className="flex-grow">
-                        <div>
-                            List
+                <div className="m-4  bg-gray-100">
+                    {/*list and add bar*/}
+                    <div className="p-4 flex justify-center items-center border-solid border border-t-4 border-b-0 border-teal-500 rounded-t">
+                        <div className="flex-grow">
+                            <div>
+                                <span className="text-base">List</span>
+                            </div>
+                        </div>
+                        <div className="cursor-pointer">
+                            <button className=" cursor-pointer p-2 font-semibold text-base rounded border-0 bg-sky-300 text-white">+Add</button>
                         </div>
                     </div>
-                    <div className="cursor-pointer bg-blue-500 text-white p-2 rounded-lg">
-                        <button onClick={handleModal}>+ add</button>
+                    {/*end of list and add bar*/}
+
+                    {/*Search bar*/}
+                    <div className="border-solid border border-b-0 border-teal-500">
+                        <div className="flex justify-end">
+                            <SearchEmployee />
+                        </div>
+                    </div>
+                    {/*end of search bar*/}
+                    <div className="bg-orange-300">
+                        <ListEmployee />
                     </div>
                 </div>
-                {/*end of list and add bar*/}
-                <div className="bg-orange-300">
-                    <ListEmployee />
-                </div>
-
-            </div>
+            </div >
             <ReactModal
                 onRequestClose={handleModal}
                 isOpen={openModal}

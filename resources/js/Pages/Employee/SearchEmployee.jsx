@@ -29,22 +29,26 @@ const SearchEmployee = () => {
 
     return (
         <>
-            <div>
-                <input
-                    type="text"
-                    name="search"
-                    value={searchQuery}
-                    placeholder="search"
-                    onChange={handleChange}
-                />
-            </div>
-            <div>
-                {response ?
-                    response.map((user) => (
-                        <p>{user.name}</p>
-                    )) : ''}
+            <div className="m-2">
+                <div>
+                    <input
+                        type="text"
+                        name="search"
+                        value={searchQuery}
+                        placeholder="search"
+                        onChange={handleChange}
+                        className=" p-2 text-lg rounded border-solid border border-green-100"
+                    />
+                </div>
+                <div>
+                    {response ?
+                        response.map((user) => (
+                            <p>{user.name}</p>
+                        )) : ''}
+                </div>
             </div>
             <div>{/* Display search results here */}</div>
+
         </>
     );
 };
