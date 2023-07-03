@@ -2,6 +2,7 @@ import { Toaster, toast } from "react-hot-toast";
 import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import axios from "axios";
+import Pagination from "../../UI/Pagination";
 import { Link, usePage } from "@inertiajs/inertia-react";
 import ReactModal from "react-modal";
 const ListEmployee = () => {
@@ -67,6 +68,7 @@ const ListEmployee = () => {
 
     }, [notification])
 
+    //for the custom pagination
 
 
     return (
@@ -126,8 +128,11 @@ const ListEmployee = () => {
                                 pageRangeDisplayed={1}
                                 marginPagesDisplayed={1}
                             />
+
                         </div>
+                        <Pagination />
                     </div >
+
                     : ''
 
             }
