@@ -20,29 +20,46 @@ const ListEmployee = () => {
         "actions",
     ]
     const [response, setResponse] = useState(null);
+    const [max, setMax] = useState(null);
 
-    async function getEmployeeList(pageNo = 1) {
+    async function getEmployeeList(pageNo) {
         try {
+            console.log(pageNo)
             const url = `http://localhost:8000/api/employeeList/?page=${pageNo}`;
             const response = await axios.get(url);
             setResponse(response.data);
+            setMax(response.data.last_page);
         } catch (error) {
             // Handle the error here
             console.error("Error fetching employee list:", error);
         }
     }
+    async function getTotalPage() {
+        try {
+            const url = 'http://localhost:8000/api/employeeList'
+            const response = await axios.get(url);
 
+        } catch (error) {
+            //Handle the error here
+            console.error("Error fetching employee list:",)
+        }
+    }
     useEffect(() => {
-        getEmployeeList()
-            .catch(error => {
-                // Handle the error here
-                console.error("Error fetching employee list:", error);
-            });
-    }, []);
+        console.log("max", max)
+    }, [max])
 
+    // useEffect(() => {
+    //     getEmployeeList()
+    //         .catch(error => {
+    //             // Handle the error here
+    //             console.error("Error fetching employee list:", error);
+    //         });
+    // }, []);
+    //
     useEffect(() => {
         console.log(response);
     }, [response]);
+
 
 
     const ActionButton = ({ userId }) => {
@@ -70,6 +87,13 @@ const ListEmployee = () => {
 
     //for the custom pagination
 
+    const [currentPageNo, setCurrentPageNo] = useState(1);
+
+    const handleChange = (pageNo) => {
+        setCurrentPageNo(pageNo);
+        getEmployeeList(pageNo);
+
+    }
 
     return (
         <>
@@ -109,33 +133,15 @@ const ListEmployee = () => {
                 </table>
             </div >
 
-            {
+            {/*pagination*/}
+            <div className="flex justify-end">
+                <Pagination className={`${response ? 'block' : 'hidden'}`} onChangeFunction={
+                    handleChange
+                }
+                    maxPage={max}
+                />
+            </div>
 
-                response ?
-                    <div className="paginate-container border-solid border-black border-2 flex justify-end">
-                        <div className="border-solid border border-green-100">
-                            < ReactPaginate
-                                nextLabel='next >'
-                                previousLabel='previous'
-                                onPageChange={(pageNumber) => {
-                                    console.log(pageNumber.selected)
-                                    getEmployeeList(pageNumber.selected + 1)
-                                }}
-                                pageCount={response.to - 1}
-                                activeClassName='activePage'
-                                previousClassName='previousPage'
-                                className="flex flex-grow"
-                                pageRangeDisplayed={1}
-                                marginPagesDisplayed={1}
-                            />
-
-                        </div>
-                        <Pagination />
-                    </div >
-
-                    : ''
-
-            }
             <ReactModal isOpen={confirmModal} ariaHideApp={false}>
                 {/*Close Button*/}
                 <div className="flex justify-end">

@@ -40,7 +40,9 @@ const Employee = () => {
                             </div>
                         </div>
                         <div className="cursor-pointer">
-                            <button className=" cursor-pointer p-2 font-semibold text-base rounded border-0 bg-sky-300 text-white">+Add</button>
+                            <button className=" cursor-pointer p-2 font-semibold text-base rounded border-0 bg-sky-300 text-white"
+                                onClick={handleModal}
+                            >+Add</button>
                         </div>
                     </div>
                     {/*end of list and add bar*/}
@@ -52,7 +54,7 @@ const Employee = () => {
                         </div>
                     </div>
                     {/*end of search bar*/}
-                    <div className="bg-orange-300">
+                    <div className="border-solid  border border-y-0 border-x-teal-500">
                         <ListEmployee />
                     </div>
                 </div>

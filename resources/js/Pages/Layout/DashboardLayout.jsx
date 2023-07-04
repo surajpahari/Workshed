@@ -66,7 +66,7 @@ const DashboardLayout = ({ children }) => {
                                 key={index}
                                 href={item.link}
                                 as="div"
-                                className={`${url === item.link ? 'bg-red-500 rounded-lg' : ''} flex  justfiy-center items-center h-16 cursor-pointer hover:bg-red-500 rounded-lg m-1`}
+                                className={`${url === item.link ? 'bg-teal-500 rounded-lg hover:bg-teal-500 text-white' : 'hover:bg-teal-200'} flex  justfiy-center items-center h-16 cursor-pointer rounded-lg m-1`}
                             >
                                 <div className="  flex justify-center items-center icon m-1 w-12 h-full flex-shrink-0">
                                     <span>
