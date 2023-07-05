@@ -5,6 +5,7 @@ import axios from "axios";
 import Pagination from "../../UI/Pagination";
 import { Link, usePage } from "@inertiajs/inertia-react";
 import ReactModal from "react-modal";
+import SearchEmployee from "./SearchEmployee";
 const ListEmployee = () => {
     const [confirmModal, setConfirmModal] = useState(false);
     const [actionId, setActionId] = useState(null);
@@ -60,6 +61,10 @@ const ListEmployee = () => {
         console.log(response);
     }, [response]);
 
+    const updateResponse = (data) => {
+        setResponse(data)
+    }
+
 
 
     const ActionButton = ({ userId }) => {
@@ -86,7 +91,6 @@ const ListEmployee = () => {
     }, [notification])
 
     //for the custom pagination
-
     const [currentPageNo, setCurrentPageNo] = useState(1);
 
     const handleChange = (pageNo) => {
@@ -99,6 +103,9 @@ const ListEmployee = () => {
         <>
 
             <Toaster />
+            <div className="flex justify-end">
+                <SearchEmployee updateResponse={updateResponse} response={response} />
+            </div>
             <div className="px-2">
                 <table className="table-fixed w-full border-collapse border-solid border border-blue-200 border-t-2 rounded-t">
                     <thead>

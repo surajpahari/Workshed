@@ -50,7 +50,6 @@ const Employee = () => {
                     {/*Search bar*/}
                     <div className="border-solid border border-b-0 border-teal-500">
                         <div className="flex justify-end">
-                            <SearchEmployee />
                         </div>
                     </div>
                     {/*end of search bar*/}

@@ -9,13 +9,16 @@ const SearchEmployee = () => {
         console.log(searchQuery);
         const url = `http://localhost:8000/api/employeeSearch/${searchQuery}`;
         const responseData = await axios.get(url);
-        setResponse(responseData.data);
+        setResponse(responseData);
     }
 
     const handleChange = (e) => {
         setSearchQuery(e.target.value);
     };
 
+    const updateResponse = (data) => {
+        setResponse(data)
+    }
     useEffect(() => {
         if (searchQuery !== "") {
             search();
@@ -29,22 +32,26 @@ const SearchEmployee = () => {
 
     return (
         <>
-            <div>
-                <input
-                    type="text"
-                    name="search"
-                    value={searchQuery}
-                    placeholder="search"
-                    onChange={handleChange}
-                />
-            </div>
-            <div>
-                {response ?
-                    response.map((user) => (
-                        <p>{user.name}</p>
-                    )) : ''}
+            <div className="m-2">
+                <div>
+                    <input
+                        type="text"
+                        name="search"
+                        value={searchQuery}
+                        placeholder="search"
+                        onChange={handleChange}
+                        className=" p-2 text-lg rounded border-solid border border-green-100"
+                    />
+                </div>
+                <div>
+                    {response ?
+                        response.map((user) => (
+                            <p>{user.name}</p>
+                        )) : ''}
+                </div>
             </div>
             <div>{/* Display search results here */}</div>
+
         </>
     );
 };
