@@ -13,6 +13,7 @@ const AddLocation = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         post('/location')
+        setData(null);
     }
     return (
         <>
