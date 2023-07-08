@@ -1,53 +1,53 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-
-const SearchEmployee = () => {
-    const [searchQuery, setSearchQuery] = useState("");
-    const [response, setResponse] = useState("");
-
+const SearchEmployee = ({ response, updateResponse }) => {
+    const [backupResponse, setBackupResponse] = useState(null);
+    const [searchQuery, setSearchQuery] = useState(null);
+    const [result, setResult] = useState(null);
     async function search() {
         console.log(searchQuery);
-        const url = `http://localhost:8000/api/employeeSearch/${searchQuery}`;
+        const url = `http://localhost:8000/api/locationSearch/${searchQuery}`;
         const responseData = await axios.get(url);
-        setResponse(responseData.data);
+        setResult(responseData)
+
     }
-
-    const handleChange = (e) => {
-        setSearchQuery(e.target.value);
-    };
-
+    const handleUpdate = (e) => {
+        setSearchQuery(e.target.value)
+    }
     useEffect(() => {
-        if (searchQuery !== "") {
-            search();
+        if (searchQuery != "") {
+            search()
         }
-    }, [searchQuery]);
+        if (searchQuery == "") {
+            updateResponse(backupResponse)
+        }
+    }, [searchQuery])
     useEffect(() => {
-        console.log(response);
-
-
-    }, [response])
-
+        if (result != null) {
+            if (backupResponse == null) {
+                setBackupResponse(response)
+            }
+            updateResponse(result)
+        }
+    }, [result])
+    useEffect(() => {
+        console.log("backupResponse", backupResponse)
+    }, [backupResponse])
     return (
-        <>
-            <div>
-                <input
-                    type="text"
-                    name="search"
-                    value={searchQuery}
-                    placeholder="search"
-                    onChange={handleChange}
-                />
+        <div>
+            <div className="m-2">
+                <div>
+                    <input
+                        type="text"
+                        onChange={handleUpdate}
+                        name="search"
+                        placeholder="search"
+                        className=" p-2 text-lg rounded border-solid border border-green-100"
+                    />
+                </div>
             </div>
-            <div>
-                {response ?
-                    response.map((user) => (
-                        <p>{user.name}</p>
-                    )) : ''}
-            </div>
-            <div>{/* Display search results here */}</div>
-        </>
-    );
-};
+        </div>
+    )
+}
 
-export default SearchEmployee;
-
+export default SearchEmployee

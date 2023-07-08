@@ -20,14 +20,29 @@ const Location = () => {
                     </div>
                 </div>
                 {/*Heading*/}
-                <div className="m-4 bg-gray-100">
-                    <div className="flex">
+
+                <div className="flex">
+                    <div className="m-2 border border-solid border-teal-500 rounded-t border-t-4">
                         <div className="form">
                             <AddLocation />
 
                         </div>
-                        <div className="list flex-grow">
-                            <ListLocation />
+                    </div>
+                    <div className="m-2 border-solid border border-teal-500 rounded-t border-t-4">
+                        <div className=" bg-gray-100">
+                            <div className="flex">
+                                <div className="list flex-grow">
+                                    <div className="border-solid border-0 border-b border-teal-500 p-4">
+                                        <span className="m-2 text-lg">
+                                            List
+                                        </span>
+                                    </div>
+                                    <div className="flex justify-end p-2">
+                                        <SearchLocation />
+                                    </div>
+                                    <ListLocation />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

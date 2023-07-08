@@ -25,7 +25,7 @@ Route::get('/employeeSearch/{key}',[EmployeeController::class,'search']);
 
 
 Route::get('/locationList',[LocationController::class,'getList']);
-Route::get('/searchLocation/{key}',[LocationController::class,'search']);
+Route::get('/locationSearch/{key}',[LocationController::class,'search']);
 
 
 Route::get('/typeList',[TypeController::class,'getList']);

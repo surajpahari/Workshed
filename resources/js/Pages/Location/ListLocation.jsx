@@ -5,6 +5,7 @@ import ReactPaginate from "react-paginate";
 import ReactModal from "react-modal";
 import Pagination from "../../UI/Pagination";
 import axios from "axios";
+import SearchEmployee from "./SearchLocation";
 
 const ListLocation = () => {
     const [response, setResponse] = useState(null);
@@ -43,8 +44,6 @@ const ListLocation = () => {
         'actions'
     ]
 
-
-    const [currentPageNo, setCurrentPageNo] = useState(1);
     const handleChange = (pageNo) => {
         setCurrentPageNo(pageNo);
         getLocationList(pageNo);
@@ -63,12 +62,18 @@ const ListLocation = () => {
 
     }
 
+    const [currentPageNo, setCurrentPageNo] = useState(1);
+    const updateResponse = (data) => {
+        setResponse(data)
+    }
+
 
 
 
     return (
         <>
             <div className="px-2">
+                <SearchEmployee updateResponse={updateResponse} response={response} />
                 <table className="table-fixed w-full border-collapse border-solid border border-blue-200 border-t-2 rounded-t">
                     <thead>
                         <tr>
