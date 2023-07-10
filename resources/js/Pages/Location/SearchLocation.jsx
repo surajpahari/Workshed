@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-const SearchEmployee = ({ response, updateResponse }) => {
+const SearchLocation = ({ response, updateResponse }) => {
     const [backupResponse, setBackupResponse] = useState(null);
     const [searchQuery, setSearchQuery] = useState(null);
     const [result, setResult] = useState(null);
@@ -9,8 +9,8 @@ const SearchEmployee = ({ response, updateResponse }) => {
         const url = `http://localhost:8000/api/locationSearch/${searchQuery}`;
         const responseData = await axios.get(url);
         setResult(responseData)
-
     }
+
     const handleUpdate = (e) => {
         setSearchQuery(e.target.value)
     }
@@ -50,4 +50,4 @@ const SearchEmployee = ({ response, updateResponse }) => {
     )
 }
 
-export default SearchEmployee
+export default SearchLocation

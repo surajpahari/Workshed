@@ -48,7 +48,7 @@ const AddLocation = () => {
                     </div>
                     <span>{errors.email}</span>
                     <div className="m-2">
-                        <label for="person" className="font-semibold">Contact Person</label>
+                        <label htmlFor="person" className="font-semibold">Contact Person</label>
                         <input placeholder="person" name="person" onChange={(e) => {
                             setData("person", e.target.value)
                         }} className="ml-1 p-1 text-lg border-none bg-blue-100 rounded" />

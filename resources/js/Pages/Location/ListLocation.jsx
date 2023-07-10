@@ -73,7 +73,9 @@ const ListLocation = () => {
     return (
         <>
             <div className="px-2">
-                <SearchEmployee updateResponse={updateResponse} response={response} />
+                <div className="flex justify-end">
+                    <SearchEmployee updateResponse={updateResponse} response={response} />
+                </div>
                 <table className="table-fixed w-full border-collapse border-solid border border-blue-200 border-t-2 rounded-t">
                     <thead>
                         <tr>

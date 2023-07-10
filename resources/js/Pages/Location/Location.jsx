@@ -37,9 +37,6 @@ const Location = () => {
                                             List
                                         </span>
                                     </div>
-                                    <div className="flex justify-end p-2">
-                                        <SearchLocation />
-                                    </div>
                                     <ListLocation />
                                 </div>
                             </div>
