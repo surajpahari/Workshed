@@ -29,7 +29,7 @@ const DashboardLayout = ({ children }) => {
         { icon: faHome, name: "Dashboard", link: "/dashboard" },
         { icon: faClock, name: "Roster", link: "/" },
         { icon: faCheckCircle, name: "Task Completed", link: "/" },
-        { icon: faBriefcase, name: "Jobs", link: "/job-type" },
+        { icon: faBriefcase, name: "Jobs", link: "/jobs" },
         { icon: faMapMarkerAlt, name: "Location", link: "/location" },
         { icon: faUsers, name: "Employee", link: "/employee" },
         { icon: faReceipt, name: "PlaySlip", link: "/" },

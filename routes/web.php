@@ -66,6 +66,9 @@ Route::controller(TypeController::class)->middleware(['auth','admin'])->group(fu
     Route::get('/job-type','index');
     Route::post ('/job-type','store');
 });
+Route::get('/jobs', function(){
+    return Inertia::render('Jobs/Job');
+})->middleware('auth');
 
 
 
