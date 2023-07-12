@@ -4,9 +4,14 @@ import DashboardLayout from "../Layout/DashboardLayout";
 const Job = () => {
     return (
         <>
-            <div className="flex grow bg-green-100">
+            <div className=" flex-grow flex bg-green-100">
                 <div className="p-2 boder-solid border border-gray-900 cursor-pointer">
-                    List
+                    <Link
+                        href="/job-list"
+                        as="div"
+                    >
+                        List
+                    </Link>
                 </div>
                 <div className="p-2 border-solid border border-gray-100 cursor-pointer">
                     <Link

@@ -3,7 +3,6 @@ import ReactPaginate from "react-paginate";
 import ReactModal from "react-modal";
 import Pagination from "../../../UI/Pagination";
 import axios from "axios";
-import SearchType from "./SearchType";
 
 const ListType = () => {
     const [response, setResponse] = useState(null);
@@ -37,8 +36,12 @@ const ListType = () => {
     }, [response]);
     const entries = [
         '#id',
-        'Job Type',
         'Status',
+        'Job',
+        'Location',
+        'Start',
+        'End',
+        'Employee',
         'Actions'
     ]
 
@@ -72,7 +75,6 @@ const ListType = () => {
         <>
             <div className="px-2">
                 <div className="flex justify-end">
-                    <SearchType updateResponse={updateResponse} response={response} />
                 </div>
                 <table className="table-fixed w-full border-collapse border-solid border border-blue-200 border-t-2 rounded-t">
                     <thead>

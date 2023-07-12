@@ -1,4 +1,5 @@
 import DashboardLayout from "../../Layout/DashboardLayout";
+import Job from "../Job";
 import AddType from "../Type/AddType"
 import ListType from "./ListType";
 
@@ -10,11 +11,11 @@ const Type = () => {
                 {/*Heading*/}
                 <div className=" flex mx-2 my-5  border-b-4 border-b-green-100">
                     <div className="m-0 flex-grow">
-                        <h1 className="m-0 font-light">Location</h1>
+                        <h1 className="m-0 font-light">Job Type</h1>
                     </div>
                     <div>
 
-                        Home&nbsp; / &nbsp;JobType
+                        Home&nbsp; / &nbsp;job-type
                     </div>
                 </div>
                 {/*Heading*/}
@@ -48,7 +49,10 @@ const Type = () => {
 }
 Type.layout = (page) => (
     < DashboardLayout >
-        {page}
+        <div>
+            <Job />
+            {page}
+        </div>
     </DashboardLayout >
 );
 

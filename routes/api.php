@@ -30,3 +30,4 @@ Route::get('/locationSearch/{key}',[LocationController::class,'search']);
 
 Route::get('/typeList',[TypeController::class,'getList']);
 Route::get('/searchType/{key}',[TypeController::class,'search']);
+
