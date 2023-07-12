@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('types_talbe', function (Blueprint $table) {
+        Schema::create('types', function (Blueprint $table) {
             $table->id();
             $table->foreignId('company_id')->references('id')->on('companies');
-            $table->string('type')->nullable();
+           $table->string('type')->nullable();
             $table->double('pay_rate', 8, 2)->nullable();
             $table->string('status')->default(1);
             $table->timestamps();
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('types_talbe');
+        Schema::dropIfExists('types');
     }
 };
