@@ -68,6 +68,7 @@ Route::controller(TypeController::class)->middleware(['auth','admin'])->group(fu
     Route::post ('/job-type','store');
 });
 Route::controller(TaskController::class)->middleware(['auth','admin'])->group(function(){
+    Route::post('/job','store');
     Route::get('/job-list','index');
 });
 Route::get('/jobs', function(){

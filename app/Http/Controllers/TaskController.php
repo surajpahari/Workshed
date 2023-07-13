@@ -16,5 +16,9 @@ class TaskController extends Controller
         return Inertia::render('Jobs/Tasks/Task');
         //
     }
+    public function store(Request $req)
+    {
+        return $req;
+    }
 
    }
