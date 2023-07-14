@@ -56,14 +56,17 @@ Route::controller(EmployeeController::class)->middleware(['auth','admin'])->grou
     Route::post('/employee','create');
     Route::get('/employee-add','showform');
     Route::get('/employee-list','showlist');
+    Route::get('/employee-option','provideOptions');
     Route::delete('/employee/destroy/{id}', 'destroy')->name('employee.delete');
 
 });
 Route::controller(LocationController::class)->middleware(['auth','admin'])->group(function(){
     Route::get('/location','index');
     Route::post ('/location','store');
+    Route::get('/location-option','provideOptions');
 });
 Route::controller(TypeController::class)->middleware(['auth','admin'])->group(function(){
+    Route::get('/type-option','provideOptions');
     Route::get('/job-type','index');
     Route::post ('/job-type','store');
 });

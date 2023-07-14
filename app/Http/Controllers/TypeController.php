@@ -34,5 +34,8 @@ class TypeController extends Controller
   public function getList(){
         $type= Type::query()->orderBy('id')->paginate(5);
         return response($type,'200');
-}
+  }
+  public function provideOptions(){
+    return Type::select('id', 'type')->get();
+  }
 }

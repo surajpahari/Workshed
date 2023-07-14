@@ -86,7 +86,7 @@ class LocationController extends Controller
     public function search($key){
         return Location::where('name','like',"$key%")->get();
     }
-
-
-
+    public function provideOptions(){
+        return Location::select('id','name')->get();
+    }
 }

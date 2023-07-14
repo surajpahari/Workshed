@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Auth;
 use Illuminate\Http\Response;
 use App\Models\User;
+use App\Models\Company;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -79,6 +80,11 @@ class EmployeeController extends Controller
         }
     /* return redirect()->route('employee.index')->with(['notification' => 'Success']); */
 
+    }
+    public function provideOptions(){
+        $id = Auth::user()->company->id;
+        $company = Company::findOrFail($id);
+        return $company->user()->select('id','name')->where('role_id', '!=', 1)->get();
     }
 
 }
