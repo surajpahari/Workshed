@@ -6,9 +6,9 @@ const AddTask = () => {
     const locations = ['lamachaur', 'lakeside', 'bagar', 'harichowk']
     const employees = ['ram', 'shyam', 'hari', 'krishna', 'radhe']
     const { data, setData, errors, post, processing } = useForm({
-        type: '',
-        location: '',
-        employee: '',
+        type: null,
+        location: null,
+        employee: null,
         startDate: '',
         endDate: '',
         startTime: '',
@@ -64,6 +64,7 @@ const AddTask = () => {
 
     //setting up options for employee input
     const [employeeOptions, setEmployeeOptions] = useState();
+    const [employeeQuery, setEmployeeQuery] = useState("");
     async function fetchEmployee() {
         try {
             const url = `http://localhost:8000/employee-option`;
@@ -79,9 +80,27 @@ const AddTask = () => {
     }, [employeeOptions])
 
     useEffect(() => {
-        fetchEmployee();
-    }, [])
+        if (employeeQuery.length == 1)
+            fetchEmployee();
+        if (employeeQuery.length == 0) {
+            setEmployeeQuery('');
+            setEmployeeOptions(null);
+        }
+    }, [employeeQuery])
 
+    //to handle the employee selection
+    const [selectedEmployee, setSelectedEmployee] = useState({ name: '', id: '' });
+    const selectEmployee = (employee) => {
+        setSelectedEmployee(employee)
+        setData('employee', employee.id)
+    }
+    useEffect(() => {
+
+        console.log(selectedEmployee)
+
+    }, [selectedEmployee])
+
+    //
     const clearInput = () => {
         return document.getElementByTagName("input");
     }
@@ -121,7 +140,18 @@ const AddTask = () => {
                 <div>
                     <input type="text" name="employee" placeholder="Employee" onChange={(e) => {
                         handleEmployeeInput(e)
-                    }} />
+                        setEmployeeQuery(e.target.value)
+                        setSelectedEmployee({ id: '', name: e.target.value })
+                    }} value={selectedEmployee.name} />
+                </div>
+                <div>
+                    {
+                        employeeOptions ? employeeOptions.map((employee, index) => (
+                            <span onClick={() => {
+                                selectEmployee(employee)
+                            }}>{employee.name}</span>
+                        )) : ''
+                    }
                 </div>
 
                 <div className="flex">

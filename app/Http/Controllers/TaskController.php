@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Models\User;
+use App\Models\Type;
+use App\Models\Location;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Auth;
 
 class TaskController extends Controller
 {
@@ -16,9 +20,19 @@ class TaskController extends Controller
         return Inertia::render('Jobs/Tasks/Task');
         //
     }
+
     public function store(Request $req)
     {
-        return $req;
-    }
+        $company = Auth::user()->company;
+        $task = new Task;
+        $task->type_id = $req->input('type');
+        $task->location_id = $req->input('location');
+        $task->start_date= "adsf";
+        $task->start_time= "adsf";
+        $task->end_date= "adsf";
+        $task->end_time= "adsf";
+        $company->tasks()->save($task);
+        dd($task);
 
-   }
+    }
+}
