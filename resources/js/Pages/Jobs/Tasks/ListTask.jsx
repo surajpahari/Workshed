@@ -13,7 +13,7 @@ const ListType = () => {
 
     async function getLocationList(pageNo = 1) {
         try {
-            const url = `http://localhost:8000/api/typeList/?page=${pageNo}`;
+            const url = `http://localhost:8000/api/taskList/?page=${pageNo}`;
             const response = await axios.get(url);
             setResponse(response.data);
             setMax(response.data.last_page);
@@ -88,14 +88,18 @@ const ListType = () => {
                     </thead>
                     <tbody>
                         {
-                            response ? response.data.map((user, index) => (
+                            response ? response.data.map((task, index) => (
 
                                 <tr key={index} className={`${index % 2 == 0 ? "bg-gray-100" : "bg-white"}`}>
-                                    <td className="p-2 border border-blue-200 border-solid"> {user.id}</td>
-                                    <td className="p-2 border border-blue-200 border-solid"> {user.type}</td>
-                                    <td className="p-2 border border-blue-200 border-solid"> active</td>
+                                    <td className="p-2 border border-blue-200 border-solid"> {task.id}</td>
+                                    <td className="p-2 border border-blue-200 border-solid"> {task.status}</td>
+                                    <td className="p-2 border border-blue-200 border-solid"> {task.type.type}</td>
+                                    <td className="p-2 border border-blue-200 border-solid"> {task.location.name}</td>
+                                    <td className="p-2 border border-blue-200 border-solid"> {task.start_time}</td>
+                                    <td className="p-2 border border-blue-200 border-solid"> {task.end_time}</td>
+                                    <td className="p-2 border border-blue-200 border-solid"> {task.status}</td>
                                     <td className="p-1 border border-blue-200 border-solid">
-                                        <ActionButton userId={user.id} />
+                                        <ActionButton userId={task.id} />
                                     </td>
                                 </tr>
                             )) : <tr></tr>

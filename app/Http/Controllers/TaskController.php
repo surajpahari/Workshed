@@ -35,4 +35,16 @@ class TaskController extends Controller
         dd($task);
 
     }
+
+    public function getList()
+    {
+        $tasks = Task::with(['type' => function ($query) {
+             $query->select('id', 'type');
+        }, 'location'=>function($query){
+
+            $query->select('id','name');
+        }])->orderBy('id')->paginate(5);
+        return response($tasks, 200);
+    }
+
 }

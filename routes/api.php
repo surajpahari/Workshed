@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TypeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,4 +31,6 @@ Route::get('/locationSearch/{key}',[LocationController::class,'search']);
 
 Route::get('/typeList',[TypeController::class,'getList']);
 Route::get('/searchType/{key}',[TypeController::class,'search']);
+
+Route::get('/taskList',[TaskController::class,'getList']);
 
