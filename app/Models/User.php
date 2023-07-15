@@ -15,6 +15,12 @@ class User extends Authenticatable
     public function company(){
         return $this->belongsTo(Company::class);
     }
+    public function tasks()
+    {
+        return $this->belongsToMany(Task::class)
+                ->withPivot('company_id', 'status', 'email_status')
+                ->withTimestamps();
+    }
     /**
      * The attributes that are mass assignable.
      *

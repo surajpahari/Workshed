@@ -30,21 +30,32 @@ class TaskController extends Controller
         $task->start_date= $req->input('startDate');
         $task->start_time= $req->input('startTime');
         $task->end_date= $req->input('endDate');
+        $task->status=0;
         $task->end_time= $req->input('endTime');
         $company->tasks()->save($task);
+        $userIds = $req->input('employee');
+        $task->users()->attach($userIds, [
+        'company_id' => $company->id,
+        'status' => null,
+        'email_status' => 'as'
+    ]);
         dd($task);
 
     }
 
-    public function getList()
-    {
-        $tasks = Task::with(['type' => function ($query) {
-             $query->select('id', 'type');
-        }, 'location'=>function($query){
 
-            $query->select('id','name');
-        }])->orderBy('id')->paginate(5);
-        return response($tasks, 200);
-    }
+public function getList()
+{
+    $tasks = Task::with(['type' => function ($query) {
+        $query->select('id', 'type');
+    }, 'location' => function ($query) {
+        $query->select('id', 'name');
+    }, 'users' => function ($query) {
+        $query->select('users.id', 'users.name');
+    }])->orderBy('id')->paginate(5);
+
+    return response($tasks, 200);
+}
+
 
 }

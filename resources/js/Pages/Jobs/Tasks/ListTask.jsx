@@ -97,7 +97,7 @@ const ListType = () => {
                                     <td className="p-2 border border-blue-200 border-solid"> {task.location.name}</td>
                                     <td className="p-2 border border-blue-200 border-solid"> {task.start_date + " - " + task.start_time}</td>
                                     <td className="p-2 border border-blue-200 border-solid"> {task.end_date + " - " + task.end_time}</td>
-                                    <td className="p-2 border border-blue-200 border-solid"> {task.status}</td>
+                                    <td className="p-2 border border-blue-200 border-solid"> {task.users[0] ? task.users[0].name : ''}</td>
                                     <td className="p-1 border border-blue-200 border-solid">
                                         <ActionButton userId={task.id} />
                                     </td>

@@ -114,7 +114,7 @@ const AddTask = () => {
                 <div className="flex">
                     <div className="m-2">
                         <div>
-                            <label forHTML="employee">Type</label>
+                            <label htmlFor="employee">Type</label>
                         </div>
                         <select className="select" name="type" onChange={(e) => {
                             setData("type", e.target.value)
@@ -131,7 +131,7 @@ const AddTask = () => {
                     </div>
                     <div className="m-2">
                         <div>
-                            <label forHTML="employee">Location</label>
+                            <label htmlFor="employee">Location</label>
                         </div>
                         <select className=" select select-secondary" name="location" onChange={(e) => {
                             setData("location", e.target.value)
@@ -151,7 +151,7 @@ const AddTask = () => {
                 {/* for the employee*/}
                 <div className="m-2">
                     <div>
-                        <label forHTML="Employee">Employee</label>
+                        <label htmlFor="Employee">Employee</label>
                     </div>
                     <select className=" select select-secondary" name="location" onChange={(e) => {
                         setData("employee", e.target.value)

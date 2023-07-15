@@ -11,4 +11,16 @@ class Task extends Model
     public function type(){
         return $this->belongsTo(Type::class);
     }
+    public function location(){
+        return $this->belongsTo(Location::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class)
+                ->withPivot('company_id', 'status', 'email_status')
+                ->withTimestamps();
+    }
+
+
 }
