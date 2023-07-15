@@ -78,6 +78,9 @@ const AddTask = () => {
     useEffect(() => {
         console.log(employeeOptions)
     }, [employeeOptions])
+    useEffect(() => {
+        fetchEmployee()
+    }, [])
 
     useEffect(() => {
         if (employeeQuery.length == 1)
@@ -106,9 +109,13 @@ const AddTask = () => {
     }
     return (
         <div>
-            <form className="m-2" onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
+                {/*for the type and location*/}
                 <div className="flex">
                     <div className="m-2">
+                        <div>
+                            <label forHTML="employee">Type</label>
+                        </div>
                         <select className="select" name="type" onChange={(e) => {
                             setData("type", e.target.value)
                         }}>
@@ -123,6 +130,9 @@ const AddTask = () => {
                         </select>
                     </div>
                     <div className="m-2">
+                        <div>
+                            <label forHTML="employee">Location</label>
+                        </div>
                         <select className=" select select-secondary" name="location" onChange={(e) => {
                             setData("location", e.target.value)
                         }}>
@@ -137,7 +147,26 @@ const AddTask = () => {
                         </select>
                     </div>
                 </div>
-                <div>
+
+                {/* for the employee*/}
+                <div className="m-2">
+                    <div>
+                        <label forHTML="Employee">Employee</label>
+                    </div>
+                    <select className=" select select-secondary" name="location" onChange={(e) => {
+                        setData("employee", e.target.value)
+                    }}>
+                        {
+                            employeeOptions ? employeeOptions.map((employee, index) => (
+                                <option value={employee.id} key={index}>{employee.name}</option>
+                            )
+                            )
+                                : ''
+                        }
+
+                    </select>
+                </div>
+                {/*<div>
                     <input type="text" name="employee" placeholder="Employee" onChange={(e) => {
                         handleEmployeeInput(e)
                         setEmployeeQuery(e.target.value)
@@ -147,36 +176,44 @@ const AddTask = () => {
                 <div>
                     {
                         employeeOptions ? employeeOptions.map((employee, index) => (
-                            <span onClick={() => {
+                            <span key={index} onClick={() => {
                                 selectEmployee(employee)
                             }}>{employee.name}</span>
                         )) : ''
                     }
-                </div>
+                </div>*/}
 
+                {/* for the start date and end date*/}
                 <div className="flex">
                     <div>
-                        <input type="date" name="startDate" placeholder="startDate" />
+                        <input type="date" name="startDate" placeholder="startDate" onChange={(e) => {
+                            setData("startDate", e.target.value)
+                        }} />
                     </div>
                     <div>
-                        <input type="date" name="endDate" placeholder="endDate" />
+                        <input type="date" name="endDate" placeholder="endDate" onChange={(e) => {
+                            setData("endDate", e.target.value)
+                        }} />
                     </div>
                 </div>
                 <div className="flex">
                     <div>
-                        <input type="time" name="startTime" placeholder="startTime" />
+                        <input type="time" name="startTime" placeholder="startTime" onChange={(e) => {
+                            setData("startTime", e.target.value)
+                        }} />
                     </div>
                     <div>
-                        <input type="time" name="endTime" placeholder="endTime"
-                        />
+                        <input type="time" name="endTime" placeholder="endTime" onChange={(e) => {
+                            setData("endTime", e.target.value)
+                        }} />
                     </div>
                 </div>
-                <div>
-                    <input type="submit" name="submi" value="submit" />
+                <div className="bg-gray-100  p-2">
+                    <input type="submit" name="submi" value="submit" className="cursor-pointer text-lg p-1 bg-sky-500 border-none rounded text-white" />
                 </div>
 
-            </form>
-        </div>
+            </form >
+        </div >
     )
 }
 

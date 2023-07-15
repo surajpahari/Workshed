@@ -27,10 +27,10 @@ class TaskController extends Controller
         $task = new Task;
         $task->type_id = $req->input('type');
         $task->location_id = $req->input('location');
-        $task->start_date= "adsf";
-        $task->start_time= "adsf";
-        $task->end_date= "adsf";
-        $task->end_time= "adsf";
+        $task->start_date= $req->input('startDate');
+        $task->start_time= $req->input('startTime');
+        $task->end_date= $req->input('endDate');
+        $task->end_time= $req->input('endTime');
         $company->tasks()->save($task);
         dd($task);
 
