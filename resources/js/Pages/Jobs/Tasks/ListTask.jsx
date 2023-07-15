@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import ReactModal from "react-modal";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import Pagination from "../../../UI/Pagination";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 const ListType = () => {
     const [response, setResponse] = useState(null);
@@ -56,8 +59,12 @@ const ListType = () => {
                 setActionId(userId)
                 setConfirmModal(!confirmModal);
             }}
-                className="cursor-pointer"
-            >del</button>
+                className="cursor-pointer text-red-500 bg-white p-1 border border-solid border-red-500 rounded
+                hover:bg-red-500 hover:text-white
+                "
+            >
+                <FontAwesomeIcon icon={faTrash} />
+            </button>
 
         )
 
