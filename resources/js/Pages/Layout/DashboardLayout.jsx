@@ -26,14 +26,14 @@ const DashboardLayout = ({ children }) => {
     }
     const MenuTitle = showMenuTitle ? "animate-contract" : "animate-expand";
     const content = [
-        { icon: faHome, name: "Dashboard", link: "/dashboard" },
-        { icon: faClock, name: "Roster", link: "/" },
-        { icon: faCheckCircle, name: "Task Completed", link: "/" },
-        { icon: faBriefcase, name: "Jobs", link: "/jobs" },
-        { icon: faMapMarkerAlt, name: "Location", link: "/location" },
-        { icon: faUsers, name: "Employee", link: "/employee" },
-        { icon: faReceipt, name: "PlaySlip", link: "/" },
-        { icon: faUser, name: "Profile", link: "/" },
+        { icon: faHome, name: "Dashboard", link: "/dashboard", active: "/dashboard" },
+        { icon: faClock, name: "Roster", link: "/dashboard", active: "/rooster" },
+        { icon: faCheckCircle, name: "Task Completed", link: "/dashboard", active: "/task/completed" },
+        { icon: faBriefcase, name: "Jobs", link: "/jobs/list", active: "/jobs" },
+        { icon: faMapMarkerAlt, name: "Location", link: "/location", active: "/location" },
+        { icon: faUsers, name: "Employee", link: "/employee", active: "/employee" },
+        { icon: faReceipt, name: "PlaySlip", link: "/dashboard", active: "/playslip" },
+        { icon: faUser, name: "Profile", link: "/dashboard", active: "/profile" },
     ]
     return (
         <>
@@ -66,7 +66,7 @@ const DashboardLayout = ({ children }) => {
                                 key={index}
                                 href={item.link}
                                 as="div"
-                                className={`${url === item.link ? 'bg-teal-500 rounded-lg hover:bg-teal-500 text-white' : 'hover:bg-teal-200'} flex  justfiy-center items-center h-16 cursor-pointer rounded-lg m-1`}
+                                className={`${url.startsWith(item.active) ? 'bg-teal-500 rounded-lg hover:bg-teal-500 text-white' : 'hover:bg-teal-200'} flex  justfiy-center items-center h-16 cursor-pointer rounded-lg m-1`}
                             >
                                 <div className="  flex justify-center items-center icon m-1 w-12 h-full flex-shrink-0">
                                     <span>
@@ -128,7 +128,7 @@ const DashboardLayout = ({ children }) => {
                 </div>
 
 
-            </div>
+            </div >
         </>
     )
 }

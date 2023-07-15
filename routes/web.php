@@ -67,12 +67,12 @@ Route::controller(LocationController::class)->middleware(['auth','admin'])->grou
 });
 Route::controller(TypeController::class)->middleware(['auth','admin'])->group(function(){
     Route::get('/type-option','provideOptions');
-    Route::get('/job-type','index');
+    Route::get('/jobs/type','index');
     Route::post ('/job-type','store');
 });
 Route::controller(TaskController::class)->middleware(['auth','admin'])->group(function(){
     Route::post('/job','store');
-    Route::get('/job-list','index');
+    Route::get('/jobs/list','index');
 });
 Route::get('/jobs', function(){
     return Inertia::render('Jobs/Job');
