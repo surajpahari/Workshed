@@ -58,6 +58,7 @@ Route::controller(EmployeeController::class)->middleware(['auth','admin'])->grou
     Route::get('/employee-list','showlist');
     Route::get('/employee-option','provideOptions');
     Route::delete('/employee/destroy/{id}', 'destroy')->name('employee.delete');
+    Route::get('/profile','show');
 
 });
 Route::controller(LocationController::class)->middleware(['auth','admin'])->group(function(){
@@ -73,6 +74,8 @@ Route::controller(TypeController::class)->middleware(['auth','admin'])->group(fu
 Route::controller(TaskController::class)->middleware(['auth','admin'])->group(function(){
     Route::post('/job','store');
     Route::get('/jobs/list','index');
+    //for the tasks
+    Route::get('/tasks/completed','showCompletedTasks');
 });
 Route::get('/jobs', function(){
     return Inertia::render('Jobs/Job');

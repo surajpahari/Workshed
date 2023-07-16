@@ -16,8 +16,7 @@ const DashboardLayout = ({ children }) => {
     const handleShowLogout = () => {
         setShowLogout(!showLogout);
     }
-    const [showSideBar, setShowSideBar] = useRemember(false);
-    const handleShowSideBar = () => {
+    const [showSideBar, setShowSideBar] = useRemember(false); const handleShowSideBar = () => {
         setShowSideBar(!showSideBar)
     }
     const [showMenuTitle, setShowMenuTitle] = useState(false);
@@ -28,12 +27,12 @@ const DashboardLayout = ({ children }) => {
     const content = [
         { icon: faHome, name: "Dashboard", link: "/dashboard", active: "/dashboard" },
         { icon: faClock, name: "Roster", link: "/dashboard", active: "/rooster" },
-        { icon: faCheckCircle, name: "Task Completed", link: "/dashboard", active: "/task/completed" },
+        { icon: faCheckCircle, name: "Task Completed", link: "/tasks/completed", active: "/tasks/completed" },
         { icon: faBriefcase, name: "Jobs", link: "/jobs/list", active: "/jobs" },
         { icon: faMapMarkerAlt, name: "Location", link: "/location", active: "/location" },
         { icon: faUsers, name: "Employee", link: "/employee", active: "/employee" },
         { icon: faReceipt, name: "PlaySlip", link: "/dashboard", active: "/playslip" },
-        { icon: faUser, name: "Profile", link: "/dashboard", active: "/profile" },
+        { icon: faUser, name: "Profile", link: "/profile", active: "/profile" },
     ]
     return (
         <>

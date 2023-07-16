@@ -44,18 +44,21 @@ class TaskController extends Controller
     }
 
 
-public function getList()
-{
-    $tasks = Task::with(['type' => function ($query) {
+    public function getList()
+    {
+        $tasks = Task::with(['type' => function ($query) {
         $query->select('id', 'type');
-    }, 'location' => function ($query) {
+        }, 'location' => function ($query) {
         $query->select('id', 'name');
-    }, 'users' => function ($query) {
+        }, 'users' => function ($query) {
         $query->select('users.id', 'users.name');
-    }])->orderBy('id')->paginate(5);
+        }])->orderBy('id')->paginate(5);
 
-    return response($tasks, 200);
-}
+        return response($tasks, 200);
+    }
+    public function showCompletedTasks(){
+        return Inertia::render("Jobs/Tasks/CompletedTasks");
+    }
 
 
 }
