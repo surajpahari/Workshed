@@ -1,5 +1,10 @@
+import { useState } from "react";
 import DashboardLayout from "../Layout/DashboardLayout";
 const Profile = () => {
+    const [activeBar, setActiveBar] = useState(1);
+    const changeActiveBar = (x) => {
+        setActiveBar(x)
+    }
     return (
         <>
             <div className=" flex mx-2 my-5  border-b-4 border-b-green-100">
@@ -39,25 +44,26 @@ const Profile = () => {
                     {/*top menu bar*/}
                     <div className="flex border-0 border-solid border-b border-b-gray-400">
 
-                        <div className="m-2 p-2 text-lg font-light cursor-pointer rounded hover:bg-teal-500 hover:text-white">
+                        <div onClick={() => { changeActiveBar(1) }}
+                            className={`m-2 p-2 text-lg font-light cursor-pointer rounded  ${activeBar == 1 ? "bg-teal-500 text-white" : 'hover:bg-teal-200'}`}>
                             Profile
                         </div>
-                        <div className="m-2 p-2 text-lg font-light cursor-pointer rounded hover:bg-teal-500 hover:text-white">
-                            Emergency Contact
-                        </div>
-
-                        <div className="m-2 p-2 text-lg font-light cursor-pointer rounded hover:bg-teal-500 hover:text-white">
-                            Details
-                        </div>
-
-                        <div className="m-2 p-2 text-lg font-light cursor-pointer rounded hover:bg-teal-500 hover:text-white">
+                        <div onClick={() => { changeActiveBar(2) }}
+                            className={`m-2 p-2 text-lg font-light cursor-pointer rounded  ${activeBar == 2 ? "bg-teal-500 text-white" : 'hover:bg-teal-200'}`}>
                             Setting
                         </div>
-
-                        <div className="m-2 p-2 text-lg font-light cursor-pointer rounded hover:bg-teal-500 hover:text-white">
-                            Administration
+                        <div onClick={() => { changeActiveBar(3) }}
+                            className={`m-2 p-2 text-lg font-light cursor-pointer rounded  ${activeBar == 3 ? "bg-teal-500 text-white" : 'hover:bg-teal-200'}`}>
+                            Emergency Details
                         </div>
-
+                        <div onClick={() => { changeActiveBar(4) }}
+                            className={`m-2 p-2 text-lg font-light cursor-pointer rounded  ${activeBar == 4 ? "bg-teal-500 text-white" : 'hover:bg-teal-200'}`}>
+                            Profile
+                        </div>
+                        <div onClick={() => { changeActiveBar(5) }}
+                            className={`m-2 p-2 text-lg font-light cursor-pointer rounded  ${activeBar == 5 ? "bg-teal-500 text-white" : 'hover:bg-teal-200'}`}>
+                            Profile
+                        </div>
                     </div>
                 </div>
 

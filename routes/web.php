@@ -76,6 +76,8 @@ Route::controller(TaskController::class)->middleware(['auth','admin'])->group(fu
     Route::get('/jobs/list','index');
     //for the tasks
     Route::get('/tasks/completed','showCompletedTasks');
+    //for the rooster
+    Route::get('/roster','showRoster');
 });
 Route::get('/jobs', function(){
     return Inertia::render('Jobs/Job');

@@ -57,8 +57,19 @@ class TaskController extends Controller
         return response($tasks, 200);
     }
     public function showCompletedTasks(){
-        return Inertia::render("Jobs/Tasks/CompletedTasks");
+        return Inertia::render("Jobs/CompletedTask/CompletedTask");
     }
-
-
+    public function getCompletedTasksList(){
+        $tasks = Task::with(['type' => function ($query) {
+        $query->select('id', 'type');
+        }, 'location' => function ($query) {
+        $query->select('id', 'name');
+        }, 'users' => function ($query) {
+        $query->select('users.id', 'users.name');
+        }])->where('status',0)->orderBy('id')->paginate(5);
+        return response($tasks, 200);
+    }
+    public  function  showRoster(){
+        return Inertia::render('Roster/Roster');
+    }
 }

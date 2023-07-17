@@ -26,7 +26,7 @@ const DashboardLayout = ({ children }) => {
     const MenuTitle = showMenuTitle ? "animate-contract" : "animate-expand";
     const content = [
         { icon: faHome, name: "Dashboard", link: "/dashboard", active: "/dashboard" },
-        { icon: faClock, name: "Roster", link: "/dashboard", active: "/rooster" },
+        { icon: faClock, name: "Roster", link: "/roster", active: "/roster" },
         { icon: faCheckCircle, name: "Task Completed", link: "/tasks/completed", active: "/tasks/completed" },
         { icon: faBriefcase, name: "Jobs", link: "/jobs/list", active: "/jobs" },
         { icon: faMapMarkerAlt, name: "Location", link: "/location", active: "/location" },
