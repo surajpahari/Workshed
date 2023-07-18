@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import ReactModal from "react-modal";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import Pagination from "../../../UI/Pagination";
 import axios from "axios";
-// import SearchType from "./SearchType";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 const ListCompletedTask = () => {
     const [response, setResponse] = useState(null);
@@ -37,13 +39,12 @@ const ListCompletedTask = () => {
     }, [response]);
     const entries = [
         '#id',
-        'status',
-        'job',
-        'location',
-        'employee',
-        'Start Time',
-        'End Time',
-        'Total Time',
+        'Status',
+        'Job',
+        'Location',
+        'Start',
+        'End',
+        'Employee',
         'Actions'
     ]
 
@@ -58,8 +59,12 @@ const ListCompletedTask = () => {
                 setActionId(userId)
                 setConfirmModal(!confirmModal);
             }}
-                className="cursor-pointer"
-            >del</button>
+                className="cursor-pointer text-red-500 bg-white p-1 border border-solid border-red-500 rounded
+                hover:bg-red-500 hover:text-white
+                "
+            >
+                <FontAwesomeIcon icon={faTrash} />
+            </button>
 
         )
 
@@ -93,14 +98,13 @@ const ListCompletedTask = () => {
                             response ? response.data.map((task, index) => (
 
                                 <tr key={index} className={`${index % 2 == 0 ? "bg-gray-100" : "bg-white"}`}>
-                                    <td className="p-2 border border-blue-200 border-solid">{task.id}</td>
-                                    <td className="p-2 border border-blue-200 border-solid">{task.status}</td>
-                                    <td className="p-2 border border-blue-200 border-solid">{task.type.type}</td>
-                                    <td className="p-2 border border-blue-200 border-solid">{task.location.name}</td>
-                                    <td className="p-2 border border-blue-200 border-solid">{task.users[0].name}</td>
-                                    <td className="p-2 border border-blue-200 border-solid">{task.location.name}</td>
+                                    <td className="p-2 border border-blue-200 border-solid"> {task.id}</td>
+                                    <td className="p-2 border border-blue-200 border-solid"> {task.status}</td>
+                                    <td className="p-2 border border-blue-200 border-solid"> {task.type.type}</td>
+                                    <td className="p-2 border border-blue-200 border-solid"> {task.location.name}</td>
                                     <td className="p-2 border border-blue-200 border-solid"> {task.start_date + " - " + task.start_time}</td>
                                     <td className="p-2 border border-blue-200 border-solid"> {task.end_date + " - " + task.end_time}</td>
+                                    <td className="p-2 border border-blue-200 border-solid"> {task.users[0] ? task.users[0].name : ''}</td>
                                     <td className="p-1 border border-blue-200 border-solid">
                                         <ActionButton userId={task.id} />
                                     </td>

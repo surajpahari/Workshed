@@ -39,7 +39,7 @@ class LocationController extends Controller
          $location ->contact = $request->input('contact');
          $location ->person = $request->input('person');
          $location ->status = 1;
-         $company->location()->save($location);
+         $company->locations()->save($location);
 
          return $this->index();
 

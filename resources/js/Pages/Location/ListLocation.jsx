@@ -1,11 +1,11 @@
-
-
 import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import ReactModal from "react-modal";
 import Pagination from "../../UI/Pagination";
 import axios from "axios";
 import SearchEmployee from "./SearchLocation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const ListLocation = () => {
     const [response, setResponse] = useState(null);
@@ -49,19 +49,23 @@ const ListLocation = () => {
         getLocationList(pageNo);
 
     }
+
     const ActionButton = ({ userId }) => {
         return (
             <button onClick={() => {
                 setActionId(userId)
                 setConfirmModal(!confirmModal);
             }}
-                className="cursor-pointer"
-            >del</button>
+                className="cursor-pointer text-red-500 bg-white p-1 border border-solid border-red-500 rounded
+                hover:bg-red-500 hover:text-white
+                "
+            >
+                <FontAwesomeIcon icon={faTrash} />
+            </button>
 
         )
 
     }
-
     const [currentPageNo, setCurrentPageNo] = useState(1);
     const updateResponse = (data) => {
         setResponse(data)
