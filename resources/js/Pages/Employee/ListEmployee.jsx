@@ -73,8 +73,12 @@ const ListEmployee = () => {
                 setActionId(userId)
                 setConfirmModal(!confirmModal);
             }}
-                className="cursor-pointer"
-            >del</button>
+                className="cursor-pointer text-red-500 bg-white p-1 border border-solid border-red-500 rounded
+                hover:bg-red-500 hover:text-white
+                "
+            >
+                <FontAwesomeIcon icon={faTrash} />
+            </button>
 
         )
 
