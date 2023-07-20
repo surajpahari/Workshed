@@ -6,6 +6,9 @@ import Pagination from "../../UI/Pagination";
 import { Link, usePage } from "@inertiajs/inertia-react";
 import ReactModal from "react-modal";
 import SearchEmployee from "./SearchEmployee";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+
 const ListEmployee = () => {
     const [confirmModal, setConfirmModal] = useState(false);
     const [actionId, setActionId] = useState(null);
