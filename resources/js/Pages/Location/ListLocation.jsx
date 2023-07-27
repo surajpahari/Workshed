@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import ReactModal from "react-modal";
 import Pagination from "../../UI/Pagination";
+import { toast } from "react-hot-toast";
 import axios from "axios";
 import SearchEmployee from "./SearchLocation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -69,6 +70,11 @@ const ListLocation = () => {
     const [currentPageNo, setCurrentPageNo] = useState(1);
     const updateResponse = (data) => {
         setResponse(data)
+    }
+    async function deleteResource(searchQuery = 1) {
+        const url = `http://localhost:8000/employee/destroy/${searchQuery}`;
+        const responseData = await axios.delete(url);
+        setNotification(responseData);
     }
 
 

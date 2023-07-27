@@ -87,7 +87,7 @@ class EmployeeController extends Controller
         return $company->user()->select('id','name')->where('role_id', '!=', 1)->get();
     }
     public function show(){
-        return Inertia::render('Employee/Profile');
+        return Inertia::render('Employee/Profile/Profile');
     }
 
 }
