@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DashboardLayout from "../../Layout/DashboardLayout";
 import ProfileDetail from "./ProfileDetail";
+import SettingForm from "./SettingForm";
+import axios from "axios";
 const Profile = () => {
     const [activeBar, setActiveBar] = useState(1);
     const changeActiveBar = (x) => {
         setActiveBar(x)
     }
+    //dummy component
     const Nothing = () => {
         return (
             <div>
@@ -14,16 +17,39 @@ const Profile = () => {
         )
     }
 
+    //to renderComponent accordance to selected menu
     const renderComponent = () => {
         switch (activeBar) {
             case 1:
-                return <ProfileDetail />;
+                return <ProfileDetail detail={profile} />;
 
+            case 3:
+                return <SettingForm />
 
             default:
                 return <Nothing />;
         }
     }
+    //getting details required for the view
+    const [profile, setProfile] = useState(null);
+    async function getData() {
+        const url = `http://localhost:8000/get-profile`;
+        const response = await axios.get(url);
+        setProfile(response.data);
+
+    }
+    useEffect(
+        () => {
+            getData()
+        }
+        , []
+
+    )
+    useEffect(
+        () => {
+            console.log(profile)
+        }, [profile])
+
     return (
         <>
             <div className=" flex mx-2 my-5  border-b-4 border-b-green-100">
@@ -60,7 +86,8 @@ const Profile = () => {
                             </div>
                             <div className="flex justify-end items-center">
                                 <div>
-                                    23-03-2023
+
+                                    {profile ? profile.created_at : ''}
                                 </div>
                             </div>
                         </div>
@@ -70,9 +97,9 @@ const Profile = () => {
                                     Email
                                 </div>
                             </div>
-                            <div className="flex justify-end items-center">
+                            <div className="flex grow justify-end items-center">
                                 <div>
-                                    work@gmail.com
+                                    {profile ? profile.email : ''}
                                 </div>
                             </div>
                         </div>
@@ -82,7 +109,7 @@ const Profile = () => {
                                     Phone no
                                 </div>
                             </div>
-                            <div className="flex justify-end items-center">
+                            <div className="flex grow justify-end items-center">
                                 <div>
                                     9898989898
                                 </div>
@@ -109,20 +136,17 @@ const Profile = () => {
                         </div>
                         <div onClick={() => { changeActiveBar(2) }}
                             className={`m-2 p-2 text-lg font-light cursor-pointer rounded  ${activeBar == 2 ? "bg-teal-500 text-white" : 'hover:bg-teal-200'}`}>
-                            Emergency Contact
+                            Bank Details
                         </div>
                         <div onClick={() => { changeActiveBar(3) }}
                             className={`m-2 p-2 text-lg font-light cursor-pointer rounded  ${activeBar == 3 ? "bg-teal-500 text-white" : 'hover:bg-teal-200'}`}>
-                            Bank Details
+                            Settings
                         </div>
                         <div onClick={() => { changeActiveBar(4) }}
                             className={`m-2 p-2 text-lg font-light cursor-pointer rounded  ${activeBar == 4 ? "bg-teal-500 text-white" : 'hover:bg-teal-200'}`}>
-                            Settings
+                            Administration
                         </div>
-                        <div onClick={() => { changeActiveBar(5) }}
-                            className={`m-2 p-2 text-lg font-light cursor-pointer rounded  ${activeBar == 5 ? "bg-teal-500 text-white" : 'hover:bg-teal-200'}`}>
-                            Adminstration
-                        </div>
+
                     </div>
                     <div>
                         {renderComponent()}

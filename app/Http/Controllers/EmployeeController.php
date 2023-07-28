@@ -89,5 +89,10 @@ class EmployeeController extends Controller
     public function show(){
         return Inertia::render('Employee/Profile/Profile');
     }
+    //for details needed for profile view
+    public function getProfile(){
+        $user = Auth::user();
+        return $user;
+    }
 
 }

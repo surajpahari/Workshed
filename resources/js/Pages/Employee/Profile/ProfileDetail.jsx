@@ -1,4 +1,11 @@
-const ProfileDetail = () => {
+import { useEffect, useRef } from "react"
+
+const ProfileDetail = (props = null) => {
+    useEffect(
+        () => {
+            console.log(props)
+        }
+        , [props])
     return (
         <div className="m-1">
             <div>
@@ -7,65 +14,37 @@ const ProfileDetail = () => {
                 </div>
                 <div className="flex">
                     <div className="flex-grow">
-                        username
+                        Username
                     </div>
                     <div>
                         :
                     </div>
                     <div className="flex-grow">
-                        work
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div className="border-0  border-b border-b-gray-200 border-solid  font-medium py-4 text-2xl">
-                    Emergency Contact Details
-                </div>
-                <div className="flex">
-                    <div className="grow">
-                        Full Name
-                    </div>
-                    <div className="mx-56">
-                        :
-                    </div>
-                    <div className="grow">
-                        work
+                        {props.detail ? props.detail.username : ''}
                     </div>
                 </div>
                 <div className="flex">
                     <div className="flex-grow">
-                        username
+                        Email
                     </div>
                     <div>
                         :
                     </div>
                     <div className="flex-grow">
-                        work
-                    </div>
-                </div>               <div className="flex">
-                    <div className="flex-grow">
-                        username
-                    </div>
-                    <div>
-                        :
-                    </div>
-                    <div className="flex-grow">
-                        work
-                    </div>
-                </div>               <div className="flex">
-                    <div className="flex-grow">
-                        username
-                    </div>
-                    <div>
-                        :
-                    </div>
-                    <div className="flex-grow">
-                        work
+                        {props.detail ? props.detail.email : ''}
                     </div>
                 </div>
-            </div>
-            <div>
-
+                <div className="flex">
+                    <div className="flex-grow">
+                        Phone
+                    </div>
+                    <div>
+                        :
+                    </div>
+                    <div className="flex-grow">
+                        {props.detail ? props.detail.phone : ''}
+                    </div>
+                </div>
             </div>
 
         </div>

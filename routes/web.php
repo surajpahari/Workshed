@@ -58,7 +58,9 @@ Route::controller(EmployeeController::class)->middleware(['auth','admin'])->grou
     Route::get('/employee-list','showlist');
     Route::get('/employee-option','provideOptions');
     Route::delete('/employee/destroy/{id}', 'destroy')->name('employee.delete');
+    //for the profile
     Route::get('/profile','show');
+    Route::get('/get-profile','getProfile');
 
 });
 Route::controller(LocationController::class)->middleware(['auth','admin'])->group(function(){
