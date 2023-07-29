@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import DashboardLayout from "../../Layout/DashboardLayout";
 import ProfileDetail from "./ProfileDetail";
 import SettingForm from "./SettingForm";
+import Administration from "./Administration";
 import axios from "axios";
 const Profile = () => {
     const [activeBar, setActiveBar] = useState(1);
@@ -25,6 +26,8 @@ const Profile = () => {
 
             case 3:
                 return <SettingForm />
+            case 4:
+                return <Administration />
 
             default:
                 return <Nothing />;
