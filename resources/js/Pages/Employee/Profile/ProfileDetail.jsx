@@ -12,37 +12,40 @@ const ProfileDetail = (props = null) => {
                 <div className="border-0  border-b border-b-gray-200 border-solid  font-medium py-4 text-2xl">
                     Personal Details
                 </div>
-                <div className="flex">
-                    <div className="flex-grow">
+                <div className=" grid grid-cols-4">
+                    <div>
                         Username
                     </div>
                     <div>
                         :
                     </div>
-                    <div className="flex-grow">
+                    <div>
                         {props.detail ? props.detail.username : ''}
                     </div>
                 </div>
-                <div className="flex">
-                    <div className="flex-grow">
+                <div className="grid grid-cols-4">
+                    <div>
                         Email
                     </div>
                     <div>
-                        :
+                        <div>
+                            :
+                        </div>
                     </div>
-                    <div className="flex-grow">
+                    <div>
                         {props.detail ? props.detail.email : ''}
                     </div>
                 </div>
-                <div className="flex">
-                    <div className="flex-grow">
+                <div className="grid grid-cols-4">
+                    <div>
                         Phone
                     </div>
                     <div>
                         :
                     </div>
-                    <div className="flex-grow">
-                        {props.detail ? props.detail.phone : ''}
+                    <div>
+                        {/*props.detail ? props.detail.phone : ''*/}
+                        9898989898
                     </div>
                 </div>
             </div>

@@ -73,9 +73,11 @@ const Profile = () => {
                             <div>
                                 <img src="/uploads/default.png" alt="unknown.png" className="w-24 h-auto" />
                             </div>
-                            <div>
-                                You are user
-                                <b>+</b>
+                            <div className="flex justify-center">
+                                <div>
+                                    {profile ? profile.username : ''}
+                                    <b>+</b>
+                                </div>
                             </div>
                         </div>
                     </div>
