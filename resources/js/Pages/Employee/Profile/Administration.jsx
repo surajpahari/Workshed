@@ -1,14 +1,33 @@
 const Administration = () => {
     return (
-        <div>
-            <div>
-                <input type="email" name="email" placeholder="email" />
+        <div className="m-4">
+            <div className="flex my-2">
+                <div className="w-48">
+                    <span className="text-base">
+                        Email
+                    </span>
+                </div>
+                <div>
+                    <input type="email" name="email" placeholder="email" className="text-base" />
+                </div>
             </div>
-            <div>
-                <input type="text" name="phone" placeholder="phone" />
+            <div className="flex my-2">
+                <div className="w-48">
+                    <span className="text-base">
+                        Phone no
+                    </span>
+                </div>
+                <div>
+                    <input type="text" name="phone" placeholder="phone" className="text-base" />
+                </div>
             </div>
-            <div>
-                <input type="submit" name="change" value="Change" />
+            <div className="flex my-2">
+                <div className="w-48">
+                    <span></span>
+                </div>
+                <div>
+                    <input type="submit" name="change" value="Change" className="bg-red-500 border-none text-white rounded py-2 text-base" />
+                </div>
             </div>
 
         </div>

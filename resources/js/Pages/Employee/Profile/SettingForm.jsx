@@ -1,9 +1,9 @@
 const SettingForm = () => {
     return (
-        <div>
+        <div className="m-4">
             <form>
                 <div className="flex">
-                    <div>
+                    <div className="w-72">
                         Old Password
                     </div>
                     <div>
@@ -11,7 +11,7 @@ const SettingForm = () => {
                     </div>
                 </div>
                 <div className="flex">
-                    <div>
+                    <div className="w-72">
                         New Password
                     </div>
                     <div>
@@ -20,14 +20,23 @@ const SettingForm = () => {
                 </div>
                 <div className="flex">
                     <div>
-                        Password Confirmation
+                        <div className="w-72">
+                            Password Confirmation
+                        </div>
                     </div>
                     <div>
                         <input type="text" name="old_password" placeholder="new_password_confirmation" />
                     </div>
                 </div>
-                <div>
-                    <input type="submit" name="submit" value="submit" />
+                <div className="flex">
+                    <div>
+                        <div className="w-72">
+                        </div>
+
+                    </div>
+                    <div>
+                        <input type="submit" name="change" value="Change" className="bg-red-500 border-none text-white rounded py-2" />
+                    </div>
                 </div>
             </form>
         </div>
