@@ -8,13 +8,11 @@ const ListEmployee = () => {
     return (
         <>
             <Toaster />
-            <ModalContextProvider>
-                <div>
-                    <Table tableInfo={TableInfo} />
-                </div>
-                <CenterModal />
-                <ConfirmModal />
-            </ModalContextProvider >
+            <div>
+                <Table tableInfo={TableInfo} />
+            </div>
+            <CenterModal />
+            <ConfirmModal />
         </>
     )
 }

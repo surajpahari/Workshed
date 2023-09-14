@@ -65,7 +65,7 @@ export const TableInfo = {
         {
             name: "delete",
             modal: () => (<></>),
-            notation: <FontAwesomeIcon icon={faTrash} />,
+            notation: <FontAwesomeIcon icon={faTrash} className="text-red-500" />,
             type: "confrimation",
             modalData: {
                 title: (n) => ("Delete " + n + " users?"),
@@ -79,7 +79,7 @@ export const TableInfo = {
         }
     ],
     //link to fetch data from
-    fetchLink: "http://localhost:8000/api/employeeList",
+    fetchLink: "http://localhost:8000/api/employeeList/",
     //set the paginate or not
     paginate: true,
     //set the searchbox or not

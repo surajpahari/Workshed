@@ -11,6 +11,16 @@ const Table = ({ tableInfo }) => {
     const { header, fetchLink, searchLink, properties, setAction, Actions, bulkActions, dataProcessor } = tableInfo;
     //check to set the actions or not
 
+    ///checking the per Page Value
+    const [perPage, setPerPage] = useState(5);
+    const handlePerPageChange = (event) => {
+        setPerPage(event.target.value)
+    }
+    useEffect(() => {
+        console.log(perPage)
+    }, [perPage])
+
+
     //adding and removing selected data
     const [selected, setSelected] = useState([]);
     const handleCheckedRow = (id, isChecked) => {
@@ -44,7 +54,7 @@ const Table = ({ tableInfo }) => {
     const [maxPage, setMaxPage] = useState(null);
     async function getEmployeeList(pageNo, pageLimit) {
         try {
-            const url = fetchLink + `/?page=${pageNo}`;
+            const url = fetchLink + pageLimit + `/?page=${pageNo}`;
             const response = await axios.get(url);
             setMainResponse(response.data);
             setMaxPage(response.data.last_page);
@@ -54,7 +64,7 @@ const Table = ({ tableInfo }) => {
     }
     useEffect(() => {
         if (response == null) {
-            getEmployeeList(1)
+            getEmployeeList(1, perPage)
         }
     }, [])
 
@@ -86,18 +96,9 @@ const Table = ({ tableInfo }) => {
 
 
     //for the Pagination
-    const handleChange = (pageNo) => {
-        getEmployeeList(pageNo);
-
+    const handleChange = (pageNo, pageLimit) => {
+        getEmployeeList(pageNo, pageLimit);
     }
-    const [perPage, setPerPage] = useState(5);
-    const handlePerPageChange = (event) => {
-        setPerPage(event.target.value)
-    }
-    useEffect(() => {
-        console.log(perPage)
-    }, [perPage])
-
 
     return (
         <>
@@ -111,25 +112,26 @@ const Table = ({ tableInfo }) => {
             <div className="px-2 overflow-x-auto mt-2 mb-1">
                 <div className="cursor-pointer flex m-1">
                     {bulkActions ?
-                        <div onClick={handleToggler} className="bg-teal-500 rounded-lg p-1 px-2 text-white mr-3">
-                            Select
+                        <div onClick={handleToggler} className="bg-teal-500 rounded-lg p-1 px-2 text-white mr-3 flex justify-center items-center">
+                            <div>
+                                Select
+                            </div>
                         </div>
                         : ''
                     }
                     <div className="flex items-center justify-end flex-grow">
-                        <div className="bg-teal-500 rounded-lg p-1 px-2 text-white">
-                            <span className="m-2">
-                                Per Page
-                            </span>
-                            <select id="dataCount"
-                                className="bg-white text-teal-500 rounded"
-                                value={perPage}
-                                onChange={handlePerPageChange}
-                            >
-                                <option value='5'>5</option>
-                                <option value='10'>10</option>
-                                <option value='15'>15</option>
-                            </select>
+                        <div className="bg-teal-500 rounded-lg text-white flex items-center justify-center p-2 cursor-pointer">
+                            <div className="w-full cursor-pointer">
+                                <select id="dataCount"
+                                    className="bg-white text-teal-500 rounded"
+                                    value={perPage}
+                                    onChange={handlePerPageChange}
+                                >
+                                    <option value='5' className="cursor-pointer">5</option>
+                                    <option value='10'>10</option>
+                                    <option value='15'>15</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -189,6 +191,7 @@ const Table = ({ tableInfo }) => {
                         handleChange
                     }
                         maxPage={maxPage}
+                        perPage={perPage}
                     />
                     :
                     ''

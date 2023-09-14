@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const Pagination = ({ onChangeFunction, maxPage = 5 }) => {
+const Pagination = ({ onChangeFunction, maxPage = 5, perPage }) => {
     const max = maxPage;
     const [page, setPage] = useState(1);
     const [nextDisabled, setNextDisabled] = useState(false);
@@ -10,7 +10,7 @@ const Pagination = ({ onChangeFunction, maxPage = 5 }) => {
         if (page < max) {
             console.log(page + 1)
             setPage(page + 1);
-            onChangeFunction(page + 1);
+            onChangeFunction(page + 1, perPage);
 
         }
     };
@@ -19,7 +19,7 @@ const Pagination = ({ onChangeFunction, maxPage = 5 }) => {
         if (page > 1) {
             console.log(page - 1)
             onChangeFunction(page - 1)
-            setPage(page - 1);
+            setPage(page - 1, perPage);
         }
     };
 
@@ -40,8 +40,9 @@ const Pagination = ({ onChangeFunction, maxPage = 5 }) => {
     }, [page]);
     useEffect(() => {
         console.log("maxPage is :", max)
-        onChangeFunction()
-    }, [])
+        console.log("perPage is:", perPage)
+        // onChangeFunction()
+    }, [perPage])
 
 
     return (

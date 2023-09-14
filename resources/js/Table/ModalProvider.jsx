@@ -5,7 +5,7 @@ const ModalProvider = (props) => {
     const handleModalTrigger = () => {
         changeModalStatus(true);
         setModalType(props.type);
-        setModalContent(() => props.modal(props.rowdata));
+        setModalContent(props.rowdata ? () => props.modal(props.rowdata) : props.modal);
         setModalData({
             ...props.modalData,
             link: props.modalData.link(props.rowdata.username),

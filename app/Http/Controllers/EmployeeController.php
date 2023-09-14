@@ -46,13 +46,12 @@ class EmployeeController extends Controller
         $employee ->payrate = $request->input('payrate');
 
         $company->user()->save($employee);
-        return $employee;
+        return response()->json(['message' => 'Authorized'], Response::HTTP_OK);
     }
 
-    public function getList(){
-        $user = User::query()->orderBy('id')->paginate(5);
-        return response($user,'200');
-
+    public function getList($key){
+        $users = User::query()->orderBy('id')->paginate($key);
+        return response($users,'200');
     }
     //to response the request for employee-list
     public function showList(){

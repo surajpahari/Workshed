@@ -21,7 +21,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/employeeList' ,[EmployeeController::class,'getList']);
+
+Route::get('/employeeList/{page}' ,[EmployeeController::class,'getList']);
 Route::get('/employeeSearch/{key}',[EmployeeController::class,'search']);
 
 
