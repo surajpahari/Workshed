@@ -42,6 +42,8 @@ Route::middleware(['guest'])->group(function(){
 
 //For built in login functioanliy
 Auth::routes();
+//For the password reset
+Auth::routes(['reset'=>true]);
 
 Route::middleware(['auth'])->group(function(){
     //Dashboard home

@@ -1,4 +1,10 @@
+import { useForm } from "@inertiajs/inertia-react"
+import { useState } from "react"
 const Administration = () => {
+    const { data, setData } = useForm({
+        Email: "",
+        Phone_no: "",
+    })
     return (
         <div className="m-4">
             <div className="flex my-2">

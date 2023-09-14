@@ -79,7 +79,6 @@ class EmployeeController extends Controller
         return response()->json(['message' => 'Unauthorized'], Response::HTTP_FAILED);
         }
     /* return redirect()->route('employee.index')->with(['notification' => 'Success']); */
-
     }
     public function provideOptions(){
         $id = Auth::user()->company->id;
@@ -92,6 +91,10 @@ class EmployeeController extends Controller
     //for details needed for profile view
     public function getProfile(){
         $user = Auth::user();
+        return $user;
+    }
+    //for updating email and phone
+    public function updateInfo(){
         return $user;
     }
 

@@ -40,10 +40,7 @@ const DashboardLayout = ({ children }) => {
                 <div className="flex" >
                     {/*ADMIN DASHBOARD*/}
 
-
                     <div className={`${showMenuTitle ? 'animate-contract' : 'animate-expand'} divide-y  animate-width  bg-green-100  flex-shrink-0`}>
-
-
                         {/*Title and Logo*/}
                         <div className="flex  justfiy-center items-center h-16 cursor-pointer  rounded-lg hover:bg-red-500">
                             <div className="  flex justify-center items-center icon w-12 h-full flex-shrink-0 m-1">
@@ -80,7 +77,6 @@ const DashboardLayout = ({ children }) => {
                             </Link>
                         ))}
                         {/*End of Icon and Menu*/}
-
                     </div>
                     {/*END ADMIN DASHBOARD*/}
 
