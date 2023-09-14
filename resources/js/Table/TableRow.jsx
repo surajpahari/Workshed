@@ -100,7 +100,6 @@ const TableRow = ({
                     ""
                 )}
             </tr>
-            <div></div>
         </>
     );
 };

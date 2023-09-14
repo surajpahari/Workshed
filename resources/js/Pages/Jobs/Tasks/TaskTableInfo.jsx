@@ -3,19 +3,19 @@ import { faTrash, faEdit, faEye } from "@fortawesome/free-solid-svg-icons"
 //helper functions
 
 //main Setting
-export const TableInfo = {
+export const TaskTableInfo = {
     //header of the table in order
     header: ['id', 'Status', 'Job', 'location', 'Start', 'End', 'Employee', 'Actions'],
     //properties per header in order
     properties: [
         { name: 'id' },
-        { name: 'name' },
-        { name: 'email', },
+        { name: 'status' },
+        { name: ['type', 'type'], },
         { name: ['location', 'name'] },
-        { name: 'payrate', dataProcessor: (payrate) => ("Rs    " + payrate) },
-        { name: 'created_at', dataProcessor: dateProcessor }
+        { name: 'id' },
+        { name: 'id' },
+        { name: 'id' },
     ],
-    //set the actions or not
     setAction: true,
     //list of the actions to be set
     Actions: [
@@ -46,34 +46,17 @@ export const TableInfo = {
                 terminate: "Cancel",
                 link: (id) => "https://www.youtube.com/results?search_query=" + id,
                 method: "delete",
-                performer: ActionPerformer
             }
         },
 
     ],
-    bulkActions: [
-        {
-            name: "delete",
-            modal: () => (<></>),
-            notation: <FontAwesomeIcon icon={faTrash} className="text-red-500" />,
-            type: "confrimation",
-            modalData: {
-                title: (n) => ("Delete " + n + " users?"),
-                subTitle: (n) => "This will delete " + n + " users",
-                proceed: "Delete",
-                terminate: "Cancel",
-                link: (id) => "www.youtube.com/results?search",
-                key: true,
-                method: "delete",
-            }
-        }
-    ],
+    //set the actions or not
     //link to fetch data from
-    fetchLink: "http://localhost:8000/api/employeeList/",
+    fetchLink: "http://localhost:8000/api/taskList/",
     //set the paginate or not
     paginate: true,
     //set the searchbox or not
-    searchBox: true,
+    // searchBox: true,
     //link to search from
     searchLink: "http://localhost:8000/api/employeeSearch/"
 }

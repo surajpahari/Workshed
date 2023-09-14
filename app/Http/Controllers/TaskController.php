@@ -44,7 +44,7 @@ class TaskController extends Controller
     }
 
 
-    public function getList()
+    public function getList($key)
     {
         $tasks = Task::with(['type' => function ($query) {
         $query->select('id', 'type');
@@ -52,7 +52,7 @@ class TaskController extends Controller
         $query->select('id', 'name');
         }, 'users' => function ($query) {
         $query->select('users.id', 'users.name');
-        }])->orderBy('id')->paginate(5);
+        }])->orderBy('id')->paginate($key);
 
         return response($tasks, 200);
     }

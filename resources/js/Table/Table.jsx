@@ -72,6 +72,7 @@ const Table = ({ tableInfo }) => {
 
     //testing the data
     useEffect(() => {
+        console.log("mainResponseis +", mainResponse)
         setResponse(mainResponse)
 
     }, [mainResponse])
