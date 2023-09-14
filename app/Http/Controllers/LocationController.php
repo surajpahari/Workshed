@@ -79,8 +79,8 @@ class LocationController extends Controller
     {
         //
     }
-    public function getList(){
-        $location = Location::query()->orderBy('id')->paginate(5);
+    public function getList($key){
+        $location = Location::query()->orderBy('id')->paginate($key);
         return response($location,'200');
     }
     public function search($key){
