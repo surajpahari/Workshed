@@ -57,12 +57,14 @@ const CompletedTasks = () => {
                                     <input type="date" name="date" />
                                 </div>
                             </div>
-
+                            <div className="flex items-center">
+                                <div className="bg-blue-500 text-white px-6 py-2 rounded cursor-pointer">
+                                    Filter
+                                </div>
+                            </div>
                             <div>
-
                             </div>
                         </div>
-
                     </div>
                     {/*Filter*/}
                     <div>
