@@ -25,8 +25,11 @@ function getPropertyData(property, rowdata, dataProcessor) {
         } else {
             return nestedValue || "";
         }
-    } else {
-        return "";
+    } else if (property.dummy) {
+        return property.dummy;
+    }
+    else {
+        return ""
     }
 }
 
