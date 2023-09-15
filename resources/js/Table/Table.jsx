@@ -164,16 +164,18 @@ const Table = ({ tableInfo }) => {
                         {/*Add row to every response*/}
                         {response != null ? (
                             response.data.map((data, index) => (
-                                <TableRow key={data.id} rowdata={data}
-                                    properties={properties} actions={Actions ? Actions : false}
-                                    dataProcessor={dataProcessor}
-                                    selected={selected} handleCheckedRow={handleCheckedRow}
-                                    selectAll={selectAll}
-                                    setSelectAll={setSelectAll}
-                                    toggleSelectAll={toggleSelectAll}
-                                    partialSelect={partialSelect}
-                                    setPartialSelect={setPartialSelect}
-                                />
+                                <tr key={data.id} className={`${index % 2 == 0 ? "bg-gray-100" : "bg-white"}`}>
+                                    <TableRow rowdata={data}
+                                        properties={properties} actions={Actions ? Actions : false}
+                                        dataProcessor={dataProcessor}
+                                        selected={selected} handleCheckedRow={handleCheckedRow}
+                                        selectAll={selectAll}
+                                        setSelectAll={setSelectAll}
+                                        toggleSelectAll={toggleSelectAll}
+                                        partialSelect={partialSelect}
+                                        setPartialSelect={setPartialSelect}
+                                    />
+                                </tr>
                             ))
                         ) : (
                             <tr></tr>

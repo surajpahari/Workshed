@@ -80,29 +80,27 @@ const TableRow = ({
 
     return (
         <>
-            <tr>
-                {toggleSelectAll ? (
-                    <td className="text-center border border-blue-200 border-solid min-w-full">
-                        <div>
-                            <input type={"checkbox"} checked={isChecked || selectAll} onChange={handleSelection} />
-                        </div>
-                    </td>
-                ) : (
-                    ""
-                )}
-                {properties.map((property, index) => (
-                    <td key={index} className="p-2 border border-blue-200 border-solid min-w-full">
-                        {getPropertyData(property, rowdata, dataProcessor)}
-                    </td>
-                ))}
-                {actions ? (
-                    <td className="p-2 border border-blue-200 border-solid">
-                        <Action actions={actions} rowdata={rowdata} />
-                    </td>
-                ) : (
-                    ""
-                )}
-            </tr>
+            {toggleSelectAll ? (
+                <td className="text-center border border-blue-200 border-solid min-w-full">
+                    <div>
+                        <input type={"checkbox"} checked={isChecked || selectAll} onChange={handleSelection} />
+                    </div>
+                </td>
+            ) : (
+                ""
+            )}
+            {properties.map((property, index) => (
+                <td key={index} className="p-2 border border-blue-200 border-solid min-w-full">
+                    {getPropertyData(property, rowdata, dataProcessor)}
+                </td>
+            ))}
+            {actions ? (
+                <td className="p-2 border border-blue-200 border-solid">
+                    <Action actions={actions} rowdata={rowdata} />
+                </td>
+            ) : (
+                ""
+            )}
         </>
     );
 };
