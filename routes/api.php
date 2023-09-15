@@ -34,5 +34,5 @@ Route::get('/typeList/{key}',[TypeController::class,'getList']);
 Route::get('/searchType/{key}',[TypeController::class,'search']);
 
 Route::get('/taskList/{key}',[TaskController::class,'getList']);
-Route::get('/completedTaskList',[TaskController::class,'getCompletedTasksList']);
+Route::get('/completedTasksList/{key}',[TaskController::class,'getCompletedTasksList']);
 
