@@ -4,7 +4,7 @@ import { faTrash, faEdit, faEye } from "@fortawesome/free-solid-svg-icons"
 //main Setting
 export const TableInfo = {
     //header of the table in order
-    header: ['id', 'Job Type', 'status', 'Action'],
+    header: ['#id', 'Job Type', 'status', 'Action'],
     //properties per header in order
     properties: [
         { name: 'id' },
@@ -39,5 +39,5 @@ export const TableInfo = {
     //set the searchbox or not
     searchBox: true,
     //link to search from
-    searchLink: "http://localhost:8000/api/typeSearch/"
+    searchLink: "http://localhost:8000/api/searchType/"
 }

@@ -31,7 +31,6 @@ const Type = () => {
                         <div className=" flex-grow m-2 border-solid border border-teal-500 rounded-t border-t-4">
                             <div className=" bg-gray-100">
                                 <div className="flex">
-
                                     <div className="list flex-grow">
                                         <div className="border-solid border-0 border-b border-teal-500 p-4">
                                             <span className="m-2 text-lg">
