@@ -129,23 +129,23 @@ const AddTask = () => {
 
                         </select>
                     </div>
-                    <div className="m-2">
-                        <div>
-                            <label htmlFor="employee">Location</label>
-                        </div>
-                        <select className=" select select-secondary" name="location" onChange={(e) => {
-                            setData("location", e.target.value)
-                        }}>
-                            {
-                                locationOptions ? locationOptions.map((location, index) => (
-                                    <option value={location.id} key={index}>{location.name}</option>
-                                )
-                                )
-                                    : ''
-                            }
-
-                        </select>
+                </div>
+                <div className="m-2">
+                    <div>
+                        <label htmlFor="employee">Location</label>
                     </div>
+                    <select className=" select select-secondary" name="location" onChange={(e) => {
+                        setData("location", e.target.value)
+                    }}>
+                        {
+                            locationOptions ? locationOptions.map((location, index) => (
+                                <option value={location.id} key={index}>{location.name}</option>
+                            )
+                            )
+                                : ''
+                        }
+
+                    </select>
                 </div>
 
                 {/* for the employee*/}

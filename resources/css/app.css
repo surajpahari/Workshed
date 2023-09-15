@@ -41,6 +41,24 @@ code {
     width:60px;
   }
 }
+@keyframes expandR{
+  from {
+    left: 60px;
+  }
+  to {
+    left: 12rem;
+  }
+}
+
+@keyframes contractR{
+  from {
+    left: 12rem;
+  }
+  to {
+    left:60px;
+  }
+}
+
 .animate-width {
   animation-duration: 0.5s;
   overflow: hidden;
@@ -56,6 +74,20 @@ code {
   animation-name: contract;
   overflow:hidden;
   width: 60px;
+}
+.animate-expandR {
+    animation-name:expandR;
+    position:fixed;
+    left:12rem;
+}
+.animate-contractR{
+    animation-name:contractR;
+    position:fixed;
+    left:60px;
+}
+.animate-position{
+    animation-duration:0.5s;
+    overflow:hidden;
 }
 
 #test:hover + #fire{
