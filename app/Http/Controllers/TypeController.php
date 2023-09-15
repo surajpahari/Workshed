@@ -31,8 +31,8 @@ class TypeController extends Controller
   public function search($key){
       return Type::where('type','like',"$key%")->get();
   }
-  public function getList(){
-        $type= Type::query()->orderBy('id')->paginate(5);
+  public function getList($key){
+        $type= Type::query()->orderBy('id')->paginate($key);
         return response($type,'200');
   }
   public function provideOptions(){
