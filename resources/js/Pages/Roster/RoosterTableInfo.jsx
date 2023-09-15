@@ -16,12 +16,19 @@ export const RoosterTableInfo = {
     //properties per header in order
     properties: [
         { name: 'id' },
-        { name: 'status' },
+        {
+            name: 'status',
+            dataProcessor:
+                (status) => (status === '0' ?
+                    <span className="bg-teal-300 rounded px-2">completed</span> :
+                    <span className="bg-yellow-500 rounded px-2">todo</span>
+                )
+        },
         { name: ['type', 'type'] },
         { name: ['location', 'name'] },
         { name: ['start_date'] },
         { name: ['end_date'] },
-        { dummy: "hari" },
+        { array: { name: "users", property: "name" } }
     ],
     setAction: true,
     Actions: [

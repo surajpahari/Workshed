@@ -20,12 +20,12 @@ export const CompletedTaskTableInfo = {
         {
             name: "id",
         },
-        { name: "status" },
+        { name: "status", dataProcessor: (status) => (status === '0' ? <span className="bg-teal-400 px-1 rounded ">completed</span> : status) },
         { name: ["type", "type"] },
         { name: ["location", "name"] },
         { name: ["start_date"] },
         { name: ["end_date"] },
-        { dummy: "hari" },
+        { array: { name: "users", property: "name" } },
 
     ],
     // properties: [

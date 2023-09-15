@@ -25,13 +25,25 @@ const DashboardLayout = ({ children }) => {
             <div className={`${showMenuTitle ? 'animate-contractR' : 'animate-expandR'}
              animate-position absolute bg-green-200 top-0  right-0  h-16`}>
                 {/*topBar*/}
-                <Topbar handleShowMenuTitle={handleShowMenuTitle} />
+                <Topbar handleShowMenuTitle={handleShowMenuTitle} handleShowLogout={handleShowLogout} />
             </div>
             <div className={`${showMenuTitle ? 'animate-contractR' : 'animate-expandR'}
              animate-position absolute  top-16  right-0  `}>
                 {/*topBar*/}
                 {children}
             </div>
+            {showLogout ? <div>
+
+                <div className="fixed right-0 top-16 bg-red-500 h-28 z-10 mr-1">
+                    <div>
+                        Log Out
+                    </div>
+                    <div>
+                        Profile
+                    </div>
+                </div>
+
+            </div> : ''}
         </>
     );
 };

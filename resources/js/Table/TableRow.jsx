@@ -28,6 +28,11 @@ function getPropertyData(property, rowdata, dataProcessor) {
     } else if (property.dummy) {
         return property.dummy;
     }
+    else if (property.array) {
+        let value = rowdata[property.array.name][0]
+        return value[property.array.property]
+
+    }
     else {
         return ""
     }
