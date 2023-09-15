@@ -19,7 +19,7 @@ class TypeController extends Controller
         $company=Auth::user()->company;
         $type= new Type;
          $type->type= $request->input('type');
-        $company->type()->save($type);
+        $company->types()->save($type);
         return $type;
 
 
