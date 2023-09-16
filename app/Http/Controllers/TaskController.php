@@ -20,6 +20,31 @@ class TaskController extends Controller
         return Inertia::render('Jobs/Tasks/Task');
         //
     }
+    public function taskCalendar()
+    {
+        $type = Type::where('status', '1')->where('company', Auth::user()->company)->get();
+        $taskNo = Task::where('company', Auth::user()->company)->latest()->first();
+        //return $taskNo;
+
+        if(count($type)==0)
+        {
+            flash('Need at least one Job Type!')->warning();
+            return view('task.type');
+        }
+
+        $location = Location::where('status', '1')->where('company', Auth::user()->company)->get();
+
+        if(count($location)==0)
+        {
+            flash('Need at least one Job Location!')->warning();
+            return view('location.index');
+        }
+
+        $users = User::where('id','!=', Auth::user()->id)->where('status', '1')->where('company', Auth::user()->company)->get();
+
+        return view('task.index')->with(['type'=>$type, 'location'=>$location, 'users'=>$users, 'taskno'=>$taskNo]);
+
+    }
 
     public function store(Request $req)
     {

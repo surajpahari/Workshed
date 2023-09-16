@@ -1,8 +1,9 @@
 import DashboardLayout from "./Layout/DashboardLayout"
-
 const Dashboard = () => {
     return (
-        <div></div>
+        <div>
+            This is Dasboard
+        </div>
     )
 }
 

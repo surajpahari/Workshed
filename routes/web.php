@@ -5,6 +5,7 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TypeController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use function PHPUnit\Framework\returnSelf;
@@ -52,6 +53,13 @@ Route::middleware(['auth'])->group(function(){
     })->name('dashboard');
 });
 
+
+Route::controller(DashboardController::class)->middleware(['auth','admin'])->group(function(){
+    //EmplyeeController
+    Route::get('/dashboard','index')->name('dashboard.index');
+    Route::get('/dashboard/getCalendarData', 'getCalendarData')->name('dashboard.getCalendarData');
+    });
+
 Route::controller(EmployeeController::class)->middleware(['auth','admin'])->group(function(){
     //EmplyeeController
     Route::get('/employee','index')->name('employee.index');
@@ -82,6 +90,7 @@ Route::controller(TaskController::class)->middleware(['auth','admin'])->group(fu
     Route::get('/tasks/completed','showCompletedTasks');
     //for the rooster
     Route::get('/roster','showRoster');
+    Route::get('/taskCalender','taskCalender')->name('tasks.calen');
 });
 Route::get('/jobs', function(){
     return Inertia::render('Jobs/Job');
