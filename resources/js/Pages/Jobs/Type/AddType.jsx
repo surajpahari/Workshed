@@ -1,14 +1,33 @@
 import { useForm } from "@inertiajs/inertia-react"
+import { toast } from "react-hot-toast"
+import axios from "axios"
 
 const AddType = () => {
     const { data, setData, errors, post, processing } = useForm({
         type: '',
         pay_rate: ''
     })
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        post('/job-type')
+    const send = async () => {
+        const response = await axios.post("/job-type", data);
+        return response;
     }
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await toast.promise(
+                send(data),
+                {
+                    loading: 'Creating New Job Type...',
+                    success: <b>Successfully Created New Job Type</b>,
+                    error: <b>Error While Creating</b>,
+                }
+            );
+        } catch (error) {
+            console.error("An error occurred:", error);
+        }
+        // Handle error if needed
+    };
+
     return (
         <>
             {/*         <form onSubmit={handleSubmit}>

@@ -23,7 +23,6 @@ class TypeController extends Controller
         return $type;
 
 
-         return $this->index();
 
 
 
