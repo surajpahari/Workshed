@@ -24,8 +24,9 @@
 
     <!-- Styles -->
     <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
-
-    @yield('css') <!-- Include additional CSS files if needed -->
+    @viteReactRefresh
+  @vite('resources/css/app.css')
+    @vite('resources/js/app.jsx')
 </head>
 <body>
 
