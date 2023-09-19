@@ -5,5 +5,14 @@ const Payslip = () => {
         </div>
     )
 }
+Payslip.layout = (page) => (
+    < DashboardLayout >
+        <div>
+            {page}
+        </div>
+    </DashboardLayout >
+);
+
+
 
 export default Payslip
