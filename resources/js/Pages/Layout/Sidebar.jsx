@@ -22,7 +22,7 @@ const Sidebar = ({ showMenuTitle }) => {
         { icon: faBriefcase, name: "Jobs", link: "/jobs/list", active: "/jobs" },
         { icon: faMapMarkerAlt, name: "Location", link: "/location", active: "/location" },
         { icon: faUsers, name: "Employee", link: "/employee", active: "/employee" },
-        { icon: faReceipt, name: "PlaySlip", link: "/dashboard", active: "/playslip" },
+        { icon: faReceipt, name: "PaySlip", link: "/payslip", active: "/payslip" },
         { icon: faUser, name: "Profile", link: "/profile", active: "/profile" },
     ]
     return (

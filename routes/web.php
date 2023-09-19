@@ -96,6 +96,9 @@ Route::get('/jobs', function(){
     return Inertia::render('Jobs/Job');
 })->middleware('auth');
 
+Route::get('/payslip',function(){
+    return Inertia::render('Payslip/Payslip.jsx');
+})->middleware('auth');
 
 
 
