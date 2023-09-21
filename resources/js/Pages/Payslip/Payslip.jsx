@@ -1,3 +1,4 @@
+import DashboardLayout from "../Layout/DashboardLayout";
 const Payslip = () => {
     return (
         <div>

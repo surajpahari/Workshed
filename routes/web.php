@@ -54,7 +54,7 @@ Route::middleware(['auth'])->group(function(){
 });
 
 
-Route::controller(DashboardController::class)->middleware(['auth','admin'])->group(function(){
+Route::controller(DashboardController::class)->middleware(['auth'])->group(function(){
     //EmplyeeController
     Route::get('/dashboard','index')->name('dashboard.index');
     Route::get('/dashboard/getCalendarData', 'getCalendarData')->name('dashboard.getCalendarData');

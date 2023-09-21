@@ -165,103 +165,21 @@ class DashboardController extends Controller
         //event(new Message(Auth::user()->id, $request->message));
     }
 
-    public function getCalendarData(Request $request)
-    {
-        /* $general = General::where('company', Auth::user()->company)->get(); */
-        /**/
-        /* //return $general; */
-        /* $format=0; */
-        /* if(count($general)!=0){ */
-        /*     foreach($general as $st) */
-        /*     { */
-        /*         if($st->type=="dataView") */
-        /*         { */
-        /*             if($st->val=="1") */
-        /*             { */
-        /*                 $format=1; */
-        /**/
-        /*             }else{ */
-        /*                 $format=2; */
-        /*             } */
-        /*         } */
-        /*     } */
-        /* } */
+public function getCalendarData(Request $request)
+{
+    $colors = ["red", "#007bff", "#17a2b8"];
+    $data = Auth::user()->company->tasks->map(function ($task, $index) use ($colors) {
+        $start_date = strtotime($task->start_date . ' ' . $task->start_time);
+        $end_date = strtotime($task->end_date . ' ' . $task->end_time);
 
+        return [
+            'title' => $task->type->type,
+            'start' =>date('Y-m-d H:i:s',$start_date),
+            'end' =>date('Y-m-d H:i:s', $end_date),
+            'allDay' => false,
+        ];
+    });
 
-        if($request->ajax()) {
-
-            $data=[];
-
-            //return $request->start;
-
-            if(Auth::user()->role_id == 2){
-
-                $data = DB::table('tasks')->select('*','tasks.id as taskID' ,'type  as title', 'tasks.id as taskID',  'tasks.status as taskStat')
-                ->join('task_user', 'tasks.id','=', 'task_user.task_id')
-                ->join('locations','tasks.location_id','=', 'locations.id')
-                ->join('users','task_user.user_id','=', 'users.id')
-                ->where('tasks.company', Auth::user()->company)
-                ->whereBetween('start_date', [$request->start, $request->end])
-                ->where('task_user.user_id', Auth::user()->id)
-                ->where('task_user.status', '!=', 10)
-                ->where('task_user.status', '!=', 101)
-                ->orderby('tasks.id','desc')
-                ->get();
-            }
-            else{
-
-                if($format==0 || $format == 1)
-                {
-                    $data = DB::table('tasks')->select('*', 'tasks.id as taskID', 'type as title', 'tasks.id as taskID',  'tasks.status as taskStat')
-                    ->join('task_user', 'tasks.id','=', 'task_user.task_id')
-                    ->join('locations','tasks.location_id','=', 'locations.id')
-                    ->where('tasks.company', Auth::user()->company)
-                    ->whereBetween('start_date', [$request->start, $request->end])
-                    ->where('task_user.status', '!=', 10)
-                    ->where('task_user.status', '!=', 101)
-                    ->orderby('tasks.id','desc')
-                    ->get();
-
-                }elseif($format == 2){
-
-                    $data = DB::table('tasks')->select('*', 'tasks.id as taskID', 'type as title', 'tasks.id as taskID',  'tasks.status as taskStat')
-                    ->join('task_user', 'tasks.id','=', 'task_user.task_id')
-                    ->join('locations','tasks.location_id','=', 'locations.id')
-                    ->join('users','task_user.user_id','=', 'users.id')
-                    ->where('tasks.company', Auth::user()->company)
-                    ->whereBetween('start_date', [$request->start, $request->end])
-                    ->where('task_user.status', '!=', 10)
-                    ->where('task_user.status', '!=', 101)
-                    ->orderby('tasks.id','desc')
-                    ->get();
-                }
-            }
-            if(!empty($data)){
-                foreach($data as $d){
-                    if($format==0 || $format==1){
-                        $title = $d->title.' @ '.$d->name;
-                    }
-                    else{
-                        $title = $d->title.' by '.$d->username;
-                    }
-                    $date1 =strtotime($d->start_date.' '.$d->start_time);
-                    $startDate= date('Y-m-d H:i:s', $date1);
-                    $date2 =strtotime($d->end_date.' '.$d->end_time);
-                    $endDate= date('Y-m-d H:i:s', $date2);
-                    $bc="#28a745";     //completed task green color
-
-                    if($d->taskStat==0)
-                    {
-                        $bc="#007bff";
-                    }elseif($d->taskStat==="01")
-                    {
-                        $bc="#17a2b8";
-                    }
-
-                    $items[]=array("id"=>$d->taskID, "title"=>$title, "start"=>$startDate, "end"=>$endDate, "backgroundColor"=>$bc, "allDay"=>false);
-                }
-            }
-            return response()->json($items);
-       }
-    }
+    return response()->json($data);
+}
 }
