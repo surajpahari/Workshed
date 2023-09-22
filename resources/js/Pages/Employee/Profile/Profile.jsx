@@ -4,7 +4,7 @@ import ProfileDetail from "./ProfileDetail";
 import SettingForm from "./SettingForm";
 import Administration from "./Administration";
 import axios from "axios";
-const Profile = () => {
+const Profile = ({ username, email, phone_no, created_at }) => {
     const [activeBar, setActiveBar] = useState(1);
     const changeActiveBar = (x) => {
         setActiveBar(x)
@@ -18,11 +18,16 @@ const Profile = () => {
         )
     }
 
+    const dateExtract = (dateString) => {
+        const dateTime = new Date(dateString)
+        const date = dateTime.toISOString().split('T')[0];
+        return date;
+    }
     //to renderComponent accordance to selected menu
     const renderComponent = () => {
         switch (activeBar) {
             case 1:
-                return <ProfileDetail detail={profile} />;
+                return <ProfileDetail username={username} phone_no={phone_no} email={email} />;
 
             case 3:
                 return <SettingForm />
@@ -34,25 +39,25 @@ const Profile = () => {
         }
     }
     //getting details required for the view
-    const [profile, setProfile] = useState(null);
-    async function getData() {
-        const url = `http://localhost:8000/get-profile`;
-        const response = await axios.get(url);
-        setProfile(response.data);
-
-    }
-    useEffect(
-        () => {
-            getData()
-        }
-        , []
-
-    )
-    useEffect(
-        () => {
-            console.log(profile)
-        }, [profile])
-
+    // const [profile, setProfile] = useState(null);
+    // async function getData() {
+    //     const url = `http://localhost:8000/get-profile`;
+    //     const response = await axios.get(url);
+    //     setProfile(response.data);
+    //
+    // }
+    // useEffect(
+    //     () => {
+    //         getData()
+    //     }
+    //     , []
+    //
+    // )
+    // useEffect(
+    //     () => {
+    //         console.log(profile)
+    //     }, [profile])
+    //
     return (
         <>
             <div className=" flex mx-2 my-5  border-b-4 border-b-green-100">
@@ -76,7 +81,7 @@ const Profile = () => {
                                 </div>
                                 <div className="flex justify-center">
                                     <div>
-                                        {profile ? profile.username : ''}
+                                        {username}
                                         <b>+</b>
                                     </div>
                                 </div>
@@ -92,8 +97,7 @@ const Profile = () => {
                                 </div>
                                 <div className="flex justify-end items-center">
                                     <div>
-
-                                        {profile ? profile.created_at : ''}
+                                        {dateExtract(created_at)}
                                     </div>
                                 </div>
                             </div>
@@ -105,7 +109,7 @@ const Profile = () => {
                                 </div>
                                 <div className="flex grow justify-end items-center">
                                     <div>
-                                        {profile ? profile.email : ''}
+                                        {email}
                                     </div>
                                 </div>
                             </div>
@@ -117,14 +121,15 @@ const Profile = () => {
                                 </div>
                                 <div className="flex grow justify-end items-center">
                                     <div>
-                                        9898989898
+                                        {phone_no ? phone_no : "----------"}
                                     </div>
                                 </div>
                             </div>
                             <div>
                                 <div className="flex justify-center m-2 bg-blue-400 rounded cursor-pointer">
                                     <div className="text-white">
-                                        9898989898
+
+                                        {phone_no ? phone_no : "----------"}
                                     </div>
                                 </div>
                             </div>

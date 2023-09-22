@@ -88,9 +88,31 @@ class EmployeeController extends Controller
         return Inertia::render('Employee/Profile/Profile');
     }
     //for details needed for profile view
-    public function getProfile(){
-        $user = Auth::user();
-        return $user;
+    public function getProfile2($key){
+        if($key){
+            if(Auth::user()->role_id == 1){
+                $user = User::findOrFail($key);
+                if(Auth::user()->company_id == $user->company_id){
+                    return Inertia::render("Profile/Profile", $user);
+                }
+                else{
+                    return Inertia::render("Profile/Profile",Auth::user());
+                }
+            }
+        }
+        else{
+        }
+
+    }
+
+    public function getProfile($id = null){
+        if($id == null){
+            $user = Auth::user();
+        }
+        else{
+            $user = User::findOrFail($id);
+        }
+        return Inertia::render("Employee/Profile/Profile",$user->only('username','email','phone_no','created_at'));
     }
     //for updating email and phone
     public function updateInfo(){

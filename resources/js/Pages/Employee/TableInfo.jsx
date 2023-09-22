@@ -38,7 +38,7 @@ export const TableInfo = {
         },
         {
             name: "edit",
-            link: (id) => ("http://localhost:8000/profile?=" + id),
+            link: (id) => ("http://localhost:8000/get-profile/" + id),
             notation: <FontAwesomeIcon className="text-blue-500" icon={faEdit} />,
             confirmation: "none",
             key: "id"

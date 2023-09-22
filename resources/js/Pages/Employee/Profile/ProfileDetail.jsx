@@ -1,11 +1,6 @@
 import { useEffect, useRef } from "react"
 
-const ProfileDetail = (props = null) => {
-    useEffect(
-        () => {
-            console.log(props)
-        }
-        , [props])
+const ProfileDetail = ({ username, email, phone_no }) => {
     return (
         <div className="m-1">
             <div>
@@ -20,7 +15,7 @@ const ProfileDetail = (props = null) => {
                         :
                     </div>
                     <div>
-                        {props.detail ? props.detail.username : ''}
+                        {username}
                     </div>
                 </div>
                 <div className="grid grid-cols-4">
@@ -33,7 +28,7 @@ const ProfileDetail = (props = null) => {
                         </div>
                     </div>
                     <div>
-                        {props.detail ? props.detail.email : ''}
+                        {email}
                     </div>
                 </div>
                 <div className="grid grid-cols-4">
@@ -45,7 +40,7 @@ const ProfileDetail = (props = null) => {
                     </div>
                     <div>
                         {/*props.detail ? props.detail.phone : ''*/}
-                        9898989898
+                        {phone_no ? phone_no : "----------"}
                     </div>
                 </div>
             </div>

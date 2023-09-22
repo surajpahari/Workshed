@@ -71,6 +71,7 @@ Route::controller(EmployeeController::class)->middleware(['auth','admin'])->grou
     //for the profile
     Route::get('/profile','show');
     Route::get('/get-profile','getProfile');
+    Route::get('/get-profile/{key}','getProfile');
 
 });
 Route::controller(LocationController::class)->middleware(['auth','admin'])->group(function(){
