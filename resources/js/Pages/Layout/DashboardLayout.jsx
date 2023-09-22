@@ -18,19 +18,21 @@ const DashboardLayout = ({ children }) => {
 
     return (
         <>
-            <div className="bg-green-100 h-screen  fixed top-0 left-0 bottom-0">
+            <div className="bg-green-100 h-screen fixed top-0 left-0 bottom-0">
                 {/*sidebar*/}
                 <Sidebar showMenuTitle={showMenuTitle} />
             </div>
             <div className={`${showMenuTitle ? 'animate-contractR' : 'animate-expandR'}
-             animate-position absolute bg-green-200 top-0  right-0  h-16`}>
+             animate-position absolute bg-green-200 top-0 right-0 h-16`}>
                 {/*topBar*/}
                 <Topbar handleShowMenuTitle={handleShowMenuTitle} handleShowLogout={handleShowLogout} />
             </div>
             <div className={`${showMenuTitle ? 'animate-contractR' : 'animate-expandR'}
-             animate-position absolute  top-16  right-0  `}>
+             animate-position absolute top-16 right-0 overflow-y-auto`} style={{ maxHeight: "calc(100vh - 4rem)" }}>
                 {/*topBar*/}
-                {children}
+                <div className="h-full">
+                    {children}
+                </div>
             </div>
             {showLogout ? <div>
 

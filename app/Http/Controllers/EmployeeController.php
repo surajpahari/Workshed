@@ -112,7 +112,7 @@ class EmployeeController extends Controller
         else{
             $user = User::findOrFail($id);
         }
-        return Inertia::render("Employee/Profile/Profile",$user->only('username','email','phone_no','created_at'));
+        return Inertia::render("Employee/Profile/Profile",$user->only('username','email','phone','created_at'));
     }
     //for updating email and phone
     public function updateInfo(){

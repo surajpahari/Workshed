@@ -19,7 +19,7 @@ const Dashboard = () => {
 
     return (
         <div className="flex justify-center items-center">
-            <div className="flex-grow">
+            <div className="flex-grow max-h-fit">
                 <FullCalendar
                     plugins={[dayGridPlugin, timeGridPlugin]}
                     editable={false}
