@@ -18,7 +18,13 @@ const Administration = () => {
     //submit function
     const submit = () => {
         put('/edit-employee', {
-            onSuccess: () => reset(),
+            onSuccess: () => {
+                reset();
+                toast.success("Sucessfully Edited");
+            },
+            onError: () => {
+                toast.error("Error Occured")
+            }
         })
     }
     //submit for the Modal
@@ -35,14 +41,8 @@ const Administration = () => {
         })
     }
     const freeError = () => {
-        if (errors) {
-            console.log(true)
-        }
         clearErrors()
     }
-    useEffect(() => {
-        console.log(errors);
-    }, [errors])
     //
     return (
         <div className="m-4" >
