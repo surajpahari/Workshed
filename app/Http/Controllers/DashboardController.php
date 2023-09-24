@@ -148,8 +148,9 @@ class DashboardController extends Controller
         //
     }
 
-    public function sendnotice(Request $request)
+    public function getMessages()
     {
+        return response()->json(["message"=>"successful"]);
 
     }
 

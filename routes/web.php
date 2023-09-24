@@ -59,6 +59,7 @@ Route::controller(DashboardController::class)->middleware(['auth'])->group(funct
     Route::get('/dashboard','index')->name('dashboard.index');
     Route::get('/dashboard/getCalendarData', 'getCalendarData')->name('dashboard.getCalendarData');
     Route::post('/send-message','store');
+    Route::get('/get-message','getMessages');
     });
 
 Route::controller(EmployeeController::class)->middleware(['auth','admin'])->group(function(){

@@ -17,17 +17,36 @@ const Dashboard = () => {
     const { data, setData, post, reset } = useForm({
         message: ""
     });
+    const isEmpty = (string) => {
+        return string.trim() === '';
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        post('/send-message', {
-            onSuccess: () => {
-                console.log("hello")
-                reset()
-            }
-        })
+        if (!isEmpty(data.message)) {
+            data.message = data.message.trim();
+            post('/send-message', {
+                onSuccess: () => {
+                    reset()
+                }
+            })
+        }
+    }
+
+    const [mainresponse, setmainresponse] = useState('');
+    const getMessages = async () => {
+        const response = await axios.get('/get-message');
+        setmainresponse(response.data)
+
     }
     useEffect(() => {
+        console.log(mainresponse)
+    }, [mainresponse])
+    useEffect(() => {
         fetchUrl()
+    }, []);
+    useEffect(() => {
+        getMessages()
     }, []);
     return (
         <div className="flex m-1">
@@ -102,7 +121,13 @@ const Dashboard = () => {
                     <form onSubmit={handleSubmit}>
                         <div className="flex m-1">
                             <div className="flex-grow mr-1">
-                                <input type="text" name="message" className="w-full border-none rounded text-xl bg-gray-200 py-1" />
+                                <input type="text" name="message"
+                                    className="w-full border-none rounded text-xl bg-gray-200 py-1"
+                                    value={data.message}
+                                    onChange={
+                                        (e) => (setData('message', e.target.value))
+                                    }
+                                />
                             </div>
                             <div className="">
                                 <button type="sumbit" className="bg-teal-500 text-white text-xl border-none rounded  py-1 px-3">
