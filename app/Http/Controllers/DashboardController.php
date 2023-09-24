@@ -52,7 +52,7 @@ class DashboardController extends Controller
             'message' => 'required',
         ]);
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()->all()]);
+            return;
         }
         $notice = new Notice;
         $notice  ->from = Auth::user()->id;
