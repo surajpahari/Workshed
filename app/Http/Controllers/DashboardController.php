@@ -162,7 +162,7 @@ class DashboardController extends Controller
 
     public function sendnotice(Request $request)
     {
-        //event(new Message(Auth::user()->id, $request->message));
+
     }
 
 public function getCalendarData(Request $request)

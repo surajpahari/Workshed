@@ -1,71 +1,92 @@
-import { useForm } from "@inertiajs/inertia-react"
-import { useState } from "react"
+import axios from "axios"
 import ModalProvider from "../../../Table/ModalProvider"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faTrash } from "@fortawesome/free-solid-svg-icons"
-import { ModalContextProvider } from "../../../ModalContext"
-const Administration = () => {
-    const ActionPerformer = () => {
-        console.log("Attempt to change the detail")
-    }
-    const changeAction = {
-        name: "delete",
-        modal: () => (<></>),
-        notation: <div className="bg-red-500 border-none text-white rounded py-2 text-base"><span>Submit</span></div>,
-        type: "confrimation",
-        modalData: {
-            title: "Change Detail?",
-            key: "id",
-            subTitle: "This will change the detail of user",
-            proceed: "proceed",
-            terminate: "Cancel",
-            link: (id) => "https://www.youtube.com/results?search_query=" + id,
-            method: "delete",
-            performer: ActionPerformer
-        }
-    }
+import { toast } from "react-hot-toast"
+import { useEffect, useState } from "react"
+import { useForm } from "@inertiajs/inertia-react"
+import { ModalContext } from "../../../ModalContext"
+import { useContext } from "react"
 
-    const { data, setData } = useForm({
-        Email: "",
-        Phone_no: "",
+const Administration = () => {
+    //data for the form
+    const { data, put, setData, processing, errors, clearErrors, reset } = useForm({
+        email: "",
+        phone: "",
+        remember: false
+
     })
+    const { changeModalStatus, setModalContent, setModalType, setModalData, setModalLink } = useContext(ModalContext);
+    //submit function
+    const submit = () => {
+        put('/edit-employee', {
+            onSuccess: () => reset(),
+        })
+    }
+    //submit for the Modal
+    const submitModal = (e) => {
+        e.preventDefault();
+        changeModalStatus(true);
+        setModalType("confrimation")
+        setModalData({
+            title: "Edit User?",
+            subTitle: "This will edit the user details.",
+            proceed: "proceed",
+            terminate: "cancel",
+            performer: submit
+        })
+    }
+    const freeError = () => {
+        if (errors) {
+            console.log(true)
+        }
+        clearErrors()
+    }
+    useEffect(() => {
+        console.log(errors);
+    }, [errors])
+    //
     return (
         <div className="m-4" >
-            <div className="flex my-2">
-                <div className="w-48">
-                    <span className="text-base">
-                        Email
-                    </span>
+            <form onSubmit={submitModal}>
+                <div className="flex my-2">
+                    <div className="w-48">
+                        <span className="text-base">
+                            Email
+                        </span>
+                    </div>
+                    <div>
+                        <input type="email" name="email" placeholder="email" value={data.email}
+                            className="text-base" onFocus={freeError}
+                            onChange={(e) => (setData("email", e.target.value))} />
+                    </div>
                 </div>
-                <div>
-                    <input type="email" name="email" placeholder="email" className="text-base" />
-                </div>
-            </div>
-            <div className="flex my-2">
-                <div className="w-48">
-                    <span className="text-base">
-                        Phone no
-                    </span>
-                </div>
-                <div>
-                    <input type="text" name="phone" placeholder="phone" className="text-base" />
-                </div>
-            </div>
-            <div className="flex my-2">
-                <div className="w-48">
-                    <span></span>
-                </div>
-                <div>
-                    <ModalProvider
-                        modal={changeAction.modal}
-                        type={changeAction.type} notation={changeAction.notation}
-                        modalData={changeAction.modalData}
-                        rowdata={{ username: "ram", id: 7 }}
-                    />
+                {errors.email && <div>
+                    <span className="text-sm text-white bg-red-500 p-1 rounded">{errors.email}</span>
+                </div>}
+                <div className="flex my-2">
+                    <div className="w-48">
+                        <span className="text-base">
+                            Phone no
+                        </span>
+                    </div>
+                    <div>
+                        <input type="phone" name="phone" placeholder="phone" minLength={10} className="text-base" value={data.phone} onChange={(e) => (setData("phone", e.target.value))} />
+                    </div>
 
                 </div>
-            </div>
-
+                {errors.phone && <div>
+                    <span className="text-sm text-white bg-red-500 p-1 rounded">{errors.phone}</span>
+                </div>}
+                <div className="flex my-2">
+                    <div className="w-48">
+                        <span></span>
+                    </div>
+                    <div>
+                        <div className="bg-red-500 border-none text-white rounded py-2 text-base">
+                            <button className="bg-none border-none bg-red-500 text-white" type="submit" disabled={processing}>Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div >
     )
 }

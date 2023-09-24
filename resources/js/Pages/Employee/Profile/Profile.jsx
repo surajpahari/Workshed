@@ -6,6 +6,7 @@ import Administration from "./Administration";
 import axios from "axios";
 import { ModalContextProvider } from "../../../ModalContext";
 import ConfirmModal from "../../../Modals/ConfirmModal";
+import { Toaster } from "react-hot-toast";
 const Profile = ({ username, email, phone, created_at }) => {
     const [activeBar, setActiveBar] = useState(1);
     const changeActiveBar = (x) => {
@@ -171,6 +172,7 @@ const Profile = ({ username, email, phone, created_at }) => {
                     </div>
                 </div >
                 <ConfirmModal />
+                <Toaster />
             </ModalContextProvider>
         </>
     )

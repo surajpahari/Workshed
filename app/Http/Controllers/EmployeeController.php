@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Validation\Rule;
+use App\Http\Requests\EditRequest;
+use function PHPUnit\Framework\returnArgument;
 
 class EmployeeController extends Controller
 {
@@ -19,7 +21,7 @@ class EmployeeController extends Controller
 
     //Page to show the create Employee form
     public function showForm(){
-         return Inertia::render("Employee/AddEmployee");
+        return Inertia::render("Employee/AddEmployee");
     }
 
     //Handle the request to create new employee
@@ -72,12 +74,12 @@ class EmployeeController extends Controller
         $user= User::findOrFail($key);
         if(Auth::user()->company_id == $user->company_id){
             $user->delete();
-        return response()->json(['message' => 'Authorized'], Response::HTTP_OK);
+            return response()->json(['message' => 'Authorized'], Response::HTTP_OK);
         }
         else{
-        return response()->json(['message' => 'Unauthorized'], Response::HTTP_FAILED);
+            return response()->json(['message' => 'Unauthorized'], Response::HTTP_FAILED);
         }
-    /* return redirect()->route('employee.index')->with(['notification' => 'Success']); */
+        /* return redirect()->route('employee.index')->with(['notification' => 'Success']); */
     }
     public function provideOptions(){
         $id = Auth::user()->company->id;
@@ -88,23 +90,6 @@ class EmployeeController extends Controller
         return Inertia::render('Employee/Profile/Profile');
     }
     //for details needed for profile view
-    public function getProfile2($key){
-        if($key){
-            if(Auth::user()->role_id == 1){
-                $user = User::findOrFail($key);
-                if(Auth::user()->company_id == $user->company_id){
-                    return Inertia::render("Profile/Profile", $user);
-                }
-                else{
-                    return Inertia::render("Profile/Profile",Auth::user());
-                }
-            }
-        }
-        else{
-        }
-
-    }
-
     public function getProfile($id = null){
         if($id == null){
             $user = Auth::user();
@@ -115,8 +100,8 @@ class EmployeeController extends Controller
         return Inertia::render("Employee/Profile/Profile",$user->only('username','email','phone','created_at'));
     }
     //for updating email and phone
-    public function updateInfo(){
-        return $user;
-    }
 
+    public  function updateInfo(EditRequest $request){
+        return;
+    }
 }
