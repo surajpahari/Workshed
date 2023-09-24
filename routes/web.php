@@ -73,6 +73,7 @@ Route::controller(EmployeeController::class)->middleware(['auth','admin'])->grou
     Route::get('/get-profile','getProfile');
     Route::get('/get-profile/{key}','getProfile');
     Route::put('/edit-employee','updateInfo');
+    Route::post('/send-message','store');
 
 });
 Route::controller(LocationController::class)->middleware(['auth','admin'])->group(function(){

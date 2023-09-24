@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from "react";
-import { usePage } from "@inertiajs/inertia-react";
+import { useForm } from "@inertiajs/inertia-react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid"; // Import the timeGrid plugin
@@ -11,14 +11,15 @@ const Dashboard = () => {
     const calendarUrl = "http://localhost:8000/dashboard/getCalendarData/"
     const fetchUrl = async () => {
         let resposne = await axios.get(calendarUrl);
-        console.log(resposne)
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
     }
     useEffect(() => {
         fetchUrl()
     }, []);
-
     return (
-        <div className="flex justify-center items-center">
+        <div className="flex">
             <div className="flex-grow max-h-fit">
                 <FullCalendar
                     plugins={[dayGridPlugin, timeGridPlugin]}
@@ -40,6 +41,26 @@ const Dashboard = () => {
                         console.log(info.event.title)
                     }}
                 />
+            </div>
+            <div className="m-4 flex-col">
+                <div className="bg-teal-500 text-white text-xl px-20">
+                    Notice Board
+                </div>
+                <div className="flex-grow">
+
+                </div>
+                <div>
+                    <form onSubmit={handleSubmit}>
+                        <div className="m-2">
+                            <input type="text" name="message" />
+                        </div>
+                        <div className="flex justify-end items-end">
+                            <div>
+                                <button type="submit" className="bg-teal-500 text-white text-xl border-none">send</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     );

@@ -46,36 +46,24 @@ class DashboardController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    /* public function store(Request $request) */
-    /* { */
-    /*     // */
-    /**/
-    /*     $validator = Validator::make($request->all(), [ */
-    /*         'message' => 'required', */
-    /*     ]); */
-    /**/
-    /*     if ($validator->fails()) { */
-    /*         return response()->json(['errors' => $validator->errors()->all()]); */
-    /*     } */
-    /**/
-    /*     $notice = new Notice; */
-    /*     $notice  ->from = Auth::user()->id; */
-    /*     $notice  ->to = 'all'; */
-    /*     $notice  ->message = $request->message; */
-    /*     $notice  ->date = date('Y-m-d'); */
-    /*     $notice  ->time= date('H:i:s'); */
-    /*     $notice  ->company = Auth::user()->company; */
-    /*     $notice  ->status = 1; */
-    /*     $notice ->save(); */
-    /**/
-    /*     //$notices=Notice::where('company', Auth::user()->company)->orderBy('id', 'desc')->take(1)->get(); */
-    /**/
-    /*     return back(); */
-    /**/
-    /**/
-    /**/
-    /*     //return $request; */
-    /* } */
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'message' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->all()]);
+        }
+        $notice = new Notice;
+        $notice  ->from = Auth::user()->id;
+        $notice  ->to = 'all';
+        $notice  ->message = $request->message;
+        $notice  ->date = date('Y-m-d');
+        $notice  ->time= date('H:i:s');
+        $notice  ->company = Auth::user()->company;
+        $notice  ->status = 1;
+        $notice ->save();
+    }
     /**/
     /**
      * Display the specified resource.
