@@ -12,8 +12,14 @@ const Dashboard = () => {
     const fetchUrl = async () => {
         let resposne = await axios.get(calendarUrl);
     }
+    const { data, setData, post } = useForm({
+        message: ""
+    });
     const handleSubmit = (e) => {
         e.preventDefault();
+        post('/send-message', {
+            onSucess: () => console.log("hello")
+        })
     }
     useEffect(() => {
         fetchUrl()
@@ -52,7 +58,7 @@ const Dashboard = () => {
                 <div>
                     <form onSubmit={handleSubmit}>
                         <div className="m-2">
-                            <input type="text" name="message" />
+                            <input type="text" name="message" value={data.message} onChange={(e) => (setData('message', e.target.value))} />
                         </div>
                         <div className="flex justify-end items-end">
                             <div>

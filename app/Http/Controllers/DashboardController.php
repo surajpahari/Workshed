@@ -60,7 +60,7 @@ class DashboardController extends Controller
         $notice  ->message = $request->message;
         $notice  ->date = date('Y-m-d');
         $notice  ->time= date('H:i:s');
-        $notice  ->company = Auth::user()->company;
+        $notice  ->company = Auth::user()->company->id;
         $notice  ->status = 1;
         $notice ->save();
     }
