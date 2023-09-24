@@ -64,15 +64,31 @@ const Dashboard = () => {
                 </div>
                 {/*content for the header*/}
                 <div className="m-2">
-                    <div className=" flex justify-end items-end ">
-                        <div className="mb-2 ml-40 max-w-sm bg-teal-500 text-white  text-lg rounded p-1">
-                            <span >
-                                Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
-                                Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
+                    {/*right side*/}
+                    <div className=" flex-col">
+                        <div className="flex justify-end">
+                            <span className="italic text-gray-500">
+                                suraj
                             </span>
                         </div>
+                        <div className="flex justify-end">
+                            <div className="mb-2 ml-10 max-w-sm bg-teal-500 text-white  text-lg rounded p-1">
+                                <span >
+                                    aa
+                                    Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
+                                    Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
+                                </span>
+                            </div>
+                        </div>
                     </div>
-                    <div>
+                    {/*left side*/}
+
+                    <div className="flex-col ">
+                        <div className="flex">
+                            <span className="italic text-gray-500">
+                                you
+                            </span>
+                        </div>
                         <div className="mb-2 mr-40 max-w-sm bg-teal-500 text-white text-lg rounded p-1">
                             <span className="bg-teal-500 rounded p-1 text-white text-lg">
                                 Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
@@ -86,7 +102,7 @@ const Dashboard = () => {
                     <form onSubmit={handleSubmit}>
                         <div className="flex m-1">
                             <div className="flex-grow mr-1">
-                                <input type="text" name="message" className="w-full border-none rounded text-xl bg-gray-300 py-1" />
+                                <input type="text" name="message" className="w-full border-none rounded text-xl bg-gray-200 py-1" />
                             </div>
                             <div className="">
                                 <button type="sumbit" className="bg-teal-500 text-white text-xl border-none rounded  py-1 px-3">
