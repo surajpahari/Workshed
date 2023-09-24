@@ -21,6 +21,9 @@ class User extends Authenticatable
                 ->withPivot('company_id', 'status', 'email_status')
                 ->withTimestamps();
     }
+    public function notice(){
+        return $this->hasMany(Notice::class);
+    }
     /**
      * The attributes that are mass assignable.
      *

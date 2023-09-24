@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('notices', function (Blueprint $table) {
             $table->id();
-            $table->integer('from');
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->string('to');
             $table->longText('message');
             $table->string('date');
             $table->string('time');
-            $table->string('company')->nullable();
+            $table->foreignId('company_id')->references('id')->on('companies');
             $table->integer('status')->default(0);
             $table->timestamps();
         });

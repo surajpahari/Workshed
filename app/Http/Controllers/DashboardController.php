@@ -54,15 +54,15 @@ class DashboardController extends Controller
         if ($validator->fails()) {
             return;
         }
+        $company = Auth::user()->company;
         $notice = new Notice;
-        $notice  ->from = Auth::user()->id;
+        $notice  ->user_id = Auth::user()->id;
         $notice  ->to = 'all';
         $notice  ->message = $request->message;
         $notice  ->date = date('Y-m-d');
         $notice  ->time= date('H:i:s');
-        $notice  ->company = Auth::user()->company->id;
         $notice  ->status = 1;
-        $notice ->save();
+        $company->notices()->save($notice);
     }
     /**/
     /**
@@ -150,7 +150,6 @@ class DashboardController extends Controller
 
     public function getMessages()
     {
-        return response()->json(["message"=>"successful"]);
 
     }
 
