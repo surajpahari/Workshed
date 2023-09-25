@@ -31,14 +31,14 @@ export const TableInfo = {
     Actions: [
         {
             name: "view",
-            link: (id) => ("http://localhost:8000/profile?=" + id),
+            internalLink: (id) => ("/get-profile/" + id),
             notation: <FontAwesomeIcon className="text-teal-500" icon={faEye} />,
             confirmation: "none",
             key: "id",
         },
         {
             name: "edit",
-            link: (id) => ("http://localhost:8000/get-profile/" + id),
+            internalLink: (id) => ("/get-profile/" + id),
             notation: <FontAwesomeIcon className="text-blue-500" icon={faEdit} />,
             confirmation: "none",
             key: "id"

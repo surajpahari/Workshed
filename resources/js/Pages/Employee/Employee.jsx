@@ -22,7 +22,7 @@ const Employee = () => {
         notation: <div className="bg-teal-500 text-lg text-white py-2 px-3 rounded-lg"><span>+Add</span></div>,
         type: "center",
         modalData: {
-            title: "Add User",
+            title: "Add Employee",
             key: "id",
             subTitle: "This will delete user",
             proceed: "Delete",

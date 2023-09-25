@@ -4,6 +4,8 @@ import CenterModal from "../Modals/CenterModal";
 import { ModalContext } from "../ModalContext";
 import { ModalContextProvider } from "../ModalContext";
 import ModalProvider from "./ModalProvider";
+import axios from "axios";
+import { Link } from "@inertiajs/inertia-react";
 
 const Action = ({ actions, rowdata }) => {
 
@@ -14,6 +16,10 @@ const Action = ({ actions, rowdata }) => {
         changeModalStatus(true);
         setModalType(type)
     };
+    const getInternalLink = async (url) => {
+        await axios.get(url);
+
+    }
     //test ends
     return (
         <>
@@ -25,29 +31,39 @@ const Action = ({ actions, rowdata }) => {
                                 <a className="m-2 cursor-pointer" key={index} href={action.link(rowdata.id)}>{action.notation}</a>
                             </div>
                             :
-                            '' ||
-                                action.modal ?
+                            action.internalLink ?
                                 <div key={index}>
-                                    <span className="m-2 cursor-pointer">
-                                        {/*<action.modal key={index} rowdata={rowdata} notation={action.notation} />*/}
-                                        {/*provide modal
+                                    <Link
+                                        href={action.internalLink(rowdata.id)}
+                                        className="m-2 cursor-pointer">
+                                        {action.notation}
+                                    </Link>
+                                </div>
+                                :
+                                ''
+                                    ||
+                                    action.modal ?
+                                    <div key={index}>
+                                        <span className="m-2 cursor-pointer">
+                                            {/*<action.modal key={index} rowdata={rowdata} notation={action.notation} />*/}
+                                            {/*provide modal
                       needed :type,content,rowdata,modaldata
                       return button with functionality that changes the modalVariables
                     */}
-                                        <ModalProvider modal={action.modal} type={action.type} notation={action.notation} modalData={action.modalData} rowdata={rowdata} />
+                                            <ModalProvider modal={action.modal} type={action.type} notation={action.notation} modalData={action.modalData} rowdata={rowdata} />
 
-                                        {/*<button onClick={() => handleModal(action.modal, action.type, rowdata)}>
+                                            {/*<button onClick={() => handleModal(action.modal, action.type, rowdata)}>
                       {action.notation}
                     </button>*/}
-                                        {/*<action.modal key={index} rowdata={rowdata} notation={action.notation} />*/}
-                                    </span>
-                                </div>
-                                : ""
+                                            {/*<action.modal key={index} rowdata={rowdata} notation={action.notation} />*/}
+                                        </span>
+                                    </div>
+                                    : ""
                     ))
                 }
                 <div >
                 </div>
-            </div>
+            </div >
         </>
     )
 }

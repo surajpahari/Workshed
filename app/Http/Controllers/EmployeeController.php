@@ -46,7 +46,6 @@ class EmployeeController extends Controller
         $employee ->password = Hash::make($request->input('password'));
         $employee ->role_id= $request->input('role_id');
         $employee ->payrate = $request->input('payrate');
-
         $company->user()->save($employee);
     }
 

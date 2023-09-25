@@ -30,7 +30,12 @@ class LocationController extends Controller
      */
     public function store(Request $request)
     {
-
+        $rules = [
+            "name"=>['required','string'],
+            "location"=>['required'],
+            "contact"=>['required','integer','min_digits:10']
+        ];
+        $this->validate($request, $rules);
         $company=Auth::user()->company;
         $location = new Location;
         $location ->name = $request->input('name');
