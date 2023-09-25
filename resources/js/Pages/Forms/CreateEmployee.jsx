@@ -2,9 +2,10 @@ import { useForm } from "@inertiajs/inertia-react"
 import { useEffect } from "react";
 import { toast } from "react-hot-toast"
 import axios from "axios";
+import { Toaster } from "react-hot-toast";
 
 const CreateEmployee = () => {
-    const { data, setData, errors, post, processing } = useForm({
+    const { data, setData, errors, post, clearErrors, processing } = useForm({
         username: '',
         name: '',
         email: '',
@@ -22,18 +23,13 @@ const CreateEmployee = () => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            await toast.promise(
-                send(data),
-                {
-                    loading: 'Creating...',
-                    success: <b>Successfully Created</b>,
-                    error: <b>Error While Creating</b>,
-                }
-            );
-        } catch (error) {
-            console.error("An error occurred:", error);
+        if (errors) {
+            clearErrors()
         }
+        post('/employee', {
+            onSuccess: () => (toast.success("Employee Created Sucessfully")),
+            onError: () => (toast.error("Error creating employee"))
+        })
         // Handle error if needed
     };
     useEffect(() => {
@@ -43,76 +39,128 @@ const CreateEmployee = () => {
 
     return (
         <>
+            <Toaster />
             <div className="w-full max-h-full">
                 <div className="flex max-h-full justify-center items-center">
                     <form onSubmit={handleSubmit}>
+                        <div className=" text-lg font-semibold text-white">
+                            UserName
+                        </div>
                         <div>
                             <input placeholder="username"
 
-                                className="outline-none rounded-md border-none text-lg px-1 my-2"
+                                className="outline-none rounded-md border-none text-xl p-1 px-1 my-2"
+                                value={data.username}
                                 name="username" onChange={(e) => {
                                     setData("username", e.target.value)
                                 }} />
                         </div>
-                        <span>{errors.username}</span>
+                        <div className="text-white bg-red-500 px-1 rounded">
+                            <span>{errors.username}</span>
+                        </div>
+
+
+                        <div className=" text-lg font-semibold text-white">
+                            Name
+                        </div>
                         <div>
                             <input placeholder="name"
-                                className="outline-none rounded-md border-none text-lg px-1 my-2"
+                                className="outline-none rounded-md border-none text-xl p-1 px-1 my-2"
                                 name="name" onChange={(e) => {
                                     setData("name", e.target.value)
                                 }} />
                         </div>
-                        <span>{errors.name}</span>
+                        <div className="text-white bg-red-500 px-1 rounded">
+                            <span>{errors.name}</span>
+                        </div>
+
+                        <div className=" text-lg font-semibold text-white">
+                            Email
+                        </div>
                         <div>
                             <input placeholder="email"
-                                className="outline-none rounded-md border-none text-lg px-1 my-2"
+                                type="email"
+                                className="outline-none rounded-md border-none text-xl p-1 px-1 my-2"
                                 name="email" onChange={(e) => {
                                     setData("email", e.target.value)
                                 }} />
                         </div>
-                        <span>{errors.email}</span>
+                        <div className="text-white bg-red-500 px-1 rounded">
+                            <span>{errors.email}</span>
+                        </div>
+
+                        <div className=" text-lg font-semibold text-white">
+                            Phone Number
+                        </div>
                         <div>
                             <input placeholder="phone_no"
-                                className="outline-none rounded-md border-none text-lg px-1 my-2"
+                                className="outline-none rounded-md border-none text-xl p-1 px-1 my-2"
                                 name="phone_no" onChange={(e) => {
                                     setData("phone_no", e.target.value)
                                 }} />
                         </div>
-                        <span>{errors.phone_no}</span>
+                        <div className="text-white bg-red-500 px-1 rounded">
+                            <span>{errors.phone_no}</span>
+                        </div>
+
+                        <div className="text-white text-lg font-semibold">
+                            Password
+                        </div>
                         <div>
                             <input placeholder="password"
-                                className="outline-none rounded-md border-none text-lg px-1 my-2"
+                                type="password"
+                                className="outline-none rounded-md border-none text-xl p-1 px-1 my-2"
                                 name="password" onChange={(e) => {
                                     setData("password", e.target.value)
                                 }} />
                         </div>
                         <span>{errors.password}</span>
+
+                        <div className=" text-lg font-semibold text-white">
+                            Confirm Password
+                        </div>
                         <div>
                             <input placeholder="confirm_password"
-                                className="outline-none rounded-md border-none text-lg px-1 my-2"
+                                type="password"
+                                className="outline-none rounded-md border-none text-xl p-1 px-1 my-2"
                                 name="password_confirmation" onChange={(e) => {
                                     setData("password_confirmation", e.target.value)
                                 }} />
                         </div>
-                        <span>{errors.password_confirmation}</span>
+                        <div className="text-white bg-red-500 px-1 rounded">
+
+                            <span>{errors.password_confirmation}</span>
+                        </div>
+
+                        <div className=" text-lg font-semibold text-white">
+                            Payrate
+                        </div>
                         <div>
                             <input placeholder="payrate"
-                                className="outline-none rounded-md border-none text-lg px-1 my-2"
+                                className="outline-none rounded-md border-none text-xl p-1 px-1 my-2"
                                 name="payrate" onChange={(e) => {
                                     setData("payrate", e.target.value)
                                 }} />
                         </div>
-                        <span>{errors.payrate}</span>
+                        <div className="text-white bg-red-500 px-1 rounded">
+                            <span>{errors.payrate}</span>
+                        </div>
+
+                        <div className=" text-lg font-semibold text-white">
+                            Role
+                        </div>
                         <div>
                             <input placeholder="role"
-                                className="outline-none rounded-md border-none text-lg px-1 my-2"
+                                className="outline-none rounded-md border-none text-xl p-1 px-1 my-2"
                                 name="role" onChange={(e) => {
                                     setData("role_id", e.target.value)
                                 }} />
                         </div>
-                        <span>{errors.role_id}</span>
-                        <div>
-                            <input type="submit" name="submit" className="border-none text white cursor-pointer text-lg text-white bg-green-500" />
+                        <div className="text-white bg-red-500 px-1 rounded">
+                            <span>{errors.role_id}</span>
+                        </div>
+                        <div className="mt-2">
+                            <input type="submit" name="submit" className="border-none text white cursor-pointer text-xl p-1 text-white bg-green-500" />
                         </div>
                     </form>
                 </div>

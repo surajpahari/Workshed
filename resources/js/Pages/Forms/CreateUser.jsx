@@ -74,7 +74,7 @@ const CreateUser = () => {
                     {errors.email}
                 </span>
                 <div>
-                    <input type="text" name="name" placeholder="password" onChange={(e) => {
+                    <input type="password" name="name" placeholder="password" onChange={(e) => {
                         setData('password', e.target.value)
                     }} />
                 </div>
@@ -82,7 +82,7 @@ const CreateUser = () => {
                     {errors.password}
                 </span>
                 <div>
-                    <input type="text" name="name" placeholder="confirmpassword" onChange={(e) => {
+                    <input type="password" name="name" placeholder="confirmpassword" onChange={(e) => {
                         setData('password_confirmation', e.target.value)
                     }} />
                 </div>
