@@ -1,8 +1,7 @@
 import { useForm } from "@inertiajs/inertia-react"
-import { document } from "postcss"
-
+import { toast } from "react-hot-toast"
 const AddLocation = () => {
-    const { data, setData, errors, post, processing } = useForm({
+    const { data, setData, errors, post, processing, reset } = useForm({
         name: '',
         address: '',
         contact: '',
@@ -13,12 +12,15 @@ const AddLocation = () => {
     })
     const handleSubmit = (e) => {
         e.preventDefault()
-        post('/location')
-        setData(null);
+        post('/location', {
+            onSuccess: () => {
+                reset()
+                toast.success("New Location Created sucessfully")
+            },
+            onError: () => (toast.error("Error Occured while processing form"))
+        })
     }
-    const clearInput = () => {
-        return document.getElementByTagName("input");
-    }
+
     return (
         <>
             <div>
@@ -28,32 +30,40 @@ const AddLocation = () => {
                 <form onSubmit={handleSubmit} className="m-2">
                     <div className="m-2">
                         <div><label htmlFor="name" className="font-semibold">Name:</label></div>
-                        <input placeholder="Name" name="name" onChange={(e) => {
-                            setData("name", e.target.value)
-                        }} className=" ml-1  p-1 text-lg border-none bg-blue-100 rounded" />
+                        <input placeholder="Name"
+                            value={data.name}
+                            onChange={(e) => {
+                                setData("name", e.target.value)
+                            }} className=" ml-1  p-1 text-lg border-none bg-blue-100 rounded" />
                     </div>
-                    <span>{errors.name}</span>
+                    <span>{errors ? errors.name : ''}</span>
                     <div className="m-2">
                         <div><label htmlFor="address" className="font-semibold">Address:</label></div>
-                        <input placeholder="address" name="address" onChange={(e) => {
-                            setData("address", e.target.value)
-                        }} className="ml-1 p-1 text-lg border-none bg-blue-100 rounded" />
+                        <input placeholder="address" name="address"
+                            value={data.address}
+                            onChange={(e) => {
+                                setData("address", e.target.value)
+                            }} className="ml-1 p-1 text-lg border-none bg-blue-100 rounded" />
                     </div>
-                    <span>{errors.name}</span>
+                    <span>{errors ? errors.name : ''}</span>
                     <div className="m-2">
                         <div><label htmlFor="contact" className="font-semibold">Contact No:</label></div>
-                        <input placeholder="Contact No" name="contact" onChange={(e) => {
-                            setData("contact", e.target.value)
-                        }} className="ml-1 p-1 text-lg border-none bg-blue-100 rounded" />
+                        <input placeholder="Contact No" name="contact"
+                            value={data.contact}
+                            onChange={(e) => {
+                                setData("contact", e.target.value)
+                            }} className="ml-1 p-1 text-lg border-none bg-blue-100 rounded" />
                     </div>
-                    <span>{errors.email}</span>
+                    <span>{errors ? errors.name : ''}</span>
                     <div className="m-2">
                         <div><label htmlFor="person" className="font-semibold">Contact Person</label></div>
-                        <input placeholder="person" name="person" onChange={(e) => {
-                            setData("person", e.target.value)
-                        }} className="ml-1 p-1 text-lg border-none bg-blue-100 rounded" />
+                        <input placeholder="person" name="person"
+                            value={data.person}
+                            onChange={(e) => {
+                                setData("person", e.target.value)
+                            }} className="ml-1 p-1 text-lg border-none bg-blue-100 rounded" />
                     </div>
-                    <span>{errors.person}</span>
+                    <span>{errors ? errors.name : ''}</span>
                     <div className="flex justify-end mt-8">
                         <input type="submit" name="submit" className="bg-blue-500 text-white border-none cursor-pointer
                         rounded p-3 text-base hover:bg-blue-600" />

@@ -30,22 +30,18 @@ class LocationController extends Controller
      */
     public function store(Request $request)
     {
+
         $company=Auth::user()->company;
         $location = new Location;
-         $location ->name = $request->input('name');
-         $location ->address = $request->input('address');
-         $location->lat = $request->input('lat');
-         $location ->long = $request->input('lng');
-         $location ->contact = $request->input('contact');
-         $location ->person = $request->input('person');
-         $location ->status = 1;
-         $company->locations()->save($location);
-
-         return $this->index();
-
-
-
-
+        $location ->name = $request->input('name');
+        $location ->address = $request->input('address');
+        $location->lat = $request->input('lat');
+        $location ->long = $request->input('lng');
+        $location ->contact = $request->input('contact');
+        $location ->person = $request->input('person');
+        $location ->status = 1;
+        $company->locations()->save($location);
+        return $this->index();
     }
 
     /**

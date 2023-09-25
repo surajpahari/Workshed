@@ -30,7 +30,7 @@ class EmployeeController extends Controller
             'username' => ['required','string','max:20'],
             'name' => ['required','string','max:20'],
             'email' => ['required','email','unique:users'],
-            'role_id' => ['required','integer',Rule::in([0])],
+            'role_id' => ['required','integer',Rule::in([0,1])],
             'payrate' => ['required','integer','min_digits:3','max_digits:6'],
             'password' => ['required','confirmed','min:6'],
             'phone_no' =>['required','integer','min_digits:10']
@@ -48,7 +48,6 @@ class EmployeeController extends Controller
         $employee ->payrate = $request->input('payrate');
 
         $company->user()->save($employee);
-        return response()->json(['message' => 'Authorized'], Response::HTTP_OK);
     }
 
     public function getList($key){
