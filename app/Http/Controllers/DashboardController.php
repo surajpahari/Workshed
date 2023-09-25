@@ -64,63 +64,7 @@ class DashboardController extends Controller
         $notice  ->status = 1;
         $company->notices()->save($notice);
     }
-    /**/
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    /* public function show(Request $request) */
-    /* { */
-    /*     // */
-    /*     if($request->ajax()){ */
-    /**/
-    /**/
-    /*     $notices=DB::table('notices')->select('*', 'users.id as UID') */
-    /*         ->join('users', 'notices.from', '=', 'users.id') */
-    /*         ->where('notices.company', Auth::user()->company)->orderBy('notices.id', 'desc')->take(10)->get(); */
-    /*     $data=[]; */
-    /*     foreach($notices as $notice) */
-    /*     { */
-    /*         if($notice->UID == Auth::user()->id) */
-    /*         { */
-    /**/
-    /*             $data[]="<div class='direct-chat-msg right'> */
-    /*             <div class='direct-chat-infos clearfix'> */
-    /*               <span class='direct-chat-name float-right'>".$notice->username."</span> */
-    /*               <span class='direct-chat-timestamp float-left'>".date("d M Y h:i A", strtotime($notice->date ." ".$notice->time))."</span> */
-    /*             </div> */
-    /*             <img class='direct-chat-img' src='/uploads/avatars/".$notice->avatar."' alt='Message User Image'> */
-    /**/
-    /*             <div class='direct-chat-text'> */
-    /*               ".$notice->message." */
-    /*             </div> */
-    /**/
-    /*           </div> */
-    /*             "; */
-    /*         }else{ */
-    /*             $data[]= "<div class='direct-chat-msg'> */
-    /*             <div class='direct-chat-infos clearfix'> */
-    /*               <span class='direct-chat-name float-left'>".$notice->username."</span> */
-    /*               <span class='direct-chat-timestamp float-right'>".date("d M Y h:i A", strtotime($notice->date ." ".$notice->time))."</span> */
-    /*             </div> */
-    /*             <img class='direct-chat-img' src='/uploads/avatars/".$notice->avatar."' alt='Message User Image'> */
-    /**/
-    /*             <div class='direct-chat-text'> */
-    /*               ".$notice->message." */
-    /*             </div> */
-    /*           </div>"; */
-    /*         } */
-    /*     } */
-    /*     return $data; */
-    /* } */
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     */
-    public function edit($id)
+   public function edit($id)
     {
         //
     }
@@ -150,24 +94,36 @@ class DashboardController extends Controller
 
     public function getMessages()
     {
+        $company = Auth::user()->company;
 
+        // Retrieve notices with user information (including name).
+        $noticesWithUser = $company->notices()->with('user')->get();
+
+        // Extract message and user name from each notice.
+        $formattedNotices = $noticesWithUser->map(function ($notice) {
+            return [
+                'message' => $notice->message,
+                'username' => $notice->user->username,
+                'self' => ($notice->user_id == Auth::user()->id) ? true : false,
+            ];
+        });
+
+        return response()->json($formattedNotices);
     }
+    public function getCalendarData(Request $request)
+    {
+        $colors = ["red", "#007bff", "#17a2b8"];
+        $data = Auth::user()->company->tasks->map(function ($task, $index) use ($colors) {
+            $start_date = strtotime($task->start_date . ' ' . $task->start_time);
+            $end_date = strtotime($task->end_date . ' ' . $task->end_time);
+            return [
+                'title' => $task->type->type,
+                'start' =>date('Y-m-d H:i:s',$start_date),
+                'end' =>date('Y-m-d H:i:s', $end_date),
+                'allDay' => false,
+            ];
+        });
 
-public function getCalendarData(Request $request)
-{
-    $colors = ["red", "#007bff", "#17a2b8"];
-    $data = Auth::user()->company->tasks->map(function ($task, $index) use ($colors) {
-        $start_date = strtotime($task->start_date . ' ' . $task->start_time);
-        $end_date = strtotime($task->end_date . ' ' . $task->end_time);
-
-        return [
-            'title' => $task->type->type,
-            'start' =>date('Y-m-d H:i:s',$start_date),
-            'end' =>date('Y-m-d H:i:s', $end_date),
-            'allDay' => false,
-        ];
-    });
-
-    return response()->json($data);
-}
+        return response()->json($data);
+    }
 }

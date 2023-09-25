@@ -27,21 +27,21 @@ const Dashboard = () => {
             data.message = data.message.trim();
             post('/send-message', {
                 onSuccess: () => {
+                    setMessages([...messages, { message: data.message, self: true }])
                     reset()
                 }
             })
         }
     }
 
-    const [mainresponse, setmainresponse] = useState('');
+    const [messages, setMessages] = useState(undefined);
     const getMessages = async () => {
         const response = await axios.get('/get-message');
-        setmainresponse(response.data)
-
+        setMessages(response.data)
     }
     useEffect(() => {
-        console.log(mainresponse)
-    }, [mainresponse])
+        console.log(messages)
+    }, [messages])
     useEffect(() => {
         fetchUrl()
     }, []);
@@ -73,7 +73,7 @@ const Dashboard = () => {
                     height={"auto"}
                 />
             </div>
-            <div className="m-4 mb-0 border-solid border border-teal-500 min-w-fit rounded  relative  max-h-[48rem]">
+            <div className="m-4 mb-0 border-solid border border-teal-500 min-w-fit rounded  relative  max-h-[36rem] overflow-y-auto">
                 <div className="bg-teal-500">
                     {/*header for the notice*/}
                     <div className="text-white text-2xl mx-32">
@@ -84,37 +84,40 @@ const Dashboard = () => {
                 {/*content for the header*/}
                 <div className="m-2">
                     {/*right side*/}
-                    <div className=" flex-col">
-                        <div className="flex justify-end">
-                            <span className="italic text-gray-500">
-                                suraj
-                            </span>
-                        </div>
-                        <div className="flex justify-end">
-                            <div className="mb-2 ml-10 max-w-sm bg-teal-500 text-white  text-lg rounded p-1">
-                                <span >
-                                    aa
-                                    Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
-                                    Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
-                                </span>
-                            </div>
-                        </div>
-                    </div>
+                    {messages ?
+                        messages.map((messageInfo, index) => (
+                            messageInfo.self ?
+                                <div className="flex-col" key={index}>
+                                    <div className="flex">
+                                        <span className="italic text-gray-500">
+                                            you
+                                        </span>
+                                    </div>
+                                    <div className="mb-2 mr-40 max-w-sm bg-teal-500 text-white text-lg rounded p-1">
+                                        <span className="bg-teal-500 rounded p-1 text-white text-lg">
+                                            {messageInfo.message}
+                                        </span>
+                                    </div>
+                                </div> :
+
+                                <div className=" flex-col">
+                                    <div className="flex justify-end">
+                                        <span className="italic text-gray-500">
+                                            {messageInfo.username}
+                                        </span>
+                                    </div>
+                                    <div className="flex justify-end">
+                                        <div className="mb-2 ml-10 max-w-sm bg-teal-500 text-white  text-lg rounded p-1">
+                                            <span >
+                                                {messageInfo.message}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                        )) : ''
+                    }
                     {/*left side*/}
 
-                    <div className="flex-col ">
-                        <div className="flex">
-                            <span className="italic text-gray-500">
-                                you
-                            </span>
-                        </div>
-                        <div className="mb-2 mr-40 max-w-sm bg-teal-500 text-white text-lg rounded p-1">
-                            <span className="bg-teal-500 rounded p-1 text-white text-lg">
-                                Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
-                                Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
-                            </span>
-                        </div>
-                    </div>
                 </div>
                 {/*butttom form*/}
                 <div className="absolute bottom-0 left-0 text-red w-full rounded mb-1">
@@ -139,7 +142,7 @@ const Dashboard = () => {
 
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 
