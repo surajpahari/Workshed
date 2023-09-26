@@ -10,7 +10,8 @@ function getPropertyData(property, rowdata, dataProcessor) {
             } else {
                 return rowdata[property.name] || "";
             }
-        } else if (Array.isArray(property.name)) {
+        }
+        else if (Array.isArray(property.name)) {
             let nestedValue = rowdata;
 
             for (const prop of property.name) {
@@ -36,6 +37,14 @@ function getPropertyData(property, rowdata, dataProcessor) {
         }
         else {
             return ""
+        }
+    }
+    if (property.dummy) {
+        if (property.dataProcessor) {
+            return dataProcessor(property.dummy)
+        }
+        else {
+            return property.dummy
         }
     }
 }
