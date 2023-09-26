@@ -3,7 +3,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
-const SearchSelect = ({ title, optionLink }) => {
+
+const SearchSelect = ({ title, optionLink, label }) => {
     const [input, setInput] = useState('');
     const [mainOptions, setMainOptions] = useState(null);
     const [optionSatus, changeOptionStatus] = useState(false);
@@ -11,7 +12,7 @@ const SearchSelect = ({ title, optionLink }) => {
     const [inputStatus, changeInputStatus] = useState(false);
     const [resetStatus, changeResetStatus] = useState(false);
     const [selected, setSelected] = useState(null);
-
+    const [optionHover, setOptionHover] = useState(false);
     async function fetchOption() {
         try {
             const url = optionLink
@@ -26,6 +27,9 @@ const SearchSelect = ({ title, optionLink }) => {
         fetchOption()
         console.log("hello")
     }, [])
+    useEffect(() => {
+
+    }, [mainOptions])
 
     useEffect(() => {
         if (input.trim() === '') {
@@ -51,13 +55,15 @@ const SearchSelect = ({ title, optionLink }) => {
     }
 
     const handleBlur = (e) => {
-        console.log(e)
+        if (!optionHover) {
+            changeOptionStatus(false);
+        }
     }
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
             e.preventDefault()
             if (filteredOptions.length > 0) {
-                setInput(filteredOptions[0].name)
+                setInput(filteredOptions[0][label])
                 changeOptionStatus(false)
                 changeInputStatus(true)
                 changeResetStatus(true)
@@ -65,7 +71,7 @@ const SearchSelect = ({ title, optionLink }) => {
         }
     }
     const handleOptionClick = (option) => {
-        setInput(option.name)
+        setInput(option[label])
         changeOptionStatus(false)
         changeInputStatus(true)
         changeResetStatus(true)
@@ -75,11 +81,14 @@ const SearchSelect = ({ title, optionLink }) => {
         changeResetStatus(false)
         changeInputStatus(false)
     }
+
     const filterForInput = (prefix) => {
-        console.log(mainOptions)
-        prefix.toLowerCase();
-        return mainOptions.filter((item) => item.name.toLowerCase().startsWith(prefix));
-    }
+        prefix = prefix.toLowerCase();
+        return mainOptions
+            ? mainOptions.filter((item) => item[label]?.toLowerCase().startsWith(prefix))
+            : [];
+    };
+
     return (
         <>
             <div className="m-1 flex-col">
@@ -90,11 +99,12 @@ const SearchSelect = ({ title, optionLink }) => {
                     <div className="relative">
                         <div>
                             <input type="text"
-                                className={`outline-none border-none bg-sky-100 min-w-full text-lg
+                                className={`outline-none border-none bg-sky-100 min-w-full text-xl
+p-2
                                 ${inputStatus ? 'bg-teal-400 text-white rounded' : 'bg-sky-100'}
                                 `
                                 }
-                                placeholder="Employee"
+                                placeholder={title}
                                 value={input}
                                 onChange={handleChange}
                                 onFocus={handleFocus}
@@ -116,7 +126,10 @@ const SearchSelect = ({ title, optionLink }) => {
 
                     </div>
                     {optionSatus ?
-                        <div className="absolute  w-full">
+                        <div className="absolute  w-full z-10"
+                            onMouseOver={() => { setOptionHover(true) }}
+                            onMouseOut={() => { setOptionHover(false) }}
+                        >
                             <div className="max-h-32 bg-red-500 border-teal-500 overflow-y-auto">
                                 {
                                     filteredOptions ?
@@ -127,12 +140,12 @@ const SearchSelect = ({ title, optionLink }) => {
                                                 className="cursor-pointer"
                                             >
                                                 {index === 0 ?
-                                                    <div className="option.name bg-green-500">
-                                                        {option.name}
+                                                    <div className="option[label] bg-green-500">
+                                                        {option[label]}
                                                     </div>
                                                     :
-                                                    <div className="option.name">
-                                                        {option.name}
+                                                    <div className="option[label]">
+                                                        {option[label]}
                                                     </div>
                                                 }
                                             </div>

@@ -20,6 +20,7 @@ const AddTask = () => {
         post('/job')
         setData(null);
     }
+
     const handleEmployeeInput = (e) => {
         console.log(e.target.value)
     }
@@ -114,63 +115,10 @@ const AddTask = () => {
                 New Job
             </div>
             <form onSubmit={handleSubmit}>
-                <SearchSelect title="Employee" optionLink="http://localhost:8000/employee-option" />
+                <SearchSelect title="Employee" optionLink="http://localhost:8000/employee-option" label="name" />
+                <SearchSelect title="Job-Type" optionLink="http://localhost:8000/type-option" label="type" />
+                <SearchSelect title="Location" optionLink="http://localhost:8000/location-option" label="name" />
                 {/*for the type and location*/}
-                <div className="flex">
-                    <div className="m-2">
-                        <div className="m-1">
-                            <label htmlFor="employee" className="font-bold text-lg">Type</label>
-                        </div>
-                        <select className="select" name="type" onChange={(e) => {
-                            setData("type", e.target.value)
-                        }}>
-                            {
-                                typeOptions ? typeOptions.map((type, index) => (
-                                    <option value={type.id} key={index}>{type.type}</option>
-                                )
-                                )
-                                    : ''
-                            }
-
-                        </select>
-                    </div>
-                </div>
-                <div className="m-2">
-                    <div>
-                        <label htmlFor="employee">Location</label>
-                    </div>
-                    <select className=" select select-secondary" name="location" onChange={(e) => {
-                        setData("location", e.target.value)
-                    }}>
-                        {
-                            locationOptions ? locationOptions.map((location, index) => (
-                                <option value={location.id} key={index}>{location.name}</option>
-                            )
-                            )
-                                : ''
-                        }
-
-                    </select>
-                </div>
-
-                {/* for the employee*/}
-                <div className="m-2">
-                    <div>
-                        <label htmlFor="Employee">Employee</label>
-                    </div>
-                    <select className=" select select-secondary" name="location" onChange={(e) => {
-                        setData("employee", e.target.value)
-                    }}>
-                        {
-                            employeeOptions ? employeeOptions.map((employee, index) => (
-                                <option value={employee.id} key={index}>{employee.name}</option>
-                            )
-                            )
-                                : ''
-                        }
-
-                    </select>
-                </div>
                 {/*<div>
                     <input type="text" name="employee" placeholder="Employee" onChange={(e) => {
                         handleEmployeeInput(e)
