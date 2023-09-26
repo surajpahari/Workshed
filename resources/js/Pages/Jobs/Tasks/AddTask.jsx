@@ -1,6 +1,7 @@
 import { useForm } from "@inertiajs/inertia-react"
 import axios from "axios"
 import { useEffect, useState } from "react"
+import SearchSelect from "./SearchSelect"
 const AddTask = () => {
     const types = ['Teaching', 'Murder', 'Pickup', 'Cleaning']
     const locations = ['lamachaur', 'lakeside', 'bagar', 'harichowk']
@@ -109,12 +110,16 @@ const AddTask = () => {
     }
     return (
         <div>
+            <div className="border-solid  text-xl border-0 border-b p-2 border-teal-500 bg-teal-500 text-white">
+                New Job
+            </div>
             <form onSubmit={handleSubmit}>
+                <SearchSelect title="Employee" optionLink="http://localhost:8000/employee-option" />
                 {/*for the type and location*/}
                 <div className="flex">
                     <div className="m-2">
-                        <div>
-                            <label htmlFor="employee">Type</label>
+                        <div className="m-1">
+                            <label htmlFor="employee" className="font-bold text-lg">Type</label>
                         </div>
                         <select className="select" name="type" onChange={(e) => {
                             setData("type", e.target.value)
