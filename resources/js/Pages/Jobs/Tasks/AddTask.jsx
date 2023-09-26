@@ -3,9 +3,6 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import SearchSelect from "./SearchSelect"
 const AddTask = () => {
-    const types = ['Teaching', 'Murder', 'Pickup', 'Cleaning']
-    const locations = ['lamachaur', 'lakeside', 'bagar', 'harichowk']
-    const employees = ['ram', 'shyam', 'hari', 'krishna', 'radhe']
     const { data, setData, errors, post, processing } = useForm({
         type: null,
         location: null,
@@ -21,120 +18,22 @@ const AddTask = () => {
         setData(null);
     }
 
-    const handleEmployeeInput = (e) => {
-        console.log(e.target.value)
-    }
-    //setting up Options for type input
-    const [typeOptions, setTypeOptions] = useState();
-    async function fetchType() {
-        try {
-            const url = `http://localhost:8000/type-option`;
-            const response = await axios.get(url);
-            setTypeOptions(response.data);
-        } catch (error) {
-            // Handle the error here
-            console.error("Error fetching employee list:", error);
-        }
+    const dataSetter = (data, value) => {
+        setData(data, value)
     }
     useEffect(() => {
-        console.log(typeOptions)
-    }, [typeOptions])
+        console.log(data)
+    }, [data])
 
-    useEffect(() => {
-        fetchType();
-    }, [])
-
-    //setting up options for location input
-    const [locationOptions, setLocationOptions] = useState();
-    async function fetchLocation() {
-        try {
-            const url = `http://localhost:8000/location-option`;
-            const response = await axios.get(url);
-            setLocationOptions(response.data);
-        } catch (error) {
-            // Handle the error here
-            console.error("Error fetching employee list:", error);
-        }
-    }
-    useEffect(() => {
-        console.log(locationOptions)
-    }, [locationOptions])
-
-    useEffect(() => {
-        fetchLocation();
-    }, [])
-
-    //setting up options for employee input
-    const [employeeOptions, setEmployeeOptions] = useState();
-    const [employeeQuery, setEmployeeQuery] = useState("");
-    async function fetchEmployee() {
-        try {
-            const url = `http://localhost:8000/employee-option`;
-            const response = await axios.get(url);
-            setEmployeeOptions(response.data);
-        } catch (error) {
-            // Handle the error here
-            console.error("Error fetching employee list:", error);
-        }
-    }
-    useEffect(() => {
-        console.log(employeeOptions)
-    }, [employeeOptions])
-    useEffect(() => {
-        fetchEmployee()
-    }, [])
-
-    useEffect(() => {
-        if (employeeQuery.length == 1)
-            fetchEmployee();
-        if (employeeQuery.length == 0) {
-            setEmployeeQuery('');
-            setEmployeeOptions(null);
-        }
-    }, [employeeQuery])
-
-    //to handle the employee selection
-    const [selectedEmployee, setSelectedEmployee] = useState({ name: '', id: '' });
-    const selectEmployee = (employee) => {
-        setSelectedEmployee(employee)
-        setData('employee', employee.id)
-    }
-    useEffect(() => {
-
-        console.log(selectedEmployee)
-
-    }, [selectedEmployee])
-
-    //
-    const clearInput = () => {
-        return document.getElementByTagName("input");
-    }
     return (
         <div>
             <div className="border-solid  text-xl border-0 border-b p-2 border-teal-500 bg-teal-500 text-white">
                 New Job
             </div>
             <form onSubmit={handleSubmit}>
-                <SearchSelect title="Employee" optionLink="http://localhost:8000/employee-option" label="name" />
-                <SearchSelect title="Job-Type" optionLink="http://localhost:8000/type-option" label="type" />
-                <SearchSelect title="Location" optionLink="http://localhost:8000/location-option" label="name" />
-                {/*for the type and location*/}
-                {/*<div>
-                    <input type="text" name="employee" placeholder="Employee" onChange={(e) => {
-                        handleEmployeeInput(e)
-                        setEmployeeQuery(e.target.value)
-                        setSelectedEmployee({ id: '', name: e.target.value })
-                    }} value={selectedEmployee.name} />
-                </div>
-                <div>
-                    {
-                        employeeOptions ? employeeOptions.map((employee, index) => (
-                            <span key={index} onClick={() => {
-                                selectEmployee(employee)
-                            }}>{employee.name}</span>
-                        )) : ''
-                    }
-                </div>*/}
+                <SearchSelect title="Employee" optionLink="http://localhost:8000/employee-option" label="name" setter={dataSetter} fordata="employee" />
+                <SearchSelect title="Job-Type" optionLink="http://localhost:8000/type-option" label="type" fordata="type" setter={dataSetter} />
+                <SearchSelect title="Location" optionLink="http://localhost:8000/location-option" label="name" fordata="location" setter={dataSetter} />
 
                 {/* for the start date and end date*/}
                 <div className="flex">
@@ -162,7 +61,7 @@ const AddTask = () => {
                     </div>
                 </div>
                 <div className="bg-gray-100  p-2">
-                    <input type="submit" name="submi" value="submit" className="cursor-pointer text-lg p-1 bg-sky-500 border-none rounded text-white" />
+                    <input type="submit" name="submit" value="submit" className="cursor-pointer text-lg p-1 bg-sky-500 border-none rounded text-white" />
                 </div>
 
             </form >

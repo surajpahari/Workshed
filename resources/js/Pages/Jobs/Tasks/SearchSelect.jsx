@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 
-const SearchSelect = ({ title, optionLink, label }) => {
+const SearchSelect = ({ title, optionLink, label, fordata, setter }) => {
     const [input, setInput] = useState('');
     const [mainOptions, setMainOptions] = useState(null);
     const [optionSatus, changeOptionStatus] = useState(false);
@@ -52,6 +52,10 @@ const SearchSelect = ({ title, optionLink, label }) => {
         if (!inputStatus) {
             changeOptionStatus(true)
         }
+        else {
+            changeOptionStatus(false)
+        }
+
     }
 
     const handleBlur = (e) => {
@@ -67,6 +71,7 @@ const SearchSelect = ({ title, optionLink, label }) => {
                 changeOptionStatus(false)
                 changeInputStatus(true)
                 changeResetStatus(true)
+                setSelected(filteredOptions[0].id)
             }
         }
     }
@@ -75,6 +80,7 @@ const SearchSelect = ({ title, optionLink, label }) => {
         changeOptionStatus(false)
         changeInputStatus(true)
         changeResetStatus(true)
+        setSelected(option.id)
     }
     const handleReset = (e) => {
         setInput('');
@@ -89,6 +95,10 @@ const SearchSelect = ({ title, optionLink, label }) => {
             : [];
     };
 
+    useEffect(() => {
+        setter(fordata, selected)
+
+    }, [selected])
     return (
         <>
             <div className="m-1 flex-col">
@@ -130,7 +140,7 @@ p-2
                             onMouseOver={() => { setOptionHover(true) }}
                             onMouseOut={() => { setOptionHover(false) }}
                         >
-                            <div className="max-h-32 bg-red-500 border-teal-500 overflow-y-auto">
+                            <div className="max-h-32 bg-white p-2  border-teal-500 overflow-y-auto">
                                 {
                                     filteredOptions ?
                                         filteredOptions.map((option, index) => (
@@ -140,11 +150,11 @@ p-2
                                                 className="cursor-pointer"
                                             >
                                                 {index === 0 ?
-                                                    <div className="option[label] bg-green-500">
+                                                    <div className="option[label] bg-teal-500 text-white p-1 text-lg">
                                                         {option[label]}
                                                     </div>
                                                     :
-                                                    <div className="option[label]">
+                                                    <div className="option[label] p-1 text-lg hover:bg-teal-300 hover:text-white">
                                                         {option[label]}
                                                     </div>
                                                 }
