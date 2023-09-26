@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 
-const SearchSelect = ({ title, optionLink, label, fordata, setter }) => {
+const SearchSelect = ({ title, optionLink, label, fordata, setter, reseter, error }) => {
     const [input, setInput] = useState('');
     const [mainOptions, setMainOptions] = useState(null);
     const [optionSatus, changeOptionStatus] = useState(false);
@@ -86,6 +86,7 @@ const SearchSelect = ({ title, optionLink, label, fordata, setter }) => {
         setInput('');
         changeResetStatus(false)
         changeInputStatus(false)
+        reseter(fordata)
     }
 
     const filterForInput = (prefix) => {
@@ -109,6 +110,7 @@ const SearchSelect = ({ title, optionLink, label, fordata, setter }) => {
                     <div className="relative">
                         <div>
                             <input type="text"
+                                required
                                 className={`outline-none border-none bg-sky-100 min-w-full text-xl
 p-2
                                 ${inputStatus ? 'bg-teal-400 text-white rounded' : 'bg-sky-100'}
@@ -133,8 +135,13 @@ p-2
                                 : ''
                             }
                         </div>
-
                     </div>
+                    {error ?
+                        <div>
+                            {error}
+                        </div>
+                        : ""
+                    }
                     {optionSatus ?
                         <div className="absolute  w-full z-10"
                             onMouseOver={() => { setOptionHover(true) }}

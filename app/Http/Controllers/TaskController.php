@@ -48,6 +48,16 @@ class TaskController extends Controller
 
     public function store(Request $req)
     {
+        $rules=[
+            'employee'=>["required"],
+            'type'=>["required"],
+            'location' => ["required"],
+            'startDate'=>["required"],
+            'startTime' =>["required"],
+            'endDate'=>["required"],
+            'endTime'=>["required"]
+        ];
+        $this->validate($req, $rules);
         $company = Auth::user()->company;
         $task = new Task;
         $task->type_id = $req->input('type');
