@@ -2,6 +2,7 @@ import { useForm } from "@inertiajs/inertia-react"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import SearchSelect from "./SearchSelect"
+import { toast } from "react-hot-toast"
 const AddTask = () => {
     const { data, setData, reset, clearErrors, errors, post, processing } = useForm({
         type: null,
@@ -14,7 +15,13 @@ const AddTask = () => {
     })
     const handleSubmit = (e) => {
         e.preventDefault()
-        post('/job')
+        post('/job', {
+            onSuccess: () => {
+                reset()
+                toast.success("New Job Created sucessfully")
+            },
+            onError: () => (toast.error("Error creating new Job"))
+        })
     }
 
     const dataSetter = (data, value) => {

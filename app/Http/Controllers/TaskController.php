@@ -74,8 +74,6 @@ class TaskController extends Controller
         'status' => null,
         'email_status' => 'as'
     ]);
-        dd($task);
-
     }
 
 
