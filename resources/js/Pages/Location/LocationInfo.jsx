@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrash, faEdit, faEye } from "@fortawesome/free-solid-svg-icons"
+import DeletePerformer from "./DeletePerformer"
 //main Setting
 export const LocationInfo = {
     //header of the table in order
@@ -33,6 +34,7 @@ export const LocationInfo = {
                 terminate: "Cancel",
                 link: (id) => "https://www.youtube.com/results?search_query=" + id,
                 method: "delete",
+                performer: DeletePerformer
             }
         },
 

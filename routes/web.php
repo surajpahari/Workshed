@@ -77,10 +77,11 @@ Route::controller(EmployeeController::class)->middleware(['auth','admin'])->grou
     Route::put('/edit-employee','updateInfo');
 
 });
-Route::controller(LocationController::class)->middleware(['auth','admin'])->group(function(){
+Route::controller(LocationController::class)->middleware(['auth'])->group(function(){
     Route::get('/location','index');
     Route::post ('/location','store');
     Route::get('/location-option','provideOptions');
+    Route::delete('/location/destroy/{id}','destroy');
 });
 Route::controller(TypeController::class)->middleware(['auth','admin'])->group(function(){
     Route::get('/type-option','provideOptions');

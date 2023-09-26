@@ -1,6 +1,6 @@
+import { toast } from "react-hot-toast";
 import axios from "axios";
-import { Toaster, toast } from "react-hot-toast";
-const ActionPerformer = async (link, data, method) => {
+const DeletePerformer = async (link, data, method) => {
     try {
         await toast.promise(
             deleteResource(data),
@@ -11,12 +11,12 @@ const ActionPerformer = async (link, data, method) => {
             }
         );
     } catch (error) {
-        console.error("An error occurred:", error);
     }
 }
-async function deleteResource(searchQuery) {
-    const url = `http://localhost:8000/employee/destroy/${searchQuery}`;
+async function deleteResource(id) {
+    const url = `http://localhost:8000/location/destroy/${id}`;
     const responseData = await axios.delete(url);
     return responseData; // Add this line
 }
-export default ActionPerformer
+
+export default DeletePerformer

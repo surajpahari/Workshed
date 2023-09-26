@@ -2,9 +2,16 @@
 
 namespace App\Http\Controllers;
 use Auth;
+use Illuminate\Http\Response;
 use App\Models\Location;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Task;
+use App\Models\Company;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
+use App\Http\Requests\EditRequest;
+use function PHPUnit\Framework\returnArgument;
 
 class LocationController extends Controller
 {
@@ -32,7 +39,7 @@ class LocationController extends Controller
     {
         $rules = [
             "name"=>['required','string'],
-            "location"=>['required'],
+            "address"=>['required'],
             "contact"=>['required','integer','min_digits:10']
         ];
         $this->validate($request, $rules);
@@ -76,10 +83,34 @@ class LocationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Location $location)
-    {
-        //
+
+
+
+
+public function destroy($id)
+{
+    $company = Auth::user()->company->id;
+    $location = Location::findOrFail($id);
+
+    if ($location->company_id == $company) {
+        // Retrieve and delete associated tasks without triggering foreign key constraints
+        $location->tasks()->each(function ($task) {
+            // Detach users associated with the task if needed
+            $task->users()->detach();
+
+            // Delete the task itself without triggering foreign key constraints
+            $task->delete();
+        });
+
+        // Delete the location
+        $location->delete();
+
+        return response()->json(['message' => 'Authorized'], Response::HTTP_OK);
+    } else {
+        return response()->json(['message' => 'Unauthorized'], Response::HTTP_FORBIDDEN);
     }
+}
+
     public function getList($key){
         $location = Location::query()->orderBy('id')->paginate($key);
         return response($location,'200');
