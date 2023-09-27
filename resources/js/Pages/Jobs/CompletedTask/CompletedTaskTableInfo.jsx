@@ -1,8 +1,23 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrash } from "@fortawesome/free-solid-svg-icons"
 import { faEye } from "@fortawesome/free-solid-svg-icons"
+import ActionPerformer from "../../Employee/ActionPerformer"
+import DeletePerformer from "./DeletePerformer"
 //helper functions
 
+const statusIndicator = (status) => {
+    if (status == 2) {
+        return (
+            <span className="bg-green-400 p-1 rounded text-white">
+                completed
+            </span>
+        )
+    }
+    else {
+        return status
+    }
+
+}
 //main Setting
 export const CompletedTaskTableInfo = {
     //header of the table in order
@@ -20,13 +35,12 @@ export const CompletedTaskTableInfo = {
         {
             name: "id",
         },
-        { name: "status", dataProcessor: (status) => (status === '0' ? <span className="bg-teal-400 px-1 rounded ">completed</span> : status) },
+        { name: "status", dataProcessor: statusIndicator },
         { name: ["type", "type"] },
         { name: ["location", "name"] },
-        { name: ["start_date"] },
-        { name: ["end_date"] },
-        { array: { name: "users", property: "name" } },
-
+        { name: ["start"] },
+        { name: ["end"] },
+        { name: ['user', 'name'] },
     ],
     // properties: [
     //     { name: 'id' },
@@ -48,12 +62,27 @@ export const CompletedTaskTableInfo = {
             notation: <FontAwesomeIcon className="text-red-500" icon={faTrash} />,
             type: "confrimation",
             modalData: {
-                title: "Delete User?",
+                title: "Delete this Task?",
                 key: "id",
-                subTitle: "This will delete user",
+                subTitle: "This action cannot be recoverd.",
                 proceed: "Delete",
                 terminate: "Cancel",
                 link: (id) => "https://www.youtube.com/results?search_query=" + id,
+                method: "delete",
+                performer: DeletePerformer,
+            }
+        },
+        {
+            name: "view",
+            modal: () => (<></>),
+            notation: <FontAwesomeIcon className="text-teal-500" icon={faEye} />,
+            type: "center",
+            modalData: {
+                title: "Task No",
+                subTitle: "This will delete user",
+                proceed: "Delete",
+                terminate: "Cancel",
+                link: (id) => id,
                 method: "delete",
             }
         },

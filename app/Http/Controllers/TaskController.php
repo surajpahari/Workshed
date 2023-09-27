@@ -66,7 +66,7 @@ class TaskController extends Controller
         $task->start_date= $req->input('startDate');
         $task->start_time= $req->input('startTime');
         $task->end_date= $req->input('endDate');
-        $task->status=0;
+        $task->status=2;
         $task->end_time= $req->input('endTime');
         $company->tasks()->save($task);
         $userIds = $req->input('employee');
@@ -126,6 +126,7 @@ class TaskController extends Controller
     public function showCompletedTasks(){
         return Inertia::render("Jobs/CompletedTask/CompletedTask");
     }
+
     public function getCompletedTasksList($key){
         $tasks = Task::with(['type' => function ($query) {
             $query->select('id', 'type');
@@ -133,8 +134,30 @@ class TaskController extends Controller
             $query->select('id', 'name');
         }, 'users' => function ($query) {
             $query->select('users.id', 'users.name');
-        }])->where('status',0)->orderBy('id')->paginate($key);
-        return response($tasks, 200);
+        }])->where('status',2)->orderBy('id')->paginate($key);
+        $transformedTasks = $tasks->map(function ($task) {
+            return [
+                'id' => $task->id,
+                'status' => $task->status,
+                'start' => $task->start_date . '  ' . $task->start_time,
+                'end' =>$task->end_date.' '.$task->end_time,
+                'type' => [
+                    'id' => $task->type->id,
+                    'type' => $task->type->type,
+                ],
+                'tablename' => $task->type->tablename,
+                'location' => [
+                    'id' => $task->location->id,
+                    'name' => $task->location->name,
+                ],
+                'user' => [
+                    'id' => $task->users[0]->id,
+                    'name' => $task->users[0]->name,
+                ],
+            ];
+        });
+
+        return response(["data"=>$transformedTasks], 200);
     }
     public  function  showRoster(){
         return Inertia::render('Roster/Roster');

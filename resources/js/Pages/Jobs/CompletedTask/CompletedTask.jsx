@@ -1,7 +1,12 @@
 import { ModalContextProvider } from "../../../ModalContext";
+import SearchSelect from "./SearchSelect";
 import DashboardLayout from "../../Layout/DashboardLayout";
 import ListCompletedTask from "./ListCompletedTask";
 const CompletedTasks = () => {
+    const handleSubmit = () => {
+        e.preventDefault();
+        console.log("Submission");
+    }
     return (
         <>
             <ModalContextProvider>
@@ -12,60 +17,74 @@ const CompletedTasks = () => {
                             <h2 className="m-0 font-light">Rooster History</h2>
                         </div>
                         <div>
-
                             Home&nbsp; / &nbsp;Task Completed
                         </div>
-
                     </div>
                     {/*Heading*/}
 
 
                     {/*Filter*/}
-                    <div className="m-6">
-                        <div className="flex gap-8">
-                            {/*Employee*/}
-                            <div>
+                    <form onSubmit={handleSubmit}>
+                        <div className="m-6">
+                            <div className="flex gap-8">
+                                {/*Employee*/}
                                 <div>
-                                    Employee(s)
+                                    <SearchSelect
+                                        title="Employee"
+                                        optionLink="http://localhost:8000/employee-option"
+                                        label="name"
+                                        fordata="employee"
+                                        setter={() => { }}
+                                        reseter={() => { }}
+                                        error={() => { }}
+                                        clear={() => { }}
+                                        setClear={() => { }}
+                                    />
                                 </div>
-                                <div>
-                                    <select className="text-xl">
-                                        <option value="all" className="m-6">All</option>
-                                    </select>
+                                {/*StartDate*/}
+                                <div className="">
+                                    <div className="m-2">
+                                        <label htmlFor="employee" className="font-bold ">StartAt</label>
+                                    </div>
+                                    <div className="m-1">
+                                        <input
+                                            required
+                                            className="outline-none border-none bg-sky-50 min-w-full text-xl"
+                                            type="date" name="startDate" placeholder="startDate" onChange={(e) => {
+                                                console.log(e)
+                                            }} />
+                                    </div>
                                 </div>
-                            </div>
-                            {/*Employee*/}
+                                {/*EndDate*/}
+                                <div className="">
+                                    <div className="m-2">
+                                        <label htmlFor="employee" className="font-bold ">StartAt</label>
+                                    </div>
+                                    <div className="m-1">
+                                        <input
+                                            required
+                                            className="outline-none border-none bg-sky-50 min-w-full text-xl"
+                                            type="date" name="startDate" placeholder="startDate" onChange={(e) => {
+                                                console.log(e)
+                                            }} />
+                                    </div>
+                                </div>
+                                {/*Employee*/}
 
-                            {/*Start Date*/}
-                            <div>
-                                <div>
-                                    Start Date
-                                </div>
-                                <div>
-                                    <input type="date" name="date" />
-                                </div>
-                            </div>
-                            {/*Start date*/}
+                                {/*Start Date*/}
+                                {/*Start date*/}
+                                {/*End date*/}
 
-                            {/*End date*/}
-
-                            <div>
-                                <div>
-                                    Start Date
+                                <div className="flex justify-center items-center">
+                                    <div className="bg-teal-500 text-white px-6 py-2 rounded cursor-pointer">
+                                        Filter
+                                    </div>
                                 </div>
                                 <div>
-                                    <input type="date" name="date" />
                                 </div>
-                            </div>
-                            <div className="flex items-center">
-                                <div className="bg-blue-500 text-white px-6 py-2 rounded cursor-pointer">
-                                    Filter
-                                </div>
-                            </div>
-                            <div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                     {/*Filter*/}
                     <div>
                         <ListCompletedTask />
