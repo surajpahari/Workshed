@@ -35,7 +35,7 @@ const Sidebar = ({ showMenuTitle }) => {
                             W
                         </div>
                     </div>
-                    <div className=" flex  items-center text flex-grow flex-shrink-0 h-full">
+                    <div className=" flex  items-center text flex-grow flex-shrink-0 h-full ml-1">
                         <span className="font-medium text-2xl ">
                             Workshed
                         </span>
