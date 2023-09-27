@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Type;
 use App\Models\Location;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Inertia\Inertia;
 use Auth;
 
@@ -70,35 +71,68 @@ class TaskController extends Controller
         $company->tasks()->save($task);
         $userIds = $req->input('employee');
         $task->users()->attach($userIds, [
-        'company_id' => $company->id,
-        'status' => null,
-        'email_status' => 'as'
-    ]);
+            'company_id' => $company->id,
+            'status' => null,
+            'email_status' => 'as'
+        ]);
     }
+    public  function destroy($key){
+        $company=Auth::user()->company->id;
+        $task = Task::findOrFail($key);
+        if($company==$task->company_id){
+            return response()->json(['message' => 'Authorized'], Response::HTTP_OK);
+        }
+        else{
 
+            return response()->json(['message' => 'Unauthorized'], Response::HTTP_FORBIDDEN);
+        }
+    }
 
     public function getList($key)
     {
         $tasks = Task::with(['type' => function ($query) {
-        $query->select('id', 'type');
+            $query->select('id', 'type as tablename');
         }, 'location' => function ($query) {
-        $query->select('id', 'name');
+            $query->select('id', 'name');
         }, 'users' => function ($query) {
-        $query->select('users.id', 'users.name');
+            $query->select('users.id', 'users.name');
         }])->orderBy('id')->paginate($key);
 
-        return response($tasks, 200);
+        // Transform the data to include 'status' and 'start' (concatenation of start_date and start_time)
+        $transformedTasks = $tasks->map(function ($task) {
+            return [
+                'id' => $task->id,
+                'status' => $task->status,
+                'start' => $task->start_date . '  ' . $task->start_time,
+                'end' =>$task->end_date.' '.$task->end_time,
+                'type' => [
+                    'id' => $task->type->id,
+                    'type' => $task->type->type,
+                ],
+                'tablename' => $task->type->tablename,
+                'location' => [
+                    'id' => $task->location->id,
+                    'name' => $task->location->name,
+                ],
+                'user' => [
+                    'id' => $task->users[0]->id,
+                    'name' => $task->users[0]->name,
+                ],
+            ];
+        });
+
+        return response(['data' => $transformedTasks], 200);
     }
     public function showCompletedTasks(){
         return Inertia::render("Jobs/CompletedTask/CompletedTask");
     }
     public function getCompletedTasksList($key){
         $tasks = Task::with(['type' => function ($query) {
-        $query->select('id', 'type');
+            $query->select('id', 'type');
         }, 'location' => function ($query) {
-        $query->select('id', 'name');
+            $query->select('id', 'name');
         }, 'users' => function ($query) {
-        $query->select('users.id', 'users.name');
+            $query->select('users.id', 'users.name');
         }])->where('status',0)->orderBy('id')->paginate($key);
         return response($tasks, 200);
     }

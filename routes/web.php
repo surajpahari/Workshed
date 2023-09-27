@@ -96,6 +96,7 @@ Route::controller(TaskController::class)->middleware(['auth','admin'])->group(fu
     //for the rooster
     Route::get('/roster','showRoster');
     Route::get('/taskCalender','taskCalender')->name('tasks.calen');
+    Route::delete('/job/destroy/{key}','destroy');
 });
 Route::get('/jobs', function(){
     return Inertia::render('Jobs/Job');
