@@ -5,29 +5,49 @@ import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { faCheckCircle, faBriefcase, faMapMarkerAlt, faUsers, faReceipt, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FiPower } from "react-icons/fi";
 import { Link } from "@inertiajs/inertia-react";
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 import { useState } from "react";
 import { usePage } from "@inertiajs/inertia-react";
 import { useRemember } from '@inertiajs/react'
 
 
-const Sidebar = ({ showMenuTitle }) => {
+const Sidebar = ({ showMenuTitle, role }) => {
 
     const { url, component } = usePage()
 
-    const MenuTitle = showMenuTitle ? "animate-contract" : "animate-expand";
-    const content = [
-        { icon: faHome, name: "Dashboard", link: "/dashboard", active: "/dashboard" },
-        { icon: faClock, name: "Roster", link: "/roster", active: "/roster" },
-        { icon: faCheckCircle, name: "Task Completed", link: "/tasks/completed", active: "/tasks/completed" },
-        { icon: faBriefcase, name: "Jobs", link: "/jobs/list", active: "/jobs" },
-        { icon: faMapMarkerAlt, name: "Location", link: "/location", active: "/location" },
-        { icon: faUsers, name: "Employee", link: "/employee", active: "/employee" },
-        { icon: faReceipt, name: "PaySlip", link: "/payslip", active: "/payslip" },
-        { icon: faUser, name: "Profile", link: "/get-profile", active: "/get-profile" },
-    ]
+    const content = () => {
+        if (role === 1) {
+            return [
+                { icon: faHome, name: "Dashboard", link: "/dashboard", active: "/dashboard" },
+                { icon: faClock, name: "Roster", link: "/roster", active: "/roster" },
+                { icon: faCheckCircle, name: "Task Completed", link: "/tasks/completed", active: "/tasks/completed" },
+                { icon: faBriefcase, name: "Jobs", link: "/jobs/list", active: "/jobs" },
+                { icon: faMapMarkerAlt, name: "Location", link: "/location", active: "/location" },
+                { icon: faUsers, name: "Employee", link: "/employee", active: "/employee" },
+                { icon: faReceipt, name: "PaySlip", link: "/payslip", active: "/payslip" },
+                { icon: faUser, name: "Profile", link: "/get-profile", active: "/get-profile" },
+            ]
+        }
+        else if (role === 0) {
+            return [
+                { icon: faHome, name: "Dashboard", link: "/dashboard", active: "/dashboard" },
+                { icon: faClock, name: "Roster", link: "/roster", active: "/roster" },
+                { icon: faCheckCircle, name: "Task Completed", link: "/tasks/completed", active: "/tasks/completed" },
+                { icon: faReceipt, name: "PaySlip", link: "/payslip", active: "/payslip" },
+                { icon: faUser, name: "Profile", link: "/get-profile", active: "/get-profile" },
+                { icon: faCircleNotch, name: "Todo", link: '/dashboard', active: "/dashboard" }
+
+            ]
+
+        }
+
+    }
+    const getContent = content();
     return (
         <>
-            <div className={`${showMenuTitle ? 'animate-contract' : 'animate-expand'} divide-y  animate-width  bg-green-100  flex-shrink-0 h-full`}>
+            <div className={`${showMenuTitle ? 'w-0 md:w-14' : 'w-14 md:w-48'} divide-y bg-green-100
+transition-[width] ease-in duration-500
+flex-shrink-0 h-full overflow-hidden`}>
                 {/*Title and Logo*/}
                 <div className="flex  justfiy-center items-center h-16 cursor-pointer bg-green-200">
                     <div className="  flex justify-center items-center icon w-12 h-full flex-shrink-0 m-1 mr-2">
@@ -35,7 +55,7 @@ const Sidebar = ({ showMenuTitle }) => {
                             W
                         </div>
                     </div>
-                    <div className=" flex  items-center text flex-grow flex-shrink-0 h-full ml-1">
+                    <div className=" flex  items-center text flex-grow flex-shrink-0 h-full ml-2">
                         <span className="font-medium text-2xl ">
                             Workshed
                         </span>
@@ -44,7 +64,7 @@ const Sidebar = ({ showMenuTitle }) => {
                 {/*End of Title and Logo*/}
 
                 {/*Icon and Menu*/}
-                {content.map((item, index) => (
+                {getContent.map((item, index) => (
                     <Link
                         key={index}
                         href={item.link}

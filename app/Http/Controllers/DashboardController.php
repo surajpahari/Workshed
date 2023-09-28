@@ -64,7 +64,7 @@ class DashboardController extends Controller
         $notice  ->status = 1;
         $company->notices()->save($notice);
     }
-   public function edit($id)
+    public function edit($id)
     {
         //
     }
@@ -112,18 +112,22 @@ class DashboardController extends Controller
     }
     public function getCalendarData(Request $request)
     {
-        $colors = ["red", "#007bff", "#17a2b8"];
-        $data = Auth::user()->company->tasks->map(function ($task, $index) use ($colors) {
-            $start_date = strtotime($task->start_date . ' ' . $task->start_time);
-            $end_date = strtotime($task->end_date . ' ' . $task->end_time);
-            return [
-                'title' => $task->type->type,
-                'start' =>date('Y-m-d H:i:s',$start_date),
-                'end' =>date('Y-m-d H:i:s', $end_date),
-                'allDay' => false,
-            ];
-        });
+        if(Auth::user()->role_id===1){
+            $colors = ["red", "#007bff", "#17a2b8"];
+            $data = Auth::user()->company->tasks->map(function ($task, $index) use ($colors) {
+                $start_date = strtotime($task->start_date . ' ' . $task->start_time);
+                $end_date = strtotime($task->end_date . ' ' . $task->end_time);
+                return [
+                    'title' => $task->type->type,
+                    'start' =>date('Y-m-d H:i:s',$start_date),
+                    'end' =>date('Y-m-d H:i:s', $end_date),
+                    'allDay' => false,
+                ];
+            });
 
-        return response()->json($data);
+            return response()->json($data);
+        }
+        return response()->json([]);
+
     }
 }

@@ -72,8 +72,6 @@ Route::controller(EmployeeController::class)->middleware(['auth','admin'])->grou
     Route::delete('/employee/destroy/{id}', 'destroy')->name('employee.delete');
     //for the profile
     Route::get('/profile','show');
-    Route::get('/get-profile','getProfile');
-    Route::get('/get-profile/{key}','getProfile');
     Route::put('/edit-employee','updateInfo');
 
 });
@@ -105,6 +103,17 @@ Route::get('/jobs', function(){
 Route::get('/payslip',function(){
     return Inertia::render('Payslip/Payslip.jsx');
 })->middleware('auth');
+
+
+//for both admin and employee
+
+Route::controller(EmployeeController::class)->middleware(['auth'])->group(function(){
+    //EmplyeeController
+    Route::get('/get-profile','getProfile');
+    Route::put('/edit-employee','updateInfo');
+
+});
+
 
 
 

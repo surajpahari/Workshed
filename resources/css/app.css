@@ -61,6 +61,16 @@ code {
   }
 }
 
+@@keyframes collapse {
+    form{
+        width: 12rem;
+    }
+    to{
+        width:0px;
+    }
+
+}
+
 .animate-width {
   animation-duration: 0.5s;
   overflow: hidden;
@@ -89,6 +99,10 @@ code {
 }
 .animate-position{
     animation-duration:0.5s;
+    overflow:hidden;
+}
+.animate-collaspe{
+    animation-name:collaspe;
     overflow:hidden;
 }
 
