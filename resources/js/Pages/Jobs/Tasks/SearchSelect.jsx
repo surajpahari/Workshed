@@ -4,17 +4,26 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
+import { formatDate } from "@fullcalendar/core";
 
-const SearchSelect = ({ title, optionLink, label, fordata, setter, reseter, error, clear, setClear }) => {
+const SearchSelect = ({ title, optionLink, label, fordata, setter, reseter, error, clear, setClear, presetValue }) => {
+
     const [input, setInput] = useState('');
     const [mainOptions, setMainOptions] = useState(null);
     const [optionStatus, changeOptionStatus] = useState(false);
     const [filteredOptions, setFilteredOptions] = useState(mainOptions);
     const [inputStatus, changeInputStatus] = useState(false);
     const [resetStatus, changeResetStatus] = useState(false);
-    const [selected, setSelected] = useState(null);
+    const [selected, setSelected] = useState();
     const [optionHover, setOptionHover] = useState(false);
-
+    //just setting label for the default value as it is already selectec
+    const defaultValueSetter = (defaultValue) => {
+        setInput(defaultValue.label)
+        changeOptionStatus(false);
+        changeInputStatus(true);
+        changeResetStatus(true);
+        setSelected(defaultValue.id)
+    }
     async function fetchOption() {
         try {
             const url = optionLink;
@@ -25,10 +34,16 @@ const SearchSelect = ({ title, optionLink, label, fordata, setter, reseter, erro
         }
     }
 
+
     useEffect(() => {
+        if (presetValue) {
+            defaultValueSetter(presetValue)
+        }
         fetchOption();
     }, []);
-
+    useEffect(() => {
+        console.log(filteredOptions)
+    }, [filteredOptions])
     useEffect(() => {
         if (input.trim() === '') {
             setFilteredOptions(mainOptions);
@@ -89,7 +104,9 @@ const SearchSelect = ({ title, optionLink, label, fordata, setter, reseter, erro
         setInput('');
         changeResetStatus(false);
         changeInputStatus(false);
-        reseter(fordata);
+        console.log("resetting")
+        setClear(true)
+        reseter(fordata)
     };
 
     const handleReset = (e) => {
@@ -104,7 +121,8 @@ const SearchSelect = ({ title, optionLink, label, fordata, setter, reseter, erro
     };
 
     useEffect(() => {
-        setter(fordata, selected);
+        setter(selected);
+        console.log("slection is Happening")
     }, [selected]);
 
     return (

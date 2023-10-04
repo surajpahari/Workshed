@@ -90,7 +90,7 @@ export const CompletedTaskTableInfo = {
     ],
 
     //link to fetch data from
-    fetchLink: "http://localhost:8000/api/completedTasksList/",
+    fetchLink: "http://localhost:8000/completedTasksList/",
     //set the paginate or not
     paginate: true,
     //set the searchbox or not

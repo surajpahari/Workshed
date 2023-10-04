@@ -50,7 +50,7 @@ const Action = ({ actions, rowdata }) => {
                       needed :type,content,rowdata,modaldata
                       return button with functionality that changes the modalVariables
                     */}
-                                            <ModalProvider modal={action.modal} type={action.type} notation={action.notation} modalData={action.modalData} rowdata={rowdata} />
+                                            <ModalProvider modal={action.modal} type={action.type} notation={action.notation} modalData={action.modalData} rowdata={rowdata} isRowData={true} />
 
                                             {/*<button onClick={() => handleModal(action.modal, action.type, rowdata)}>
                       {action.notation}

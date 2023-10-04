@@ -5,6 +5,7 @@ export const ModalContextProvider = ({ children }) => {
     const [modalContent, setModalContent] = useState();
     const [modalStatus, changeModalStatus] = useState(false);
     const [modalData, setModalData] = useState({ title: "", subTitle: "", terminate: "", proceed: "", link: "" })
+    const [modalRow, setModalRow] = useState({});
 
     return (
 

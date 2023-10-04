@@ -4,15 +4,14 @@ import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ReactModal from "react-modal";
 
-const CenterModal = ({ type }) => {
+const CenterModal = ({ type, data }) => {
     const customStyles = {
         minWidth: '120px', // Set the desired minimum width
     };
-    const { modalStatus, modalType, modalContent, changeModalStatus, modalData, setModalData, ModalData } = useContext(ModalContext);
+    const { modalStatus, modalType, modalContent, changeModalStatus, modalData, setModalData, modalRow, setModalRow } = useContext(ModalContext);
     const toggleModalStatus = () => {
         changeModalStatus(!modalStatus)
     }
-
     useEffect(() => {
     }, [])
 
@@ -29,9 +28,9 @@ const CenterModal = ({ type }) => {
                 }
                 }
                 className="absolute inset-8 inset-x-0 md:inset-x-56 overflow-auto
-        outline-none border border-solid border-teal-500 md:min-w-120"
+        outline-none border border-solid border-teal-500 md:min-w-120 z-20"
             >
-                <div className="bg-teal-500 w-full h-full">
+                <div className="bg-teal-500 w-full h-full z-20">
                     <div className='flex bg-teal-600 mb-4'>
                         <div className='flex-grow'>
                             <div className="flex justify-center p-2">

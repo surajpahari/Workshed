@@ -21,7 +21,7 @@ const Topbar = ({ handleShowMenuTitle, handleShowLogout, logMenuStatus, username
                 </div>
                 {logMenuStatus ?
                     <div className="relative">
-                        <div className="absolute w-full bg-green-100 rounded">
+                        <div className="absolute w-full bg-green-100 rounded z-10">
                             <Link
                                 as="div"
                                 href="/get-profile"

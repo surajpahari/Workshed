@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 
@@ -13,6 +13,7 @@ const SearchSelect = ({ title, optionLink, label, fordata, setter, reseter, erro
     const [selected, setSelected] = useState(null);
     const [optionHover, setOptionHover] = useState(false);
 
+
     async function fetchOption() {
         try {
             const url = optionLink;
@@ -24,7 +25,7 @@ const SearchSelect = ({ title, optionLink, label, fordata, setter, reseter, erro
     }
 
     useEffect(() => {
-        fetchOption();
+        fetchOption()
     }, []);
 
     useEffect(() => {

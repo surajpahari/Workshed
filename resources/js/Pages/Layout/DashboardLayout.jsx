@@ -28,7 +28,7 @@ const DashboardLayout = ({ children }) => {
 
             <div className={`${showMenuTitle ? 'left-0 md:left-14' : 'left-14 md:left-48'}
              transition-[left] duration-500 ease-in absolute bg-green-200  top-0  p-1 right-0
-            h-16 overflow-visible z-10 `}
+            h-16 overflow-visible `}
             >
                 {/*topBar*/}
                 <Topbar handleShowMenuTitle={handleShowMenuTitle}

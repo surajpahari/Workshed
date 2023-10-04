@@ -128,6 +128,9 @@ class TaskController extends Controller
     }
 
     public function getCompletedTasksList($key){
+        $id = Auth::user()->role_id;
+        $transformedTasks=[];
+        if($id ==1){
         $tasks = Task::with(['type' => function ($query) {
             $query->select('id', 'type');
         }, 'location' => function ($query) {
@@ -137,7 +140,7 @@ class TaskController extends Controller
         }])->where('status',2)->orderBy('id')->paginate($key);
         $transformedTasks = $tasks->map(function ($task) {
             return [
-                'id' => $task->id,
+                'id'=>$task->id,
                 'status' => $task->status,
                 'start' => $task->start_date . '  ' . $task->start_time,
                 'end' =>$task->end_date.' '.$task->end_time,
@@ -156,7 +159,10 @@ class TaskController extends Controller
                 ],
             ];
         });
+        }
+        else if($id == 0 ){
 
+        }
         return response(["data"=>$transformedTasks], 200);
     }
     public  function  showRoster(){

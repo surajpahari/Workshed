@@ -3,9 +3,13 @@ import { useForm } from "@inertiajs/inertia-react"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import SearchSelect from "./SearchSelect"
+import { useContext } from "react"
 import { toast } from "react-hot-toast"
+import { ModalContext } from "../../../ModalContext"
 
-const AddTask = () => {
+const AddTask = ({ presets, editmode }) => {
+    const { changeModalStatus } = useContext(ModalContext)
+
     const getCurrentDate = () => {
         const now = new Date();
         const year = now.getFullYear();
@@ -13,19 +17,22 @@ const AddTask = () => {
         const day = now.getDate().toString().padStart(2, '0');
         return `${year}-${month}-${day}`;
     };
+    const locationPreset = { label: "lamachaurBranch", id: 68 }
+    const typePreset = { label: "cleaning", id: 13 }
+    const employeePreset = { label: "kisan", id: 12 }
     const [clearEmployee, setClearEmployee] = useState(false);
     const [clearType, setClearType] = useState(false);
     const [clearLocation, setClearLocation] = useState(false);
-
     const { data, setData, reset, clearErrors, errors, post, processing } = useForm({
-        type: null,
-        location: null,
-        employee: null,
-        startDate: '',
-        endDate: '',
-        startTime: '',
-        endTime: '',
+        type: presets ? presets.type.id : '',
+        employee: presets ? presets.employee.id : '',
+        location: presets ? presets.location.id : '',
+        startDate: presets ? presets.startDate : '',
+        endDate: presets ? presets.endDate : '',
+        startTime: presets ? presets.startTime : '',
+        endTime: presets ? presets.endTime : '',
     });
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -37,23 +44,77 @@ const AddTask = () => {
                 setClearType(true)
                 setClearEmployee(true)
                 setClearLocation(true)
+                editmode ? changeModalStatus(false) : () => { }
             },
             onError: () => (toast.error("Error creating new Job"))
         });
     };
 
-    const dataSetter = (data, value) => {
-        setData(data, value);
-        clearErrors(data);
-    };
+    const employeeSetter = (value) => {
+        console.log("setting the employee")
+
+        setData('employee', value);
+        clearErrors('employee')
+    }
+    const typeSetter = (value) => {
+        console.log('setting the type')
+        setData('type', value);
+        clearErrors('type')
+    }
+    const locationSetter = (value) => {
+        console.log('setting the location')
+        setData('location', value);
+        clearErrors('location')
+
+    }
 
     const dataRemover = (data = undefined) => {
-        reset(data);
+        setData(data, '')
     };
 
     useEffect(() => {
         console.log(data);
     }, [data]);
+    const searchSelectArray = [
+        {
+            title: "Employee",
+            optionLink: "http://localhost:8000/employee-option",
+            label: "name",
+            fordata: "employee",
+            setter: employeeSetter,
+            reseter: dataRemover,
+            error: errors.employee,
+            clear: clearEmployee,
+            setClear: setClearEmployee,
+            presetValue: presets ? presets.employee : undefined
+        },
+        {
+            title: "Location",
+            optionLink: "http://localhost:8000/location-option",
+            label: "name",
+            fordata: "location",
+            setter: locationSetter,
+            reseter: dataRemover,
+            error: errors.location,
+            clear: clearLocation,
+            setClear: setClearLocation,
+            presetValue: presets ? presets.location : undefined
+        },
+        {
+            title: "Job-Type",
+            optionLink: "http://localhost:8000/type-option",
+            label: "type",
+            fordata: "type",
+            setter: typeSetter,
+            reseter: dataRemover,
+            error: errors.location,
+            clear: clearType,
+            setClear: setClearType,
+            presetValue: presets ? presets.type : undefined
+        }
+
+
+    ]
 
     return (
         <div>
@@ -61,39 +122,25 @@ const AddTask = () => {
                 New Job
             </div>
             <form onSubmit={handleSubmit}>
-                <SearchSelect
-                    title="Employee"
-                    optionLink="http://localhost:8000/employee-option"
-                    label="name"
-                    fordata="employee"
-                    setter={dataSetter}
-                    reseter={dataRemover}
-                    error={errors.employee}
-                    clear={clearEmployee}
-                    setClear={setClearEmployee}
-                />
-                <SearchSelect
-                    title="Job-Type"
-                    optionLink="http://localhost:8000/type-option"
-                    label="type"
-                    fordata="type"
-                    setter={dataSetter}
-                    reseter={dataRemover}
-                    error={errors.type}
-                    clear={clearType}
-                    setClear={setClearType}
-                />
-                <SearchSelect
-                    title="Location"
-                    optionLink="http://localhost:8000/location-option"
-                    label="name"
-                    fordata="location"
-                    setter={dataSetter}
-                    reseter={dataRemover}
-                    error={errors.location}
-                    clear={clearLocation}
-                    setClear={setClearEmployee}
-                />
+                {
+
+                    searchSelectArray.map((searchSelect, index) => (
+                        <SearchSelect
+                            key={index}
+                            title={searchSelect.title}
+                            optionLink={searchSelect.optionLink}
+                            label={searchSelect.label}
+                            fordata={searchSelect.fordata}
+                            setter={searchSelect.setter}
+                            reseter={searchSelect.reseter}
+                            error={searchSelect.error}
+                            clear={searchSelect.clear}
+                            setClear={searchSelect.setClear}
+                            presetValue={searchSelect.presetValue}
+                        />
+                    ))
+                }
+
 
                 {/* for the start date and end date*/}
                 <div className="m-2">
@@ -110,7 +157,7 @@ const AddTask = () => {
                                 clearErrors("startDate");
                             }} />
                     </div>
-                    <div>
+                    <div className="m-1">
                         <input
                             required
                             className="outline-none border-none bg-sky-50 min-w-full text-xl"
@@ -142,7 +189,7 @@ const AddTask = () => {
                             }} />
                     </div>
 
-                    <div>
+                    <div className="m-1">
                         <input
                             required
                             className="outline-none border-none bg-sky-50 min-w-full text-xl"
@@ -159,10 +206,18 @@ const AddTask = () => {
                 }
                 <div className="bg-gray-100  p-2 flex justify-end">
                     <div className="text-lg">
-                        <input
-                            type="submit" name="submit" value="submit"
-                            required
-                            className="cursor-pointer text-lg p-1 py-2 bg-teal-500 border-none rounded text-white" />
+                        {editmode ?
+                            <input
+                                type="submit" name="submit" value="Edit"
+                                required
+                                className="cursor-pointer text-lg p-1 py-2 bg-teal-500 border-none rounded text-white"
+                            /> :
+                            <input
+                                type="submit" name="submit" value="Submit"
+                                required
+                                className="cursor-pointer text-lg p-1 px-3 bg-teal-500 border-none rounded text-white"
+                            />
+                        }
                     </div>
                 </div>
             </form>

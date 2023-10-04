@@ -18,7 +18,6 @@ const ModalProvider = (props) => {
             key: (typeof props.modalData.key === "string") ? props.rowdata[props.modalData.key] : (props.modalData.key === true ? props.selected : undefined)
         });
     };
-
     const { changeModalStatus, setModalContent, setModalType, setModalData, setModalLink } = useContext(ModalContext);
 
     return (

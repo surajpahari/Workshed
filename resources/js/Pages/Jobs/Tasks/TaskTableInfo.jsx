@@ -1,6 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrash, faEdit, faEye } from "@fortawesome/free-solid-svg-icons"
 import DeletePerformer from "./DeletePerformer"
+import TaskForm from "../TaskForm"
+import AddTask from "./AddTask"
+import JobViewModal from "../JobViewModal"
 //helper functions
 
 const statusIndicator = (status) => {
@@ -35,8 +38,8 @@ export const TaskTableInfo = {
     Actions: [
         {
             name: "view",
-            modal: () => (<></>),
-            notation: <FontAwesomeIcon className="text-teal-500" icon={faEye} />,
+            modal: (rowdata) => (<JobViewModal rowdata={rowdata} />),
+            notation: < FontAwesomeIcon className="text-teal-500" icon={faEye} />,
             type: "center",
             modalData: {
                 title: "View Employee",
@@ -49,7 +52,7 @@ export const TaskTableInfo = {
         },
         {
             name: "edit",
-            modal: () => (<></>),
+            modal: (rowdata) => (<><TaskForm rowdata={rowdata} /></>),
             notation: <FontAwesomeIcon className="text-blue-500" icon={faEdit} />,
             type: "center",
             modalData: {
