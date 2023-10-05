@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Models\Task;
@@ -66,7 +65,7 @@ class TaskController extends Controller
         $task->start_date= $req->input('startDate');
         $task->start_time= $req->input('startTime');
         $task->end_date= $req->input('endDate');
-        $task->status=2;
+        $task->status=1;
         $task->end_time= $req->input('endTime');
         $company->tasks()->save($task);
         $userIds = $req->input('employee');
@@ -126,44 +125,165 @@ class TaskController extends Controller
     public function showCompletedTasks(){
         return Inertia::render("Jobs/CompletedTask/CompletedTask");
     }
-
+    public function showTodoTasks(){
+        return Inertia::render("Jobs/TodoTask/Todo");
+    }
     public function getCompletedTasksList($key){
-        $id = Auth::user()->role_id;
-        $transformedTasks=[];
-        if($id ==1){
-        $tasks = Task::with(['type' => function ($query) {
-            $query->select('id', 'type');
-        }, 'location' => function ($query) {
-            $query->select('id', 'name');
-        }, 'users' => function ($query) {
-            $query->select('users.id', 'users.name');
-        }])->where('status',2)->orderBy('id')->paginate($key);
-        $transformedTasks = $tasks->map(function ($task) {
+        $role_id = Auth::user()->role_id;
+        $transformedtasks = [];
+        $authuserid = Auth::user()->id; // get the id of the authenticated user
+
+        if ($role_id == 1) {
+            $tasks = Task::with(['type' => function ($query) {
+                $query->select('id', 'type');
+            }, 'location' => function ($query) {
+                $query->select('id', 'name');
+            }, 'users' => function ($query) {
+                $query->select('users.id', 'users.name');
+            }])->where('status', 2)->orderby('id')->paginate($key);
+
+            $transformedtasks = $tasks->map(function ($task) {
+                return [
+                    'id' => $task->id,
+                    'status' => $task->status,
+                    'start' => $task->start_date . '  ' . $task->start_time,
+                    'end' => $task->end_date . ' ' . $task->end_time,
+                    'type' => [
+                        'id' => $task->type->id,
+                        'type' => $task->type->type,
+                    ],
+                    'tablename' => $task->type->tablename,
+                    'location' => [
+                        'id' => $task->location->id,
+                        'name' => $task->location->name,
+                    ],
+                    'user' => [
+                        'id' => $task->users[0]->id,
+                        'name' => $task->users[0]->name,
+                    ],
+                ];
+            });
+        } else if ($role_id == 0) {
+            $taskIds = DB::table('task_user')
+                ->where('user_id', $authuserid)
+                ->pluck('task_id',)
+                ->toArray();
+            // Use the taskIds array to retrieve tasks from the tasks table
+            $tasks = DB::table('tasks')
+                ->whereIn('id', $taskIds)->where("status",2)->paginate($key);
+            $finalTask=$tasks->map(function($task){
+                $type = DB::table('types')->where('id',$task->type_id)->first();
+                $location = DB::table('locations')->where('id',$task->location_id)->first();
+                return [
+                    'id' =>$task->id,
+                    'status'=>$task->status,
+                    'status' => $task->status,
+                    'start' => $task->start_date . '  ' . $task->start_time,
+                    'end' => $task->end_date . ' ' . $task->end_time,
+                    'type'=>[
+                        'id'=>$type->id,
+                        'type'=>$type->type,
+                    ],
+                    'location' => [
+                        'id' => $location->id,
+                        'name' => $location->name,
+                    ],
+                    'tablename'=>$type->type,
+                    'user'=>[
+                        'id'=>Auth::user()->id,
+                        'name'=>Auth::user()->name,
+                    ]
+                ];
+
+            });
+            return response(["data"=>$finalTask],200);
+
+
+
+        }
+        return response(["data" => $transformedtasks], 200);
+    }
+
+    public function getTodoTasksList($key){
+        $authuserid = Auth::user()->id;
+        $taskIds = DB::table('task_user')
+            ->where('user_id', $authuserid)
+            ->pluck('task_id',)
+            ->toArray();
+        // Use the taskIds array to retrieve tasks from the tasks table
+        $tasks = DB::table('tasks')
+            ->whereIn('id', $taskIds)->where("status",1)->paginate($key);
+        $finalTask=$tasks->map(function($task){
+            $type = DB::table('types')->where('id',$task->type_id)->first();
+            $location = DB::table('locations')->where('id',$task->location_id)->first();
             return [
-                'id'=>$task->id,
+                'id' =>$task->id,
+                'status'=>$task->status,
                 'status' => $task->status,
                 'start' => $task->start_date . '  ' . $task->start_time,
-                'end' =>$task->end_date.' '.$task->end_time,
-                'type' => [
-                    'id' => $task->type->id,
-                    'type' => $task->type->type,
+                'end' => $task->end_date . ' ' . $task->end_time,
+                'type'=>[
+                    'id'=>$type->id,
+                    'type'=>$type->type,
                 ],
-                'tablename' => $task->type->tablename,
                 'location' => [
-                    'id' => $task->location->id,
-                    'name' => $task->location->name,
+                    'id' => $location->id,
+                    'name' => $location->name,
                 ],
-                'user' => [
-                    'id' => $task->users[0]->id,
-                    'name' => $task->users[0]->name,
-                ],
+                'tablename'=>$type->type,
+                'user'=>[
+                    'id'=>Auth::user()->id,
+                    'name'=>Auth::user()->name,
+                ]
             ];
         });
-        }
-        else if($id == 0 ){
+        return response(["data"=>$finalTask],200);
+    }
+
+
+    public function getRoosterTasksList($key){
+        if(Auth::user()->id != 1){
+
+         $authuserid = Auth::user()->id;
+        $taskIds = DB::table('task_user')
+            ->where('user_id', $authuserid)
+            ->pluck('task_id',)
+            ->toArray();
+        // Use the taskIds array to retrieve tasks from the tasks table
+        $tasks = DB::table('tasks')
+            ->whereIn('id', $taskIds)->where("status",2)->paginate($key);
+        $finalTask=$tasks->map(function($task){
+            $type = DB::table('types')->where('id',$task->type_id)->first();
+            $location = DB::table('locations')->where('id',$task->location_id)->first();
+            return [
+                'id' =>$task->id,
+                'status'=>$task->status,
+                'status' => $task->status,
+                'start' => $task->start_date . '  ' . $task->start_time,
+                'end' => $task->end_date . ' ' . $task->end_time,
+                'type'=>[
+                    'id'=>$type->id,
+                    'type'=>$type->type,
+                ],
+                'location' => [
+                    'id' => $location->id,
+                    'name' => $location->name,
+                ],
+                'tablename'=>$type->type,
+                'user'=>[
+                    'id'=>Auth::user()->id,
+                    'name'=>Auth::user()->name,
+                ]
+            ];
+        });
+        return response(["data"=>$finalTask],200);
 
         }
-        return response(["data"=>$transformedTasks], 200);
+    }
+    //updating the status
+    public function markAsCompleted($key){
+        $affected = DB::table('tasks')->where("id",$key)->update(['status'=> 2]);
+        return;
     }
     public  function  showRoster(){
         return Inertia::render('Roster/Roster');

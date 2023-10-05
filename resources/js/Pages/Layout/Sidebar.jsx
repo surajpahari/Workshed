@@ -32,10 +32,10 @@ const Sidebar = ({ showMenuTitle, role }) => {
             return [
                 { icon: faHome, name: "Dashboard", link: "/dashboard", active: "/dashboard" },
                 { icon: faClock, name: "Roster", link: "/roster", active: "/roster" },
+                { icon: faCircleNotch, name: "Todo", link: '/tasks/todo', active: "/tasks/todo" },
                 { icon: faCheckCircle, name: "Task Completed", link: "/tasks/completed", active: "/tasks/completed" },
                 { icon: faReceipt, name: "PaySlip", link: "/payslip", active: "/payslip" },
                 { icon: faUser, name: "Profile", link: "/get-profile", active: "/get-profile" },
-                { icon: faCircleNotch, name: "Todo", link: '/dashboard', active: "/dashboard" }
 
             ]
 

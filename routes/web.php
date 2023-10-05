@@ -91,7 +91,6 @@ Route::controller(TaskController::class)->middleware(['auth','admin'])->group(fu
     Route::get('/jobs/list','index');
     //for the tasks
     //for the rooster
-    Route::get('/roster','showRoster');
     Route::get('/taskCalender','taskCalender')->name('tasks.calen');
     Route::delete('/job/destroy/{key}','destroy');
 });
@@ -116,4 +115,8 @@ Route::controller(EmployeeController::class)->middleware(['auth'])->group(functi
 Route::controller(TaskController::class)->middleware(['auth'])->group(function(){
     Route::get('/tasks/completed','showCompletedTasks');
     Route::get('/completedTasksList/{key}','getCompletedTasksList');
+    Route::get('/tasks/todo','showTodoTasks');
+    Route::get('/roster','showRoster');
+    Route::get('/todoTasksList/{key}','getTodoTasksList');
+    Route::put('/markAsCompleted/{key}','markAsCompleted');
 });

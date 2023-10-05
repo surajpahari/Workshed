@@ -28,7 +28,7 @@ const CenterModal = ({ type, data }) => {
                 }
                 }
                 className="absolute inset-8 inset-x-0 md:inset-x-56 overflow-auto
-        outline-none border border-solid border-teal-500 md:min-w-120 z-20"
+        outline-none border border-solid border-teal-500 md:min-w-120 z-20 bg-teal-500"
             >
                 <div className="bg-teal-500 w-full h-full z-20">
                     <div className='flex bg-teal-600 mb-4'>
