@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrash } from "@fortawesome/free-solid-svg-icons"
 import { faEye } from "@fortawesome/free-solid-svg-icons"
-import ActionPerformer from "../../Employee/ActionPerformer"
+import ViewCompletedTask from "./ViewCompletedTask"
 import DeletePerformer from "./DeletePerformer"
 //helper functions
 
@@ -74,7 +74,7 @@ export const CompletedTaskTableInfo = {
         },
         {
             name: "view",
-            modal: () => (<></>),
+            modal: (rowdata) => (<div>Hello</div>),
             notation: <FontAwesomeIcon className="text-teal-500" icon={faEye} />,
             type: "center",
             modalData: {

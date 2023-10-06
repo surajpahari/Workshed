@@ -60,7 +60,7 @@ export const UnpaidTableInfo = {
             notation: < FontAwesomeIcon className="text-teal-500" icon={faEye} />,
             type: "center",
             modalData: {
-                title: "View Employee",
+                title: "Unpaid Job",
                 subTitle: "This will delete user",
                 proceed: "Delete",
                 terminate: "Cancel",
