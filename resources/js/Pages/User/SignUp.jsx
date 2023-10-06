@@ -6,9 +6,11 @@ const SignUp = () => {
     return (
         <>
             <Front>
-                <div>
-                    Already  have an account?
-                    <Link href="/signin" >Sing in</Link>
+                <div className="justify-center items-center flex m-6 text-lg">
+                    <div>
+                        Already  have an account? ;&nsp;
+                        <Link href="/signin" >Sign in</Link>
+                    </div>
                 </div>
                 <CreateUser />
             </Front>

@@ -24,13 +24,26 @@ const CenterModal = ({ type, data }) => {
                 onRequestClose={toggleModalStatus}
                 ariaHideApp={false}
                 style={{
-                    content: { ...customStyles }
-                }
-                }
-                className="absolute inset-8 inset-x-0 md:inset-x-56 overflow-auto
-        outline-none border border-solid border-teal-500 md:min-w-120 z-20 bg-teal-500"
+                    overlay: {
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    },
+                    content: {
+                        width: '100%',
+                        padding: '0px',
+                        maxWidth: '400px',
+                        borderRadius: '8px',
+                        position: 'static',
+                        transform: 'none',
+                    },
+                }}
+                className="
+                bg-white
+                absolute inset-8 inset-x-0 md:inset-x-96 overflow-auto
+            outline-none border border-solid border-teal-500 md:min-w-96 z-20 "
             >
-                <div className="bg-teal-500 w-full h-full z-20">
+                <div className="bg-white w-full h-full z-20">
                     <div className='flex bg-teal-600 mb-4'>
                         <div className='flex-grow'>
                             <div className="flex justify-center p-2">
@@ -47,7 +60,7 @@ const CenterModal = ({ type, data }) => {
                     </div>
                     {modalContent}
                 </div>
-            </ReactModal>
+            </ReactModal >
         </>
     );
 }

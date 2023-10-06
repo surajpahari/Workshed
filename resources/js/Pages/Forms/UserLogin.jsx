@@ -14,14 +14,42 @@ const UserLogin = () => {
     }
 
     return (
-        <form onSubmit={submit}>
-            <input type="text" value={data.email} onChange={e => setData('email', e.target.value)} />
-            {errors.email && <div>{errors.email}</div>}
-            <input type="password" value={data.password} onChange={e => setData('password', e.target.value)} />
-            {errors.password && <div>{errors.password}</div>}
-            <input type="checkbox" checked={data.remember} onChange={e => setData('remember', e.target.checked)} /> Remember Me
-            <button type="submit" disabled={processing}>Login</button>
-        </form>
+        <div className="flex items-center justify-center">
+            <form onSubmit={submit}>
+                <div className="mb-6">
+                    <div className="text-lg">
+                        Email
+                    </div>
+                    <div >
+                        <input
+                            className="text-3xl p-1  w-lg"
+                            type="text" value={data.email} onChange={e => setData('email', e.target.value)} />
+                    </div>
+                    {errors.email && <div className="text-red-500">{errors.email}</div>}
+                </div>
+                <div className="mb-6">
+                    <div>
+                        password
+                    </div>
+                    <div>
+                        <input
+                            className="text-3xl p-1"
+                            type="password" value={data.password} onChange={e => setData('password', e.target.value)} />
+                    </div>
+                    {errors.password && <div className="text-red-500">{errors.password}</div>}
+                </div>
+                <div>
+                    <div>
+                        <input type="checkbox" checked={data.remember} onChange={e => setData('remember', e.target.checked)} /> Remember Me
+                    </div>
+                    <div className="bg-orange-500  bg-none border-none">
+                        <button
+                            className="w-full bg-orange-500  text-xl p-2 text-white  border-none outline-none "
+                            type="submit" disabled={processing}>Login</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     )
 }
 export default UserLogin;
