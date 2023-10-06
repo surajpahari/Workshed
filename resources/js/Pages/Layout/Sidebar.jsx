@@ -24,7 +24,7 @@ const Sidebar = ({ showMenuTitle, role }) => {
                 { icon: faBriefcase, name: "Jobs", link: "/jobs/list", active: "/jobs" },
                 { icon: faMapMarkerAlt, name: "Location", link: "/location", active: "/location" },
                 { icon: faUsers, name: "Employee", link: "/employee", active: "/employee" },
-                { icon: faReceipt, name: "PaySlip", link: "/payslip", active: "/payslip" },
+                { icon: faReceipt, name: "PaySlip", link: "/payslip/unpaid", active: "/payslip" },
                 { icon: faUser, name: "Profile", link: "/get-profile", active: "/get-profile" },
             ]
         }
@@ -34,7 +34,7 @@ const Sidebar = ({ showMenuTitle, role }) => {
                 { icon: faClock, name: "Roster", link: "/roster", active: "/roster" },
                 { icon: faCircleNotch, name: "Todo", link: '/tasks/todo', active: "/tasks/todo" },
                 { icon: faCheckCircle, name: "Task Completed", link: "/tasks/completed", active: "/tasks/completed" },
-                { icon: faReceipt, name: "PaySlip", link: "/payslip", active: "/payslip" },
+                { icon: faReceipt, name: "PaySlip", link: "/payslip/unpaid", active: "/payslip" },
                 { icon: faUser, name: "Profile", link: "/get-profile", active: "/get-profile" },
 
             ]

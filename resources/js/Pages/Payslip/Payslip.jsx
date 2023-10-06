@@ -1,51 +1,73 @@
-import { ModalContext, ModalContextProvider } from "../../ModalContext";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "@inertiajs/inertia-react";
 import DashboardLayout from "../Layout/DashboardLayout";
-import ListTable from "./ListTable";
 const Payslip = () => {
+    const [paymentInfo, setPaymentInfo] = useState();
+    const fetchInfo = async () => {
+        const url = "http://localhost:8000/getPaymentInfo/"
+        let response = await axios.get(url);
+        setPaymentInfo(response.data);
+    }
+    useEffect(() => {
+        fetchInfo()
+    }, [])
+    useEffect(() => {
+        console.log(paymentInfo)
+    }, [paymentInfo])
     return (
         <>
-            <ModalContextProvider>
-                <div className="flex gap-2">
+            <div className="flex gap-2">
+                <Link as="div" href="/payslip/unpaid" className="text-2xl bg-teal-500 p-2 rounded text-white cursor-pointer" >
+                    <div>
+                        Unpaid
+                    </div>
+                    <div>
+                        {paymentInfo ? paymentInfo.unpaidInfo ? paymentInfo.unpaidInfo.totalCount.toFixed(1) + " Jobs" : '--' : '--' + "Jobs"}
+                    </div>
+                    <div>
+                        {paymentInfo ? paymentInfo.unpaidInfo ? "RS " + paymentInfo.unpaidInfo.totalPay.toFixed(1) : 'Rs --' : 'Rs--'}
+                    </div>
+                    <div>
+                        {paymentInfo ? paymentInfo.unpaidInfo ? paymentInfo.unpaidInfo.totalPay.toFixed(1) + ' hours' : '-- hours' : '--hours'}
+                    </div>
+                </Link>
+                <Link
+                    as="div"
+                    to="/dashboard"
+                    className="text-2xl bg-teal-500 p-2 rounded text-white cursor-pointer" >
+                    <div>
+                        Paid
+                    </div>
+                    <div>
+                        4 jobs
+                    </div>
+                    <div>
+                        Rs 400
+                    </div>
+                    <div>
+                        6hours
+                    </div>
+                </Link>
+                <Link
+                    as="div"
+                    href="/payslip/todo"
+                    className="text-2xl bg-teal-500 p-2 rounded text-white cursor-pointer" >
+                    <div>
+                        Todo
+                    </div>
+                    <div>
+                        {paymentInfo ? paymentInfo.remainingInfo ? paymentInfo.remainingInfo.totalCount.toFixed(1) + " Jobs" : '--' : '--' + "Jobs"}
+                    </div>
+                    <div>
+                        {paymentInfo ? paymentInfo.remainingInfo ? "RS " + paymentInfo.remainingInfo.totalPay.toFixed(1) : 'Rs --' : 'Rs--'}
+                    </div>
+                    <div>
+                        {paymentInfo ? paymentInfo.remainingInfo ? paymentInfo.remainingInfo.totalHours.toFixed(1) + ' hours' : '-- hours' : '-- hours'}
+                    </div>
+                </Link>
 
-                    <div className="text-2xl bg-teal-500 p-2 rounded text-white cursor-pointer" >
-                        <div>
-                            Unpaid
-                        </div>
-                        <div>
-                            Rs 500
-                        </div>
-                        <div>
-                            8hours
-                        </div>
-                    </div>
-
-                    <div className="text-2xl bg-teal-500 p-2 rounded text-white cursor-pointer" >
-                        <div>
-                            Paid
-                        </div>
-                        <div>
-                            Rs 400
-                        </div>
-                        <div>
-                            6hours
-                        </div>
-                    </div>
-                    <div className="text-2xl bg-teal-500 p-2 rounded text-white cursor-pointer" >
-                        <div>
-                            Remaining Task
-                        </div>
-                        <div>
-                            Rs 600
-                        </div>
-                        <div>
-                            5 hours
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <ListTable />
-                </div>
-            </ModalContextProvider>
+            </div>
         </>
     )
 }
@@ -57,7 +79,4 @@ Payslip.layout = (page) => (
         </div>
     </DashboardLayout >
 );
-
-
-
 export default Payslip

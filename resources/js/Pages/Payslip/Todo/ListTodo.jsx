@@ -1,9 +1,7 @@
-import Table from "../../Table/Table"
-import { PaySlipTableInfo } from "./PaySlipTableInfo"
-
+import Table from "../../../Table/Table"
+import { TodoTableInfo } from "./TodoTableInfo"
 const ListTable = () => {
     return (
-
         <div>
             <Table tableInfo={PaySlipTableInfo} />
         </div>

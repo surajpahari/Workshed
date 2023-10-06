@@ -242,7 +242,7 @@ class TaskController extends Controller
 
 
     public function getRoosterTasksList($key){
-        if(Auth::user()->id != 1){
+        if(Auth::user()->id == 1){
 
          $authuserid = Auth::user()->id;
         $taskIds = DB::table('task_user')

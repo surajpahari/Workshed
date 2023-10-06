@@ -5,6 +5,7 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TypeController;
+use App\Http\Controllers\PaySlipController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -98,8 +99,8 @@ Route::get('/jobs', function(){
     return Inertia::render('Jobs/Job');
 })->middleware('auth');
 
-Route::get('/payslip',function(){
-    return Inertia::render('Payslip/Payslip.jsx');
+Route::get('/payslip/unpaid',function(){
+    return Inertia::render('Payslip/Unpaid/Unpaid.jsx');
 })->middleware('auth');
 
 
@@ -119,4 +120,10 @@ Route::controller(TaskController::class)->middleware(['auth'])->group(function()
     Route::get('/roster','showRoster');
     Route::get('/todoTasksList/{key}','getTodoTasksList');
     Route::put('/markAsCompleted/{key}','markAsCompleted');
+});
+Route::controller(PaySlipController::class)->middleware(['auth'])->group(function(){
+    Route::get('/getPaymentInfo','getInfo');
+    Route::get('/getUnpaidList/{key}','getUnpaidList');
+    Route::get('/getTodoPayList/{key}','getTodoList');
+    Route::get('/payslip/todo','showTodo');
 });
