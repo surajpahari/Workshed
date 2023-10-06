@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEye } from "@fortawesome/free-solid-svg-icons"
+import ViewPaid from "./ViewPaid"
 //helper functions
 const statusIndicator = (status) => {
     if (status == 3) {
@@ -41,11 +42,11 @@ export const PaidTableInfo = {
     Actions: [
         {
             name: "view",
-            modal: (rowdata) => (<></>),
+            modal: (rowdata) => (<ViewPaid rowdata={rowdata} />),
             notation: < FontAwesomeIcon className="text-teal-500" icon={faEye} />,
             type: "center",
             modalData: {
-                title: "View Employee",
+                title: "Paid Job",
                 subTitle: "This will delete user",
                 proceed: "Delete",
                 terminate: "Cancel",
