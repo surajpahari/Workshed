@@ -1,11 +1,17 @@
+import { Toaster } from "react-hot-toast"
 import Table from "../../Table/Table"
 import { TableInfo } from "../Employee/TableInfo"
 import { RoosterTableInfo } from "./RoosterTableInfo"
+import CenterModal from "../../Modals/CenterModal"
 const ListRoster = () => {
     return (
-        <div>
-            <Table tableInfo={RoosterTableInfo} />
-        </div>
+        <>
+            <Toaster />
+            <div>
+                <Table tableInfo={RoosterTableInfo} />
+            </div>
+            <CenterModal />
+        </>
     )
 }
 

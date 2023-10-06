@@ -1,8 +1,7 @@
 import DashboardLayout from "../Layout/DashboardLayout"
-import SearchLocation from "./SearchLocation";
 import AddLocation from "./AddLocation";
 import ListLocation from "./ListLocation";
-import { ModalContext, ModalContextProvider } from "../../ModalContext";
+import { ModalContextProvider } from "../../ModalContext";
 
 
 const Location = () => {

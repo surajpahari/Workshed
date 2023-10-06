@@ -16,15 +16,15 @@ class TypeController extends Controller
   }
   public function store(Request $request){
 
+        $rules =[
+            'type'=>['required','min:4']
+        ];
+        $this->validate($request, $rules);
         $company=Auth::user()->company;
         $type= new Type;
          $type->type= $request->input('type');
         $company->types()->save($type);
-        return $type;
-
-
-
-
+        return;
 
   }
   public function search($key){

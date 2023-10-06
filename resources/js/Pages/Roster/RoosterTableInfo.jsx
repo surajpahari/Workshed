@@ -1,6 +1,23 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrash, faEdit, faEye } from "@fortawesome/free-solid-svg-icons"
 //helper functions
+const statusIndicator = (status) => {
+    if (status == 2) {
+        return (
+            <span className="bg-green-400 p-1 rounded text-white">
+                completed
+            </span>
+        )
+    }
+    else if (status == 0) {
+        return (
+            <span className="bg-blue-400 p-1 rounded text-white">
+                to do
+            </span>
+        )
+    }
+
+}
 
 //main Setting
 export const RoosterTableInfo = {
@@ -18,18 +35,15 @@ export const RoosterTableInfo = {
         { name: 'id' },
         {
             name: 'status',
-            dataProcessor:
-                (status) => (status === '0' ?
-                    <span className="bg-teal-300 rounded px-2">completed</span> :
-                    <span className="bg-yellow-500 rounded px-2">todo</span>
-                )
+            dataProcessor: statusIndicator
         },
         { name: ['type', 'type'] },
         { name: ['location', 'name'] },
-        { name: ['start_date'] },
-        { name: ['end_date'] },
-        { array: { name: "users", property: "name" } }
+        { name: ['start'] },
+        { name: ['end'] },
+        { name: ['user', 'name'] }
     ],
+
     setAction: true,
     Actions: [
         {
@@ -44,6 +58,20 @@ export const RoosterTableInfo = {
                 proceed: "Delete",
                 terminate: "Cancel",
                 link: (id) => "https://www.youtube.com/results?search_query=" + id,
+                method: "delete",
+            }
+        },
+        {
+            name: "view",
+            modal: () => (<></>),
+            notation: <FontAwesomeIcon className="text-teal-500" icon={faEye} />,
+            type: "center",
+            modalData: {
+                title: "View Employee",
+                subTitle: "This will delete user",
+                proceed: "Delete",
+                terminate: "Cancel",
+                link: (id) => id,
                 method: "delete",
             }
         },

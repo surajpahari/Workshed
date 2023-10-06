@@ -1,8 +1,6 @@
 import axios from "axios";
 import { Toaster, toast } from "react-hot-toast";
 const ActionPerformer = async (link, data, method) => {
-    console.log(link, data, method, "bhadai hoo");
-
     try {
         await toast.promise(
             deleteResource(data),

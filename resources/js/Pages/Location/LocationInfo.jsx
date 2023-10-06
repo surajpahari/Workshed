@@ -1,16 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrash, faEdit, faEye } from "@fortawesome/free-solid-svg-icons"
-//helper functions
-const dateProcessor = (isoDateString) => {
-    const isoDate = new Date(isoDateString);
-    if (isNaN(isoDate.getTime())) {
-        return null;
-        // Invalid date
-    }
-    let date = isoDate.toLocaleDateString();
-    let time = isoDate.toLocaleTimeString();
-    return (date + "\u00A0\u00A0\u00A0" + time);
-}
+import DeletePerformer from "./DeletePerformer"
 //main Setting
 export const LocationInfo = {
     //header of the table in order
@@ -20,32 +10,31 @@ export const LocationInfo = {
         { name: 'id' },
         { name: 'name' },
         { name: 'address' },
-        { dummy: 'active' }
+        {
+            dummy: (<span className="bg-yellow-300 p-1 rounded ">
+                active
+            </span>)
+        }
     ],
     //set the actions or not
     setAction: true,
     //list of the actions to be set
     Actions: [
-        {
-            name: "view",
-            link: (id) => ("http://localhost:8000/profile?=" + id),
-            notation: <FontAwesomeIcon className="text-teal-500" icon={faEye} />,
-            confirmation: "none",
-            key: "id",
-        },
+
         {
             name: "delete",
             modal: () => (<></>),
             notation: <FontAwesomeIcon className="text-red-500" icon={faTrash} />,
             type: "confrimation",
             modalData: {
-                title: "Delete User?",
+                title: "Delete Location?",
                 key: "id",
-                subTitle: "This will delete user",
+                subTitle: "This will delete every job on this location.",
                 proceed: "Delete",
                 terminate: "Cancel",
                 link: (id) => "https://www.youtube.com/results?search_query=" + id,
                 method: "delete",
+                performer: DeletePerformer
             }
         },
 
@@ -69,26 +58,6 @@ export const LocationInfo = {
 
     ],
 
-    //         {
-    //             name: "delete",
-    //             modal: () => (<></>),
-    //             notation: <FontAwesomeIcon className="text-red-500" icon={faTrash} />,
-    //             type: "confrimation",
-    //             modalData: {
-    //                 title: "Delete User?",
-    //                 key: "id",
-    //                 subTitle: "This will delete user",
-    //                 proceed: "Delete",
-    //                 terminate: "Cancel",
-    //                 link: (id) => "https://www.youtube.com/results?search_query=" + id,
-    //                 method: "delete",
-    //                 performer: ActionPerformer
-    //             }
-    //         },
-
-
-
-
     fetchLink: "http://localhost:8000/api/locationList/",
     //set the paginate or not
     paginate: true,
@@ -97,65 +66,4 @@ export const LocationInfo = {
     //link to search from
     searchLink: "http://localhost:8000/api/locationSearch/"
 }
-    //set the actions or not
-   // setAction: true,
-    //list of the actions to be set
-//     Actions: [
-//         {
-//             name: "view",
-//             link: (id) => ("http://localhost:8000/profile?=" + id),
-//             notation: <FontAwesomeIcon className="text-teal-500" icon={faEye} />,
-//             confirmation: "none",
-//             key: "id",
-//         },
-//         {
-//             name: "edit",
-//             link: (id) => ("http://localhost:8000/profile?=" + id),
-//             notation: <FontAwesomeIcon className="text-blue-500" icon={faEdit} />,
-//             confirmation: "none",
-//             key: "id"
-//         },
-//         {
-//             name: "delete",
-//             modal: () => (<></>),
-//             notation: <FontAwesomeIcon className="text-red-500" icon={faTrash} />,
-//             type: "confrimation",
-//             modalData: {
-//                 title: "Delete User?",
-//                 key: "id",
-//                 subTitle: "This will delete user",
-//                 proceed: "Delete",
-//                 terminate: "Cancel",
-//                 link: (id) => "https://www.youtube.com/results?search_query=" + id,
-//                 method: "delete",
-//                 performer: ActionPerformer
-//             }
-//         },
-//
-//     ],
-//     bulkActions: [
-//         {
-//             name: "delete",
-//             modal: () => (<></>),
-//             notation: <FontAwesomeIcon icon={faTrash} className="text-red-500" />,
-//             type: "confrimation",
-//             modalData: {
-//                 title: (n) => ("Delete " + n + " users?"),
-//                 subTitle: (n) => "This will delete " + n + " users",
-//                 proceed: "Delete",
-//                 terminate: "Cancel",
-//                 link: (id) => "www.youtube.com/results?search",
-//                 key: true,
-//                 method: "delete",
-//             }
-//         }
-//     ],
-//     //link to fetch data from
-//     fetchLink: "http://localhost:8000/api/employeeList/",
-//     //set the paginate or not
-//     paginate: true,
-//     //set the searchbox or not
-//     searchBox: true,
-//     //link to search from
-//     searchLink: "http://localhost:8000/api/employeeSearch/"
-// }
+

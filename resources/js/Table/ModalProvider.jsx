@@ -18,11 +18,10 @@ const ModalProvider = (props) => {
             key: (typeof props.modalData.key === "string") ? props.rowdata[props.modalData.key] : (props.modalData.key === true ? props.selected : undefined)
         });
     };
-
     const { changeModalStatus, setModalContent, setModalType, setModalData, setModalLink } = useContext(ModalContext);
 
     return (
-        <button onClick={handleModalTrigger} className="cursor-pointer bg-none border-none">{props.notation}</button>
+        <button onClick={handleModalTrigger} disabled={props.disabled ? props.disabled : false} className="cursor-pointer bg-none border-none">{props.notation}</button>
     );
 };
 

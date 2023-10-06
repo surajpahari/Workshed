@@ -6,7 +6,22 @@ export default {
         "./resources/**/*.jsx",
     ],
     theme: {
+        keyframes: {
+            expand: {
+                '0%': { width: '60px' },
+                '100%': { width: '12rem' }
+            },
+            contract: {
+                '0%': { width: '12rem' },
+                '100%': { width: '60px' }
+            }
+
+        },
         extend: {
+            transitionProperty: {
+                'width': 'width',
+                'left': 'left'
+            },
             width: {
                 '288': '72rem',
                 '224': '56rem',

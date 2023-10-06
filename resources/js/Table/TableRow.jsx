@@ -3,38 +3,49 @@ import { useEffect, useState } from "react";
 import Action from "./Action";
 
 function getPropertyData(property, rowdata, dataProcessor) {
-    if (typeof property.name === "string") {
-        if (property.dataProcessor) {
-            return property.dataProcessor(rowdata[property.name]);
-        } else {
-            return rowdata[property.name] || "";
-        }
-    } else if (Array.isArray(property.name)) {
-        let nestedValue = rowdata;
-
-        for (const prop of property.name) {
-            if (nestedValue && nestedValue.hasOwnProperty(prop)) {
-                nestedValue = nestedValue[prop];
+    if (property.name) {
+        if (typeof property.name === "string") {
+            if (property.dataProcessor) {
+                return property.dataProcessor(rowdata[property.name]);
             } else {
-                return ""; // Property not found, return empty string
+                return rowdata[property.name] || "";
             }
         }
+        else if (Array.isArray(property.name)) {
+            let nestedValue = rowdata;
 
-        if (property.dataProcessor) {
-            return property.dataProcessor(nestedValue);
-        } else {
-            return nestedValue || "";
+            for (const prop of property.name) {
+                if (nestedValue && nestedValue.hasOwnProperty(prop)) {
+                    nestedValue = nestedValue[prop];
+                } else {
+                    return ""; // Property not found, return empty string
+                }
+            }
+
+            if (property.dataProcessor) {
+                return property.dataProcessor(nestedValue);
+            } else {
+                return nestedValue || "";
+            }
+        } else if (property.dummy) {
+            return property.dummy;
         }
-    } else if (property.dummy) {
-        return property.dummy;
-    }
-    else if (property.array) {
-        let value = rowdata[property.array.name][0]
-        return value[property.array.property]
+        else if (property.array) {
+            let value = rowdata[property.array.name][0]
+            return value[property.array.property]
 
+        }
+        else {
+            return ""
+        }
     }
-    else {
-        return ""
+    if (property.dummy) {
+        if (property.dataProcessor) {
+            return dataProcessor(property.dummy)
+        }
+        else {
+            return property.dummy
+        }
     }
 }
 

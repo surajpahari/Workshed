@@ -1,7 +1,24 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrash, faEdit, faEye } from "@fortawesome/free-solid-svg-icons"
+import DeletePerformer from "./DeletePerformer"
+import TaskForm from "../TaskForm"
+import AddTask from "./AddTask"
+import JobViewModal from "../JobViewModal"
 //helper functions
 
+const statusIndicator = (status) => {
+    if (status == 0) {
+        return (
+            <span className="bg-blue-400 p-1 rounded text-white">
+                to do
+            </span>
+        )
+    }
+    else {
+        return status
+    }
+
+}
 //main Setting
 export const TaskTableInfo = {
     //header of the table in order
@@ -9,29 +26,42 @@ export const TaskTableInfo = {
     //properties per header in order
     properties: [
         { name: 'id' },
-        { name: 'status' },
-        { name: ['type', 'type'], },
+        { name: 'status', dataProcessor: statusIndicator },
+        { name: 'tablename' },
         { name: ['location', 'name'] },
-        { name: 'id' },
-        { name: 'id' },
-        { name: 'id' },
+        { name: 'start' },
+        { name: 'end' },
+        { name: ['user', 'name'] },
     ],
     setAction: true,
     //list of the actions to be set
     Actions: [
         {
             name: "view",
-            link: (id) => ("http://localhost:8000/profile?=" + id),
-            notation: <FontAwesomeIcon className="text-teal-500" icon={faEye} />,
-            confirmation: "none",
-            key: "id",
+            modal: (rowdata) => (<JobViewModal rowdata={rowdata} />),
+            notation: < FontAwesomeIcon className="text-teal-500" icon={faEye} />,
+            type: "center",
+            modalData: {
+                title: "View Employee",
+                subTitle: "This will delete user",
+                proceed: "Delete",
+                terminate: "Cancel",
+                link: (id) => id,
+                method: "delete",
+            }
         },
         {
             name: "edit",
-            link: (id) => ("http://localhost:8000/profile?=" + id),
+            modal: (rowdata) => (<><TaskForm rowdata={rowdata} /></>),
             notation: <FontAwesomeIcon className="text-blue-500" icon={faEdit} />,
-            confirmation: "none",
-            key: "id"
+            type: "center",
+            modalData: {
+                title: "Edit Employee",
+                proceed: "Delete",
+                terminate: "Cancel",
+                link: (id) => id,
+                method: "delete",
+            }
         },
         {
             name: "delete",
@@ -39,12 +69,13 @@ export const TaskTableInfo = {
             notation: <FontAwesomeIcon className="text-red-500" icon={faTrash} />,
             type: "confrimation",
             modalData: {
-                title: "Delete User?",
+                title: "Delete Job?",
                 key: "id",
-                subTitle: "This will delete user",
+                subTitle: "This will delete the selected job.",
                 proceed: "Delete",
                 terminate: "Cancel",
                 link: (id) => "https://www.youtube.com/results?search_query=" + id,
+                performer: DeletePerformer,
                 method: "delete",
             }
         },
