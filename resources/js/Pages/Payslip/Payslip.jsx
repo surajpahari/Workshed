@@ -23,18 +23,18 @@ const Payslip = () => {
                         Unpaid
                     </div>
                     <div>
-                        {paymentInfo ? paymentInfo.unpaidInfo ? paymentInfo.unpaidInfo.totalCount.toFixed(1) + " Jobs" : '--' : '--' + "Jobs"}
+                        {paymentInfo ? paymentInfo.unpaidInfo ? paymentInfo.unpaidInfo.totalCount + " Jobs" : '--' : '--' + "Jobs"}
                     </div>
                     <div>
                         {paymentInfo ? paymentInfo.unpaidInfo ? "RS " + paymentInfo.unpaidInfo.totalPay.toFixed(1) : 'Rs --' : 'Rs--'}
                     </div>
                     <div>
-                        {paymentInfo ? paymentInfo.unpaidInfo ? paymentInfo.unpaidInfo.totalPay.toFixed(1) + ' hours' : '-- hours' : '--hours'}
+                        {paymentInfo ? paymentInfo.unpaidInfo ? paymentInfo.unpaidInfo.totalHours.toFixed(1) + ' hours' : '-- hours' : '--hours'}
                     </div>
                 </Link>
                 <Link
                     as="div"
-                    to="/dashboard"
+                    href="/payslip/paid"
                     className="text-2xl bg-teal-500 p-2 rounded text-white cursor-pointer" >
                     <div>
                         Paid
@@ -57,7 +57,7 @@ const Payslip = () => {
                         Todo
                     </div>
                     <div>
-                        {paymentInfo ? paymentInfo.remainingInfo ? paymentInfo.remainingInfo.totalCount.toFixed(1) + " Jobs" : '--' : '--' + "Jobs"}
+                        {paymentInfo ? paymentInfo.remainingInfo ? paymentInfo.remainingInfo.totalCount + " Jobs" : '--' : '--' + "Jobs"}
                     </div>
                     <div>
                         {paymentInfo ? paymentInfo.remainingInfo ? "RS " + paymentInfo.remainingInfo.totalPay.toFixed(1) : 'Rs --' : 'Rs--'}

@@ -21,6 +21,9 @@ class Company extends Model
     public function notices(){
         return $this->hasMany(Notice::class);
     }
+    public function payments(){
+        return $this->hasMany(Payment::class);
+    }
 
     use HasFactory;
 }

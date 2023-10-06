@@ -1,6 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEye } from "@fortawesome/free-solid-svg-icons"
 import ViewUnpaid from "./ViewUnpaid"
+import ViewPay from "./ViewPay"
+import { usePage } from "@inertiajs/inertia-react"
 const statusIndicator = (status) => {
     if (status == 2) {
         return (
@@ -51,6 +53,22 @@ export const UnpaidTableInfo = {
                 method: "delete",
             }
         },
+        {
+            role: 1,
+            name: "view",
+            modal: (rowdata) => (<ViewPay rowdata={rowdata} />),
+            notation: < FontAwesomeIcon className="text-teal-500" icon={faEye} />,
+            type: "center",
+            modalData: {
+                title: "View Employee",
+                subTitle: "This will delete user",
+                proceed: "Delete",
+                terminate: "Cancel",
+                link: (id) => id,
+                method: "delete",
+            }
+        },
+
 
     ],
     //set the actions or not

@@ -1,18 +1,19 @@
 import DashboardLayout from "../../Layout/DashboardLayout";
-import { UnpaidTableInfo } from "./UpaidTableInfo";
 import Table from "../../../Table/Table";
 import { ModalContextProvider } from "../../../ModalContext";
 import Payslip from "../Payslip";
 import ConfirmModal from "../../../Modals/ConfirmModal";
 import CenterModal from "../../../Modals/CenterModal";
 import { Toaster } from "react-hot-toast";
-const Unpaid = () => {
+import axios from "axios";
+import { PaidTableInfo } from "./PaidTableInfo";
+const Paid = () => {
     return (
         <>
             <ModalContextProvider>
                 <Toaster />
                 <div>
-                    <Table tableInfo={UnpaidTableInfo} />
+                    <Table tableInfo={PaidTableInfo} />
                 </div>
                 <ConfirmModal />
                 <CenterModal />
@@ -21,7 +22,7 @@ const Unpaid = () => {
     )
 }
 
-Unpaid.layout = (page) => (
+Paid.layout = (page) => (
     < DashboardLayout >
         <Payslip />
         <div>
@@ -29,4 +30,4 @@ Unpaid.layout = (page) => (
         </div>
     </DashboardLayout >
 );
-export default Unpaid
+export default Paid;

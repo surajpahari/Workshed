@@ -21,6 +21,8 @@ class Task extends Model
                 ->withPivot('company_id', 'status', 'email_status')
                 ->withTimestamps();
     }
-
-
+    public function payment(){
+        return $this->hasOne(Payment::class);
+    }
 }
+

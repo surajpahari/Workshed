@@ -120,10 +120,13 @@ Route::controller(TaskController::class)->middleware(['auth'])->group(function()
     Route::get('/roster','showRoster');
     Route::get('/todoTasksList/{key}','getTodoTasksList');
     Route::put('/markAsCompleted/{key}','markAsCompleted');
+    Route::put('/markAsPaid/{key}','markAsPaid');
 });
 Route::controller(PaySlipController::class)->middleware(['auth'])->group(function(){
     Route::get('/getPaymentInfo','getInfo');
     Route::get('/getUnpaidList/{key}','getUnpaidList');
     Route::get('/getTodoPayList/{key}','getTodoList');
+    Route::get('/getPaidList/{key}','getPaidList');
     Route::get('/payslip/todo','showTodo');
+    Route::get('/payslip/paid','showPaid');
 });
