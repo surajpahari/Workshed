@@ -28,9 +28,12 @@ export default {
             },
             colors: {
                 purple: '#1e266d',
-                icons: '#343a40'
+                icons: '#343a40',
+                'teal-500': '#6884d6',
+                'green-200': '#05846b',
+                'green-100': '#5a6fa3',
+                'teal-200': '#'
             }
-
         },
     },
     plugins: [

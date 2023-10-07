@@ -21,11 +21,29 @@ class PaySlipController extends Controller
     {
         $unpaidInfo = $this->getUnpaidInfo();
         $remainingInfo= $this->getRemainingInfo();
-        return response(["unpaidInfo" => $unpaidInfo,"remainingInfo"=>$remainingInfo], 200);
+        $paidInfo = $this->getPaidInfo();
+        return response(["unpaidInfo" => $unpaidInfo,"remainingInfo"=>$remainingInfo,"paidInfo"=>$paidInfo],200);
     }
 
-
     //getting info for the nav card
+    public function getPaidInfo(){
+        $userId = Auth::user()->id;
+        $compnayId = Auth::user()->company_id;
+        if(Auth::user()->role_id ==1 ){
+            $paid = DB::table('payments')->where('company_id',$compnayId)->get();
+        }
+        if(Auth::user()->role_id==0){
+            $paid = DB::table('payments')->where('user_id',$userId)->get();
+        }
+        $totalPay=0;
+        $totalHours=0;
+        foreach ($paid as $pay) {
+            $totalPay = $totalPay + $pay->payment;
+            $totalHours = $totalHours + $pay->hours;
+        }
+        $totalCount = $paid->count();
+        return ['totalCount'=>$totalCount,'totalPay'=>$totalPay,'totalHours'=>$totalHours];
+    }
     public function getUnpaidInfo()
     {
         $userId = Auth::user()->id;
@@ -264,7 +282,6 @@ class PaySlipController extends Controller
                     'total_amount' => $pay->payment,
                     'paid_date' =>$pay->created_at,
                 ];
-
             });
             return response(["data"=>$modifiedList]);
     }

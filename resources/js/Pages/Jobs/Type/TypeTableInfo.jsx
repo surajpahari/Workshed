@@ -33,7 +33,7 @@ export const TableInfo = {
     ],
     //list of the actions to be set
     //link to fetch data from
-    fetchLink: "http://localhost:8000/api/typeList/",
+    fetchLink: "http://localhost:8000/typeList/",
     //set the paginate or not
     paginate: true,
     //set the searchbox or not

@@ -57,6 +57,7 @@ export const CompletedTaskTableInfo = {
     Actions: [
 
         {
+            role: 1,
             name: "delete",
             modal: () => (<></>),
             notation: <FontAwesomeIcon className="text-red-500" icon={faTrash} />,
@@ -74,11 +75,11 @@ export const CompletedTaskTableInfo = {
         },
         {
             name: "view",
-            modal: (rowdata) => (<div>Hello</div>),
+            modal: (rowdata) => (<ViewCompletedTask rowdata={rowdata} />),
             notation: <FontAwesomeIcon className="text-teal-500" icon={faEye} />,
             type: "center",
             modalData: {
-                title: "Task No",
+                title: "Completed Task",
                 subTitle: "This will delete user",
                 proceed: "Delete",
                 terminate: "Cancel",

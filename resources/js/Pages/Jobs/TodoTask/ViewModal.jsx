@@ -22,57 +22,55 @@ const ViewModal = (props) => {
     }, [])
     return (
         <>
-            <div className="flex items-center justify-center">
-                <div>
-                    <div className="flex gap-3 bg-green-50 p-6">
+            <div className="flex items-center justify-center bg-gray-100">
+                <div className="text-gray-800">
+                    <div className="flex gap-2 bg-gray-100 p-6">
                         <div>
-                            Task Id
+                            Task Id:
                         </div>
                         <div>
                             {props.rowdata.id}
                         </div>
                     </div>
 
-                    <div className="flex gap-3 bg-green-50 p-6">
+                    <div className="flex gap-2  p-6">
                         <div>
-                            Task
+                            Task:
                         </div>
                         <div>
                             {props.rowdata.tablename}
                         </div>
                     </div>
-                    <div className="flex gap-3 bg-green-50 p-6">
+                    <div className="flex gap-2  p-6">
                         <div>
-                            Start date
+                            Start date:
                         </div>
                         <div>
-                            {props.rowdata.user.name}
+                            {props.rowdata.start}
                         </div>
                     </div>
 
-                    <div className="flex gap-3 bg-green-50 p-6">
+                    <div className="flex gap-2 p-6">
                         <div>
-                            Assigned to
+                            Assigned to:
                         </div>
                         <div>
                             {props.rowdata.user.name}
                         </div>
                     </div>
-                    <div className="flex gap-3 bg-green-50 p-6">
+                    <div className="flex gap-2 p-6">
                         <div>
-                            End Date
+                            End Date:
                         </div>
                         <div>
-                            {props.rowdata.endDate}
+                            {props.rowdata.end}
                         </div>
                     </div>
                 </div>
             </div >
             <div className="flex  p-2 rounded cursor-pointer justify-center items-center text-xl text-white">
-                <div className="flex bg-green-500 rounded-full p-2" onClick={markAsCompleted}>
-                    <div>
-                    </div>
-                    <div>
+                <div className="flex bg-green-500 rounded p-2" onClick={markAsCompleted}>
+                    <div className="p-1">
                         Mark as completed
                     </div>
                 </div>

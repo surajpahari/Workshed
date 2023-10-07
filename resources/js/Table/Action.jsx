@@ -27,7 +27,7 @@ const Action = ({ actions, rowdata }) => {
             <div className="flex">
                 {
                     actions.map((action, index) => (
-                        !(action.role == 1 && role == 0) ?
+                        !(action.role) || (action.role === role) ?
                             action.link ?
                                 <div key={index}>
                                     <a className="m-2 cursor-pointer" key={index} href={action.link(rowdata.id)}>{action.notation}</a>

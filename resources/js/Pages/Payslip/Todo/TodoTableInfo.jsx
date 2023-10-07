@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEye } from "@fortawesome/free-solid-svg-icons"
+import ViewTodo from "./ViewTodo"
 //helper functions
 const statusIndicator = (status) => {
     if (status == 1) {
@@ -40,7 +41,7 @@ export const TodoTableInfo = {
     Actions: [
         {
             name: "view",
-            modal: (rowdata) => (<></>),
+            modal: (rowdata) => (<ViewTodo rowdata={rowdata} />),
             notation: < FontAwesomeIcon className="text-teal-500" icon={faEye} />,
             type: "center",
             modalData: {

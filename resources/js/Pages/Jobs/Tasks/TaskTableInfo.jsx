@@ -42,7 +42,7 @@ export const TaskTableInfo = {
             notation: < FontAwesomeIcon className="text-teal-500" icon={faEye} />,
             type: "center",
             modalData: {
-                title: "View Employee",
+                title: "Todo Task",
                 subTitle: "This will delete user",
                 proceed: "Delete",
                 terminate: "Cancel",
@@ -83,7 +83,7 @@ export const TaskTableInfo = {
     ],
     //set the actions or not
     //link to fetch data from
-    fetchLink: "http://localhost:8000/api/taskList/",
+    fetchLink: "http://localhost:8000/taskList/",
     //set the paginate or not
     paginate: true,
     //set the searchbox or not

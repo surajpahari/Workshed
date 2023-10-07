@@ -5,7 +5,7 @@ import { Link } from "@inertiajs/inertia-react"
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons"
 const Topbar = ({ handleShowMenuTitle, handleShowLogout, logMenuStatus, username }) => {
     return (
-        <div className="flex w-full items-center h-full">
+        <div className="flex w-full items-center h-full text-white">
             <div className="flex-grow mr-2 ">
                 <div className="flex gap-4">
                     <div>
@@ -13,15 +13,15 @@ const Topbar = ({ handleShowMenuTitle, handleShowLogout, logMenuStatus, username
                     </div>
                 </div>
             </div>
-            <div className="mr-6 ml-20 text-large">
-                <div >
+            <div className="text-large w-20 mr-4">
+                <div>
                     <span className="cursor-pointer text-lg" onClick={handleShowLogout}>
                         <FontAwesomeIcon icon={logMenuStatus ? faCaretUp : faCaretDown} /> {username}
                     </span>
                 </div>
                 {logMenuStatus ?
-                    <div className="relative">
-                        <div className="absolute w-full bg-green-100 rounded z-10">
+                    <div className="relative min-w-64">
+                        <div className="absolute w-full bg-green-200 rounded z-10 m-2">
                             <Link
                                 as="div"
                                 href="/get-profile"

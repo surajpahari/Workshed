@@ -112,7 +112,8 @@ public function destroy($id)
 }
 
     public function getList($key){
-        $location = Location::query()->orderBy('id')->paginate($key);
+        $company_id = Auth::user()->company_id;
+        $location = Location::query()->where('company_id',$company_id)->orderBy('id','desc')->paginate($key);
         return response($location,'200');
     }
     public function search($key){

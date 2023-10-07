@@ -4,7 +4,7 @@ import DeletePerformer from "./DeletePerformer"
 //main Setting
 export const LocationInfo = {
     //header of the table in order
-    header: ['id', 'Name', 'address', 'status', 'action'],
+    header: ['#id', 'Name', 'Address', 'Status', 'Action'],
     //properties per header in order
     properties: [
         { name: 'id' },
@@ -32,7 +32,7 @@ export const LocationInfo = {
                 subTitle: "This will delete every job on this location.",
                 proceed: "Delete",
                 terminate: "Cancel",
-                link: (id) => "https://www.youtube.com/results?search_query=" + id,
+                link: (id) => "" + id,
                 method: "delete",
                 performer: DeletePerformer
             }
@@ -58,7 +58,7 @@ export const LocationInfo = {
 
     ],
 
-    fetchLink: "http://localhost:8000/api/locationList/",
+    fetchLink: "http://localhost:8000/locationList/",
     //set the paginate or not
     paginate: true,
     //set the searchbox or not

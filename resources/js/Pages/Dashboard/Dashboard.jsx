@@ -73,73 +73,77 @@ const Dashboard = () => {
                     height={"auto"}
                 />
             </div>
-            <div className="m-4 mb-0 border-solid border border-teal-500 min-w-fit rounded  relative  max-h-[36rem] overflow-y-auto">
-                <div className="bg-teal-500">
-                    {/*header for the notice*/}
-                    <div className="text-white text-2xl mx-32">
-                        <FontAwesomeIcon icon={faBullhorn} />
-                        &nbsp;&nbsp;Notice Board
-                    </div>
-                </div>
-                {/*content for the header*/}
-                <div className="m-2">
-                    {/*right side*/}
-                    {messages ?
-                        messages.map((messageInfo, index) => (
-                            messageInfo.self ?
-                                <div className="flex-col" key={index}>
-                                    <div className="flex">
-                                        <span className="italic text-gray-500">
-                                            you
-                                        </span>
-                                    </div>
-                                    <div className="mb-2 mr-40 max-w-sm bg-teal-500 text-white text-lg rounded p-1">
-                                        <span className="bg-teal-500 rounded p-1 text-white text-lg">
-                                            {messageInfo.message}
-                                        </span>
-                                    </div>
-                                </div> :
-
-                                <div className=" flex-col">
-                                    <div className="flex justify-end">
-                                        <span className="italic text-gray-500">
-                                            {messageInfo.username}
-                                        </span>
-                                    </div>
-                                    <div className="flex justify-end">
-                                        <div className="mb-2 ml-10 max-w-sm bg-teal-500 text-white  text-lg rounded p-1">
-                                            <span >
-                                                {messageInfo.message}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                        )) : ''
-                    }
-                    {/*left side*/}
-
-                </div>
-                {/*butttom form*/}
-                <div className="absolute bottom-0 left-0 text-red w-full rounded mb-1">
-                    <form onSubmit={handleSubmit}>
-                        <div className="flex m-1">
-                            <div className="flex-grow mr-1">
-                                <input type="text" name="message"
-                                    className="w-full border-none rounded text-xl bg-gray-200 py-1"
-                                    value={data.message}
-                                    onChange={
-                                        (e) => (setData('message', e.target.value))
-                                    }
-                                />
-                            </div>
-                            <div className="">
-                                <button type="sumbit" className="bg-teal-500 text-white text-xl border-none rounded  py-1 px-3">
-                                    <FontAwesomeIcon icon={faPaperPlane} />
-                                </button>
-                            </div>
+            <div className="min-w-fit">
+                <div className="m-4 min-w-fit border-solid border border-teal-500  rounded">
+                    <div className="bg-teal-500 rounded p-2 py-3">
+                        {/*header for the notice*/}
+                        <div className="text-white text-2xl mx-32">
+                            <FontAwesomeIcon icon={faBullhorn} />
+                            &nbsp;&nbsp;Notice Board
                         </div>
-                    </form>
+                    </div>
 
+                    <div className=" mb-0 min-w-fit relative  max-h-[36rem] overflow-y-auto">
+                        {/*content for the header*/}
+                        <div className="m-2">
+                            {/*right side*/}
+                            {messages ?
+                                messages.map((messageInfo, index) => (
+                                    messageInfo.self ?
+                                        <div className="flex-col" key={index}>
+                                            <div className="flex">
+                                                <span className="italic text-gray-500">
+                                                    you
+                                                </span>
+                                            </div>
+                                            <div className="mb-2 mr-40 max-w-sm bg-teal-500 text-white text-lg rounded p-1">
+                                                <span className="bg-teal-500 rounded p-1 text-white text-lg">
+                                                    {messageInfo.message}
+                                                </span>
+                                            </div>
+                                        </div> :
+
+                                        <div className=" flex-col">
+                                            <div className="flex justify-end">
+                                                <span className="italic text-gray-500">
+                                                    {messageInfo.username}
+                                                </span>
+                                            </div>
+                                            <div className="flex justify-end">
+                                                <div className="mb-2 ml-10 max-w-sm bg-teal-500 text-white  text-lg rounded p-1">
+                                                    <span >
+                                                        {messageInfo.message}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                )) : ''
+                            }
+                            {/*left side*/}
+
+                        </div>
+                    </div>
+                    {/*butttom form*/}
+                    <div className=" text-red rounded mb-1">
+                        <form onSubmit={handleSubmit}>
+                            <div className="flex m-1">
+                                <div className="flex-grow mr-1">
+                                    <input type="text" name="message"
+                                        className="w-full border-none rounded text-xl bg-gray-200 py-1"
+                                        value={data.message}
+                                        onChange={
+                                            (e) => (setData('message', e.target.value))
+                                        }
+                                    />
+                                </div>
+                                <div className="">
+                                    <button type="sumbit" className="bg-teal-500 text-white text-xl border-none rounded  py-1 px-3">
+                                        <FontAwesomeIcon icon={faPaperPlane} />
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div >

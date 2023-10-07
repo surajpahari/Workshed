@@ -3,7 +3,7 @@ import { faCheckDouble } from "@fortawesome/free-solid-svg-icons"
 const ViewPaid = ({ rowdata }) => {
     return (
         <>
-            <div className="flex justify-center mb-4">
+            <div className="flex justify-center mb-4 text-xl">
                 <div>
                     <div className="flex">
                         <div>
@@ -29,7 +29,7 @@ const ViewPaid = ({ rowdata }) => {
             </div>
             <div className="flex justify-center bg-green-500">
                 <div className="text-lg bg-green-500 text-white p-1">
-                    Paid<FontAwesomeIcon icon={faCheckDouble} />
+                    Status:  Paid<FontAwesomeIcon icon={faCheckDouble} />
                 </div>
             </div>
         </>

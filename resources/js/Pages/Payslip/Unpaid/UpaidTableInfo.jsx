@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEye } from "@fortawesome/free-solid-svg-icons"
+import { faEdit } from "@fortawesome/free-solid-svg-icons"
 import ViewUnpaid from "./ViewUnpaid"
 import ViewPay from "./ViewPay"
 import { usePage } from "@inertiajs/inertia-react"
@@ -25,7 +26,7 @@ const concatHrs = (hour) => {
 //main Setting
 export const UnpaidTableInfo = {
     //header of the table in order
-    header: ['id', 'Status', 'Job', 'location', 'Total hours', 'payment', 'days', 'Actions'],
+    header: ['#id', 'Status', 'Job', 'Location', 'Total hours', 'Payment', 'Employee', 'Actions'],
     //properties per header in order
     properties: [
         { name: 'id' },
@@ -34,18 +35,19 @@ export const UnpaidTableInfo = {
         { name: ['location', 'name'] },
         { name: ['payDetail', 'totalHours'], dataProcessor: concatHrs },
         { name: ['payDetail', 'totalPay'], dataProcessor: concatRs },
-        { name: 'completedTime' },
+        { name: ['user', 'name'] },
     ],
     setAction: true,
     //list of the actions to be set
     Actions: [
         {
+            role: 0,
             name: "view",
             modal: (rowdata) => (<ViewUnpaid rowdata={rowdata} />),
             notation: < FontAwesomeIcon className="text-teal-500" icon={faEye} />,
             type: "center",
             modalData: {
-                title: "View Employee",
+                title: "Unpaid Task",
                 subTitle: "This will delete user",
                 proceed: "Delete",
                 terminate: "Cancel",
@@ -57,7 +59,7 @@ export const UnpaidTableInfo = {
             role: 1,
             name: "view",
             modal: (rowdata) => (<ViewPay rowdata={rowdata} />),
-            notation: < FontAwesomeIcon className="text-teal-500" icon={faEye} />,
+            notation: < FontAwesomeIcon className="text-teal-500" icon={faEdit} />,
             type: "center",
             modalData: {
                 title: "Unpaid Job",

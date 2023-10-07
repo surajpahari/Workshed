@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Notifications\UserCreatedNotification;
+use Illuminate\Notifications\Notification;
 use Session;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -10,8 +12,15 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
+
+
 class UserController extends Controller
 {
+    public  function index(){
+        $user = User::first();
+        $user->notify(new UserCreatedNotification());
+        return $user;
+    }
 
    //redirecting new User to the signUp form
     public function newUser(){

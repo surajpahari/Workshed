@@ -118,9 +118,11 @@ const AddTask = ({ presets, editmode }) => {
 
     return (
         <div>
-            <div className="border-solid  text-xl border-0 border-b p-2 border-teal-500 bg-teal-500 text-white">
-                New Job
-            </div>
+            {presets ? "" :
+                <div className="border-solid  text-xl border-0 border-b p-2 border-teal-500 bg-teal-500 text-white">
+                    New Job
+                </div>
+            }
             <form onSubmit={handleSubmit}>
                 {
 

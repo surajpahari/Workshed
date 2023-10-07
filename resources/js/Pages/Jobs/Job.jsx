@@ -10,7 +10,7 @@ const Job = () => {
     const { url, component } = usePage();
     return (
         <>
-            <div className=" flex-grow flex bg-green-100">
+            <div className=" flex-grow flex bg-gray-100">
                 <div className="p-2 boder-solid border border-gray-900 cursor-pointer">
                     <Link
                         href="/jobs/list"

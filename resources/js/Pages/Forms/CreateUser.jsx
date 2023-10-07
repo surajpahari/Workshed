@@ -40,7 +40,7 @@ const CreateUser = () => {
                         </span>
                     </div>
 
-                    <div className="text-lg">
+                    <div className="">
                         CompanyAddress
                     </div>
                     <div>

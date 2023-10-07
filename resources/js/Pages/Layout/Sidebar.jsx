@@ -45,19 +45,19 @@ const Sidebar = ({ showMenuTitle, role }) => {
     const getContent = content();
     return (
         <>
-            <div className={`${showMenuTitle ? 'w-0 md:w-14' : 'w-14 md:w-48'} divide-y bg-green-100
+            <div className={`${showMenuTitle ? 'w-0 md:w-14' : 'w-14 md:w-52'} divide-y bg-gray-100 shadow-2xl
 transition-[width] ease-in duration-500
 flex-shrink-0 h-full overflow-hidden`}>
                 {/*Title and Logo*/}
-                <div className="flex  justfiy-center items-center h-16 cursor-pointer bg-green-200">
+                <div className="flex  justfiy-center items-center h-16 cursor-pointer bg-green-200 text-white">
                     <div className="  flex justify-center items-center icon w-12 h-full flex-shrink-0 m-1 mr-2">
-                        <div className="rounded-full  bg-red-50 hw-33 flex justify-center items-center ">
+                        <div className="rounded-full  bg-red-50 hw-33 flex justify-center text-gray-500 text-bold items-center ">
                             W
                         </div>
                     </div>
                     <div className=" flex  items-center text flex-grow flex-shrink-0 h-full ml-2">
                         <span className="font-medium text-2xl ">
-                            Workshed
+                            WORKSHED
                         </span>
                     </div>
                 </div>
@@ -69,7 +69,7 @@ flex-shrink-0 h-full overflow-hidden`}>
                         key={index}
                         href={item.link}
                         as="div"
-                        className={`${url.startsWith(item.active) ? 'bg-teal-500 rounded-lg hover:bg-teal-500 text-white' : 'hover:bg-teal-200'} flex  justfiy-center items-center h-16 cursor-pointer rounded-lg m-1`}
+                        className={`${url.startsWith(item.active) ? 'bg-teal-500 rounded-lg  text-white' : 'hover:bg-gray-300'} flex  justfiy-center items-center h-16 cursor-pointer rounded-lg m-1`}
                     >
                         <div className="  flex justify-center items-center icon m-1 w-12 h-full flex-shrink-0">
                             <span>

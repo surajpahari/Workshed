@@ -47,7 +47,7 @@ const CreateEmployee = () => {
     return (
         <>
             <Toaster />
-            <div className="w-full max-h-full">
+            <div className="w-full max-h-full bg-white mb-2">
                 <div className="flex max-h-full justify-center items-center">
                     <form onSubmit={handleSubmit}>
                         <div className=" text-lg font-semibold text-white">

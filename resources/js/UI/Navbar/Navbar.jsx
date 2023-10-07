@@ -13,16 +13,16 @@ const Navbar = () => {
                 <div className="  lg:w-[85rem] md:w-[56rem] w-full">
                     <div className="flex justify-center">
                         <div className=" flex items-center flex-grow h-20">
-                            <h1 className="text-purple">WorkShed</h1>
+                            <h1 className="text-purple">WORKSHED</h1>
                         </div>
                         <div className="md:flex hidden items-center flex-grow h-20 bg-green-50 justify-end">
-                            <div className="m-2 text-purple font-semibold cursor-pointer text-sm leading-3">
+                            <Link as='div' href='/' className="m-2 text-purple font-semibold cursor-pointer text-xl leading-3">
                                 Home
-                            </div>
-                            <div className="cursor-pointer m-2 text-purple font-semibold text-sm">
+                            </Link>
+                            <div className="cursor-pointer m-2 text-purple font-semibold text-xl">
                                 Details
                             </div>
-                            <div className="m-2 text-purple cursor-pointer font-semibold text-sm">
+                            <div className="m-2 text-purple cursor-pointer font-semibold text-xl">
                                 Features
                             </div>
                             <Link href="/signin"
@@ -48,7 +48,7 @@ const Navbar = () => {
                     <div>
                     </div>
                 </div>
-            </div>
+            </div >
             <div className={`bg-green-50 md:hidden text-purple  rounded ${dropDown ? 'block' : 'hidden'}`}>
                 <div>
                     Home

@@ -22,24 +22,24 @@ const UserLogin = () => {
                     </div>
                     <div >
                         <input
-                            className="text-3xl p-1  w-lg"
+                            className="text-lg p-1 w-80"
                             type="text" value={data.email} onChange={e => setData('email', e.target.value)} />
                     </div>
                     {errors.email && <div className="text-red-500">{errors.email}</div>}
                 </div>
                 <div className="mb-6">
                     <div>
-                        password
+                        Password
                     </div>
                     <div>
                         <input
-                            className="text-3xl p-1"
+                            className="text-lg p-1 w-80"
                             type="password" value={data.password} onChange={e => setData('password', e.target.value)} />
                     </div>
                     {errors.password && <div className="text-red-500">{errors.password}</div>}
                 </div>
                 <div>
-                    <div>
+                    <div className="mb-2">
                         <input type="checkbox" checked={data.remember} onChange={e => setData('remember', e.target.checked)} /> Remember Me
                     </div>
                     <div className="bg-orange-500  bg-none border-none">

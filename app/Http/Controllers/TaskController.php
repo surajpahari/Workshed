@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Inertia\Inertia;
 use App\Http\Controllers\UtilityController;
+use App\Notifications\TaskAssignedNotification;
+use App\Notifications\PaymentNotification;
 use Auth;
 
 class TaskController extends Controller
@@ -60,6 +62,15 @@ class TaskController extends Controller
             'endTime'=>["required"]
         ];
         $this->validate($req, $rules);
+        $isValidInterval = UtilityController::isValidInterval($req->input('startDate'),
+            $req->input('startTime'),
+            $req->input('endDate'),
+            $req->input('endTime')
+        );
+      if (!$isValidInterval) {
+        return redirect()->back()->withErrors(['endDate' => 'Invalid Date']);
+    }
+
         $company = Auth::user()->company;
         $task = new Task;
         $task->type_id = $req->input('type');
@@ -76,6 +87,9 @@ class TaskController extends Controller
             'status' => null,
             'email_status' => 'as'
         ]);
+
+        $employee = User::where('id', $userIds)->get();
+        $employee[0]->notify(new TaskAssignedNotification());
     }
     public  function destroy($key){
         $company=Auth::user()->company->id;
@@ -97,7 +111,7 @@ class TaskController extends Controller
             $query->select('id', 'name');
         }, 'users' => function ($query) {
             $query->select('users.id', 'users.name');
-        }])->orderBy('id')->paginate($key);
+        }])->where('company_id',Auth::user()->company_id)->orderBy('id','desc')->paginate($key);
 
         // Transform the data to include 'status' and 'start' (concatenation of start_date and start_time)
         $transformedTasks = $tasks->map(function ($task) {
@@ -201,7 +215,6 @@ class TaskController extends Controller
             return response(["data"=>$finalTask],200);
 
 
-
         }
         return response(["data" => $transformedtasks], 200);
     }
@@ -292,6 +305,7 @@ class TaskController extends Controller
             $company_id = Auth::user()->company_id;
             $task=DB::table("tasks")->where('id',$key)->first();
             $user_id = DB::table('task_user')->where('task_id', $task->id)->value('user_id');
+            $user = User::find($user_id);
             $payrate= DB::table("users")->where('id',$user_id)->value('payrate');
             if($company_id == $task->company_id){
                 $affected = DB::table('tasks')->where("id",$key)->update(['status'=> 3]);
@@ -305,6 +319,7 @@ class TaskController extends Controller
                 $payment->user_id =$user_id;
                 $payment->paid_by = Auth::user()->id;
                 $payment->save();
+                $user->notify(new PaymentNotification());
                 return ;
             }
             else{

@@ -26,7 +26,7 @@ const DashboardLayout = ({ children }) => {
                 <Sidebar showMenuTitle={showMenuTitle} role={auth.user.role_id} />
             </div>
 
-            <div className={`${showMenuTitle ? 'left-0 md:left-14' : 'left-14 md:left-48'}
+            <div className={`${showMenuTitle ? 'left-0 md:left-14' : 'left-14 md:left-52'}
              transition-[left] duration-500 ease-in absolute bg-green-200  top-0  p-1 right-0
             h-16 overflow-visible `}
             >
@@ -36,19 +36,19 @@ const DashboardLayout = ({ children }) => {
                     handleShowLogout={handleShowLogout} logMenuStatus={showLogout} />
             </div>
 
-            <div className={`${showMenuTitle ? 'left-0 md:left-14' : 'left-14 md:left-48'}
+            <div className={`${showMenuTitle ? 'left-0 md:left-14' : 'left-14 md:left-52'}
              transition-[left]  ease-in duration-500 absolute top-16 p-1  right-0 overflow-y-auto`} style={{ maxHeight: "calc(100vh - 4rem)" }}
                 onClick={() => { setShowLogout(false) }}
             >
                 {/*topBar*/}
-                <div className="h-full">
+                <div className="h-full m-4">
                     {children}
                 </div>
             </div>
 
 
 
-            {fire ? showLogout ? <div>
+            {fire ? showLogout ? <div className="min-w-64">
 
                 <div className="fixed right-0 top-16 bg-blue-50 z-10 mr-1 border border-solid border-teal-500">
                     <div className="cursor-pointer p-2">

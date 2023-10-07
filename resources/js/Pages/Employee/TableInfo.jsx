@@ -79,7 +79,7 @@ export const TableInfo = {
         }
     ],
     //link to fetch data from
-    fetchLink: "http://localhost:8000/api/employeeList/",
+    fetchLink: "http://localhost:8000/employeeList/",
     //set the paginate or not
     paginate: true,
     //set the searchbox or not

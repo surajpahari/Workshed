@@ -5,6 +5,7 @@ use Auth;
 use Illuminate\Http\Response;
 use App\Models\User;
 use App\Models\Company;
+use App\Notifications\UserCreatedNotification;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -47,10 +48,11 @@ class EmployeeController extends Controller
         $employee ->role_id= $request->input('role_id');
         $employee ->payrate = $request->input('payrate');
         $company->user()->save($employee);
+        $employee->notify(new UserCreatedNotification());
     }
 
     public function getList($key){
-        $users = User::query()->orderBy('id')->paginate($key);
+        $users = User::where('company_id',Auth::user()->company_id)->orderBy('id','desc')->paginate($key);
         return response($users,'200');
     }
     //to response the request for employee-list

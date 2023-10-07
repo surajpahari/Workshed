@@ -69,6 +69,7 @@ Route::controller(EmployeeController::class)->middleware(['auth','admin'])->grou
     Route::post('/employee','create');
     Route::get('/employee-add','showform');
     Route::get('/employee-list','showlist');
+    Route::get('/employeeList/{key}','getList');
     Route::get('/employee-option','provideOptions');
     Route::delete('/employee/destroy/{id}', 'destroy')->name('employee.delete');
     //for the profile
@@ -79,6 +80,7 @@ Route::controller(EmployeeController::class)->middleware(['auth','admin'])->grou
 Route::controller(LocationController::class)->middleware(['auth'])->group(function(){
     Route::get('/location','index');
     Route::post ('/location','store');
+    Route::get('/locationList/{key}','getList');
     Route::get('/location-option','provideOptions');
     Route::delete('/location/destroy/{id}','destroy');
 });
@@ -86,10 +88,12 @@ Route::controller(TypeController::class)->middleware(['auth','admin'])->group(fu
     Route::get('/type-option','provideOptions');
     Route::get('/jobs/type','index');
     Route::post ('/job-type','store');
+    Route::get('/typeList/{key}','getList');
 });
 Route::controller(TaskController::class)->middleware(['auth','admin'])->group(function(){
     Route::post('/job','store');
     Route::get('/jobs/list','index');
+    Route::get('/taskList/{key}','getList');
     //for the tasks
     //for the rooster
     Route::get('/taskCalender','taskCalender')->name('tasks.calen');
@@ -130,3 +134,5 @@ Route::controller(PaySlipController::class)->middleware(['auth'])->group(functio
     Route::get('/payslip/todo','showTodo');
     Route::get('/payslip/paid','showPaid');
 });
+
+Route::get('/test',[UserController::class,'index']);

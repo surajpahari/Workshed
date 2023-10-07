@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrash, faEdit, faEye } from "@fortawesome/free-solid-svg-icons"
+import ViewRoosterModal from "./ViewRoosterModal"
 //helper functions
 const statusIndicator = (status) => {
     if (status == 2) {
@@ -47,6 +48,7 @@ export const RoosterTableInfo = {
     setAction: true,
     Actions: [
         {
+            role: 1,
             name: "delete",
             modal: () => (<></>),
             notation: <FontAwesomeIcon className="text-red-500" icon={faTrash} />,
@@ -63,11 +65,11 @@ export const RoosterTableInfo = {
         },
         {
             name: "view",
-            modal: () => (<></>),
+            modal: (rowdata) => (<ViewRoosterModal rowdata={rowdata} />),
             notation: <FontAwesomeIcon className="text-teal-500" icon={faEye} />,
             type: "center",
             modalData: {
-                title: "View Employee",
+                title: "Rooster History",
                 subTitle: "This will delete user",
                 proceed: "Delete",
                 terminate: "Cancel",

@@ -14,9 +14,10 @@ const ActionPerformer = async (link, data, method) => {
         console.error("An error occurred:", error);
     }
 }
-async function deleteResource(searchQuery) {
-    const url = `http://localhost:8000/employee/destroy/${searchQuery}`;
+async function deleteResource(id) {
+    const url = `http://localhost:8000/employee/destroy/${id}`;
     const responseData = await axios.delete(url);
-    return responseData; // Add this line
+    return responseData;
 }
+
 export default ActionPerformer
